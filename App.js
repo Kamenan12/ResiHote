@@ -17,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="LogScreen" component={LogScreen} />
+        <Stack.Screen name="LogScreen" component={LogScreen} options={{ headerShown: false, }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
