@@ -10,7 +10,7 @@ const LogScreen = () => {
 
     return (
         <View style={[ tw` h-full`, styles.logBack]}>
-            <Text>la page d"accueil</Text>
+            <Text>la page d"accueil</Text> 
         </View>
     )
 }
