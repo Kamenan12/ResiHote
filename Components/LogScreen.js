@@ -17,6 +17,10 @@ const LogScreen = () => {
         navigation.navigate('Login')
     }
 
+    const SignIn = () => {
+        navigation.navigate('SignIn')
+    }
+
 
     return (
         <View style={[ tw`flex h-full`]}>
@@ -37,7 +41,8 @@ const LogScreen = () => {
                        onPress={() => {Login()}}> 
                             <Text style={[tw``, {fontSize: 18, color: "white", fontWeight: "600"}]}>Connexion</Text>
                        </TouchableOpacity>
-                       <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center mt-4`]}> 
+                       <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center mt-4`]}
+                       onPress={() => {SignIn()}}> 
                             <Text style={[tw``, {fontSize: 18, color: "white", fontWeight: "600"}]}>Inscription</Text>
                        </TouchableOpacity>
                     </View>
