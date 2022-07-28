@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import { useForm, Controller } from 'react-hook-form';
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import tw from "twrnc"
 
 
@@ -20,15 +22,22 @@ const Login = () => {
         }
       });
 
-      const login = () => {
-        console.log("champ bien valide");
-      }
+      
     
     const SignIn = () => {
-
         navigation.navigate('SignIn')
     }
-    
+
+    const Connexion = (data) => {
+        signInWithEmailAndPassword(auth, data.email, data.passWord).then((
+            (userCredentials) => {
+                const user = userCredentials.user;
+                console.log( "est conncete");
+                navigation.navigate('Home')
+            }
+        ))
+    }
+
     return (
             <View style={[tw`h-full`]}>
                 <LinearGradient 
@@ -107,7 +116,7 @@ const Login = () => {
 
                             <View style={[tw`mt-6 items-center`]}>
                             <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
-                                onPress={handleSubmit(login)}> 
+                                onPress={handleSubmit(Connexion)}> 
                                  <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Connexion</Text>
                             </TouchableOpacity>
                             </View>

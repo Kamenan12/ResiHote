@@ -1,9 +1,13 @@
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { LinearGradient } from 'expo-linear-gradient';
+import { auth } from "../firebase";
 import GlobalStyle from "./Styles/GlobalStyle";
 
+
 import tw from "twrnc";
+
 
 
 
@@ -11,6 +15,9 @@ import tw from "twrnc";
 const LogScreen = () => {
 
         const navigation = useNavigation();
+
+
+
 
     const Login = () => {
        
@@ -21,6 +28,15 @@ const LogScreen = () => {
         navigation.navigate('SignIn')
     }
 
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate("Home")
+            }
+        })
+        return unsubscribe
+    })
 
     return (
         <View style={[ tw`flex h-full`]}>

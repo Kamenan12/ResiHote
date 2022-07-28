@@ -1,10 +1,16 @@
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useForm, Controller } from 'react-hook-form';
 import { Icon } from "@rneui/themed";
+import { auth } from "../firebase";
+import { db } from "../firebase";
 
 import tw from "twrnc"
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { async } from "@firebase/util";
 
 
 
@@ -29,9 +35,41 @@ const SignIn = () => {
     const Login = () => {
         navigation.navigate("Login")
     }
-    const signin = () => {
-        console.log("user ajout")
+
+    const inscription = async(data) => {
+        createUserWithEmailAndPassword(auth, data.email, data.passWord).then( async( userCredential) => {
+            const user = userCredential.user;
+
+            try {
+                const docRef  = await addDoc(collection(db, "users"), {
+                    user: user.uid,
+                    nom: data.nom,
+                    prenom: data.prenom,
+                    pseudo: data.pseudo,
+                    email: data.email,
+                    hote: "oui",
+                    date_create: serverTimestamp()
+
+
+                })
+                console.log("User ajouter a la collection", docRef.id)
+            } catch (e) {
+                console.log("erreur d'ajout de user en collection", e)
+            }
+            // navigation.navigate("Home")
+        }
+
+        )
     }
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate("Home")
+            }
+        })
+        return unsubscribe
+    })
 
     return (
         
@@ -143,7 +181,7 @@ const SignIn = () => {
                                         <Icon name="ios-person-circle-outline" type="ionicon" color="white" size={28} />
                                     </View>
                                     {errors.pseudo?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Pseudo obligatoire * </Text>}
-                                    {errors.pseudo?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>* Pas de caractere special * </Text>}
+                                    {errors.pseudo?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>*Lettre et chiffre * </Text>}
                                     {errors.pseudo?.type === "minLength" && <Text style={{ color: "white", fontSize: 18}}>*Minimum de caratere 3* </Text>}
                                 </View>
                             </View>
@@ -249,7 +287,7 @@ const SignIn = () => {
 
                             <View style={[tw`mt-10 items-center mb-5`]}>
                             <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
-                                onPress={handleSubmit(signin)}> 
+                                onPress={handleSubmit(inscription)}> 
                                  <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
                             </TouchableOpacity>
                            
