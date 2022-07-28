@@ -135,7 +135,7 @@ const SignIn = () => {
                                     />
                                     )}
                                     name="pseudo"
-                                    rules={{ required: true, minLength: 3,pattern: /^[A-Za-z]+$/i }}
+                                    rules={{ required: true, minLength: 3,pattern: /^[A-Za-z-0-9]+$/i}}
                                     /> 
                                     
                                     <View style={[tw`absolute right-5 top-5`]}>
