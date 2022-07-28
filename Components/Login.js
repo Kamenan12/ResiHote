@@ -3,6 +3,7 @@ import GlobalStyle from "./Styles/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
+import { useForm, Controller } from 'react-hook-form';
 import tw from "twrnc"
 
 
@@ -11,8 +12,17 @@ const Login = () => {
 
     const navigation = useNavigation();
 
+    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues: {
+          email: '',
+          passWord: '',
+          
+        }
+      });
 
-
+      const login = () => {
+        console.log("champ bien valide");
+      }
     
     const SignIn = () => {
 
@@ -44,37 +54,60 @@ const Login = () => {
                             <View>
                                 <Text style={[tw``, { color: "white", fontSize: 22, fontWeight: "500"}]}>Votre Adresse E-mail</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre E-mail" 
-                                    placeholderTextColor="white"
-                                    
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: { onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre E-mail" 
+                                        placeholderTextColor="white"
+                                        
+                                        style={[styles.Input]}
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        />
+                                    )}
+                                    name="email"
+                                    rules={{ required: true, minLength: 2, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ }}
                                     />
+                                   
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="mail-unread-outline" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.email?.type === "required" && <Text style={{ color: "white", fontSize: 17}}>*Email est obligatoire *</Text>}
+                                    {errors.email?.type === "pattern" && <Text style={{ color: "white", fontSize: 17}}>  *Entrez un mail valide</Text>}
                                 </View>
                             </View>
                             <View style={[tw`mt-5`]}>
                                 <Text style={[tw``, { color: "white", fontSize: 22, fontWeight: "500"}]}>Votre mot de passe</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre mot de passe" 
-                                    placeholderTextColor="white"
-                                    
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre mot de passe" 
+                                        placeholderTextColor="white"
+                                        secureTextEntry={true}
+                                        style={[styles.Input]}
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        />
+                                    )}
+                                    name="passWord"
+                                    rules={{ required: true, minLength: 4 }}
                                     />
+                                   
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.passWord?.type === "required" && <Text style={{ color: "white", fontSize: 17}}>* Mot de passe obligatoire *</Text>}
                                 </View>
                             </View>
 
                             <View style={[tw`mt-6 items-center`]}>
                             <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
-                                ess={() => {Login()}}> 
+                                onPress={handleSubmit(login)}> 
                                  <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Connexion</Text>
                             </TouchableOpacity>
                             </View>

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useForm, Controller } from 'react-hook-form';
 import { Icon } from "@rneui/themed";
 
 import tw from "twrnc"
@@ -13,10 +14,24 @@ const SignIn = () => {
     const navigation = useNavigation();
 
 
+    const { register, getValues, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues: {
+          nom: '',
+          prenom: '',
+          pseudo: '',
+          email: '',
+          passWord: '',
+          confirmPassWord: ''
+          
+        }
+      });
+
     const Login = () => {
         navigation.navigate("Login")
     }
-
+    const signin = () => {
+        console.log("user ajout")
+    }
 
     return (
         
@@ -46,16 +61,29 @@ const SignIn = () => {
                             <View>
                                 <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre Nom</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre Nom" 
-                                    placeholderTextColor="white"
-                                    
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre Nom" 
+                                        placeholderTextColor="white"
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        style={[styles.Input]}
+                                        ri
+                                        />
+                                    )}
+                                    name="nom"
+                                    rules={{ required: true, minLength: 2, pattern: /^[A-Za-z]+$/i}}
                                     />
+                                  
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="person" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.nom?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Le nom est obligatoire*</Text>}
+                                    {errors.nom?.type === "minLength" && <Text style={{ color: "white", fontSize: 18}}>*Minimum de caractere 2 * </Text>}
+                                    {errors.nom?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>* Pas de caractere special * </Text>}
                                 </View>
                             </View>
                             {/* fin de champ nnom */}
@@ -63,16 +91,29 @@ const SignIn = () => {
                             <View style={[tw`mt-5`]}>
                                 <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre prenom</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre prenom" 
-                                    placeholderTextColor="white"
-                                    
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre prenom" 
+                                        placeholderTextColor="white"
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        style={[styles.Input]}
+                                        
+                                        />
+                                    )}
+                                    name="prenom"
+                                    rules={{ required: true, minLength: 2, pattern: /^[A-Za-z]+$/i}}
                                     />
+                                   
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="person-add" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.prenom?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Prenom obligatoire * </Text>}
+                                    {errors.prenom?.type === "minLength" && <Text style={{ color: "white", fontSize: 18}}>*caractere Minimum 2 * </Text>}
+                                    {errors.prenom?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>* Pas de caractere special * </Text>}
                                 </View>
                             </View>
                             {/* fin de champ de prenom  */}
@@ -81,16 +122,29 @@ const SignIn = () => {
                             <View style={[tw`mt-5`]}>
                                 <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre Pseudo</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre Pseudo" 
-                                    placeholderTextColor="white"
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange,onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre Pseudo" 
+                                            placeholderTextColor="white"
+                                            onBlur={onBlur}
+                                            onChangeText={value => onChange(value)}
+                                            value={value}
+                                            style={[styles.Input]}
                                     
-                                    style={[styles.Input]}
-                                    ri
                                     />
+                                    )}
+                                    name="pseudo"
+                                    rules={{ required: true, minLength: 3,pattern: /^[A-Za-z]+$/i }}
+                                    /> 
+                                    
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="ios-person-circle-outline" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.pseudo?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Pseudo obligatoire * </Text>}
+                                    {errors.pseudo?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>* Pas de caractere special * </Text>}
+                                    {errors.pseudo?.type === "minLength" && <Text style={{ color: "white", fontSize: 18}}>*Minimum de caratere 3* </Text>}
                                 </View>
                             </View>
                             {/* fin de champ Pseudo  */}
@@ -99,16 +153,29 @@ const SignIn = () => {
                             <View style={[tw`mt-5`]}>
                                 <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre Adresse E-mail</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre E-mail" 
-                                    placeholderTextColor="white"
-                                    
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre E-mail" 
+                                        placeholderTextColor="white"
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        style={[styles.Input]}
+                                        
                                     />
+                                    )}
+                                    name="email"
+                                    rules={{ required: true, minLength: 4, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ }}
+                                    />
+                                    
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="ios-mail-unread" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.email?.type === "minLength" && <Text style={{ color: "white", fontSize: 18}}>*Minimum de caratere 4* </Text>}
+                                    {errors.email?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*E-mail obligatoire* </Text>}
+                                    {errors.email?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>*Entrez un E-mail valide* </Text>}
                                 </View>
                             </View>
                             {/* fin de champ de email   */}
@@ -117,16 +184,29 @@ const SignIn = () => {
                             <View style={[tw`mt-5`]}>
                                 <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre mot de passe</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre mot de passe" 
-                                    placeholderTextColor="white"
-                                    secureTextEntry
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre mot de passe" 
+                                        placeholderTextColor="white"
+                                        secureTextEntry
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        style={[styles.Input]}
+                                    
                                     />
+                                    )}
+                                    name="passWord"
+                                    rules={{ required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/}}
+                                    />
+                                    
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.passWord?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Mot de passe obligatoire* </Text>}
+                                    {errors.passWord?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>*Majuscule, minuscule, Chiffre, entre 6-15* </Text>}
                                 </View>
                             </View>
 
@@ -136,23 +216,40 @@ const SignIn = () => {
                             <View style={[tw`mt-5`]}>
                                 <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Verification de mot de passe</Text>
                                 <View style={[tw``]}>
-                                    <TextInput placeholder="Entrez votre mot de passe " 
-                                    placeholderTextColor="white"
-                                    secureTextEntry
-                                    style={[styles.Input]}
-                                    ri
+                                    <Controller 
+                                    control={control}
+                                    render={({field: {onChange, onBlur, value}}) => (
+                                        <TextInput placeholder="Entrez votre mot de passe " 
+                                        placeholderTextColor="white"
+                                        secureTextEntry
+                                        onBlur={onBlur}
+                                        onChangeText={value => onChange(value)}
+                                        value={value}
+                                        style={[styles.Input]}
+                                        
+                                        />
+                                    )}
+                                    name="confirmPassWord"
+                                    rules={{ required: true, 
+                                        validate: (val) => {
+                                            const { passWord } = getValues();
+                                            return passWord === val 
+                                    } }}
                                     />
+                                    
                                     <View style={[tw`absolute right-5 top-5`]}>
 
                                         <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
                                     </View>
+                                    {errors.confirmPassWord?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*confirmation obligatoire </Text>}
+                                    {errors.confirmPassWord?.type === "validate" && <Text style={{ color: "white", fontSize: 18}}>*mot de passe Different*</Text>}
                                 </View>
                             </View>
                             {/* Fin de champ de verification de mot de passe  */}
 
                             <View style={[tw`mt-10 items-center mb-5`]}>
                             <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
-                                ess={() => {Login()}}> 
+                                onPress={handleSubmit(signin)}> 
                                  <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
                             </TouchableOpacity>
                            
