@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from "react-na
 import { signOut, getAuth } from "firebase/auth";
 import GlobalStyle from "../Styles/GlobalStyle";
 import tw from "twrnc"
-import BarEntete from "../BarEntete";
+import BarEntete from "./BarEntete";
+import StatGen from "./StatGen";
 
 
 
@@ -25,15 +26,8 @@ const Home =() => {
         <>
         <View style={[tw`bg-white`]}>
                      <BarEntete />
-                    <Text>Bienvenue cher Reservation plus </Text>
-
-                    <Text style={[]}> {Curentuser.email}</Text>
-            <TouchableOpacity
-            onPress={() => Decon()}
-            >
-
-                <Text style={[tw`bg-red-500 p-2`]}> Deconnexion </Text>
-            </TouchableOpacity>
+                     <StatGen />
+                    <Text>Bienvenue cher Reservation plus </Text>    
         </View>
                
         </>

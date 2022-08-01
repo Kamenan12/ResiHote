@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LogScreen from './Components/LogScreen';
 import SignIn from './Components/SignIn';
-import Home from './Components/HomeScreen/Home';
+import HomeView from './Components/HomeScreens/HomeView';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
@@ -20,7 +20,7 @@ import tw from 'twrnc'
 function HomeScreen () {
   return (
       <HomeStack.Navigator>
-        <HomeStack.Screen  name="Home" component={Home} options={{ headerShown: false, }}/>
+        <HomeStack.Screen  name="Home" component={HomeView} options={{ headerShown: false, }}/>
       </HomeStack.Navigator>
   )
 }
