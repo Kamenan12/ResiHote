@@ -33,7 +33,7 @@ const Login = () => {
             (userCredentials) => {
                 const user = userCredentials.user;
                 console.log( "est conncete");
-                navigation.navigate('Home')
+                navigation.navigate('Home-G')
             }
         ))
     }
