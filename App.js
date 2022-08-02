@@ -144,11 +144,11 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+} 
 
 const styles = StyleSheet.create({
   backGround: {
-    left: 0,
+    left: 0, 
     right: 0,
     // top: -30,
     height: 60,

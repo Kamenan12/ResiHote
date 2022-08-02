@@ -30,6 +30,13 @@ const StatGen = () => {
                     <NbChambre />
 
                     <NbVues />
+                    
+            </View>
+            <View style={[tw`pt-4`]}>
+                <Ajourdhui />
+            </View>
+            <View style={[tw`pt-4`]}>
+                <MoisActu />
             </View>
            </View>
         </View>
@@ -72,7 +79,43 @@ const StatGen = () => {
                         </>
                 )
             }
- 
+
+
+            const Ajourdhui = () => {
+                return (
+                    <>
+                        <View style={[tw` `, {}]}>
+                            <View style={[tw`items-center`]}>
+                                <Text style={[tw``, {fontSize: 25, color: "black", fontWeight: "600" }]}> Aujourd'Hui</Text>
+                            </View>
+                            <View style={[tw``, {}]}>
+                                <View style={[tw`flex-row justify-between px-5`]}>
+                                    <Image source={require("../images/eyes/002-eye-1.png")} style={{ height: 40, width: 40}} />
+                                    <Text style={[tw``, {fontSize: 22, }]}> 12 </Text>
+                                </View>
+                                <View style={[tw`flex-row justify-between px-5 `]}>
+                                    <Image source={require("../images/wallet/002-wallet.png")} style={{ height: 40, width: 40}} />
+                                    <Text style={[tw``, {fontSize: 22, }]}> 12 </Text>
+                                </View>
+                                
+                            </View>
+                        </View>
+                    </>
+                )
+            }
+
+
+            const MoisActu = () => {
+                return (
+                    <>
+                    <View>
+                        <View>
+                            <Text>ici mettres le state du mois </Text>
+                        </View>
+                    </View>
+                    </>
+                )
+            }
 
 export default StatGen;
 
