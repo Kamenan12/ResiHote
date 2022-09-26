@@ -27,12 +27,13 @@ const Home =() => {
         <View style={[tw`bg-white`]}>
                      <BarEntete />
                      <StatGen />
-                    <Text>Bienvenue cher Reservation plus </Text>    
+                    <Text>Bienvenue cher Reservation plus </Text> 
+                    <Text style={[tw`bg-red-500 w-30`]} onPress={()=> Decon()}> Deconnnection</Text>   
         </View>
                
         </>
 
-        
+         
     )
 }
 
