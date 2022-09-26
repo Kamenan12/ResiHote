@@ -90,17 +90,17 @@ const StatGen = () => {
                             </View>
                             <View style={[tw``, {}]}>
                                 <View style={[tw`flex-row justify-between px-5`]}>
-                                    <Image source={require("../images/eyes/002-eye-1.png")} style={{ height: 40, width: 40}} />
+                                    <Image source={require("../images/eyes/002-eye-1.png")} style={{ height: 30, width: 30}} />
                                     <Text style={[tw``, {fontSize: 22, }]}> 12 </Text>
                                 </View>
                                 <View style={[tw`flex-row justify-between px-5 `]}>
                                     <Image source={require("../images/wallet/002-wallet.png")} style={{ height: 40, width: 40}} />
-                                    <Text style={[tw``, {fontSize: 22, }]}> 12 </Text>
+                                    <Text style={[tw``, {fontSize: 22, }]}> 12000 fr </Text>
                                 </View>
                                 
                             </View>
                         </View>
-                    </>
+                    </>   
                 )
             }
 
@@ -108,11 +108,22 @@ const StatGen = () => {
             const MoisActu = () => {
                 return (
                     <>
-                    <View>
-                        <View>
-                            <Text>ici mettres le state du mois </Text>
+                             <View style={[tw` `, {}]}>
+                            <View style={[tw`items-center`]}>
+                                <Text style={[tw``, {fontSize: 25, color: "black", fontWeight: "600" }]}> Aout </Text>
+                            </View>
+                            <View style={[tw``, {}]}>
+                                <View style={[tw`flex-row justify-between px-5`]}>
+                                    <Image source={require("../images/eyes/002-eye-1.png")} style={{ height: 30, width: 30}} />
+                                    <Text style={[tw``, {fontSize: 22, fontWeight: "500"}]}> 44  </Text>
+                                </View>
+                                <View style={[tw`flex-row justify-between px-5 `]}>
+                                    <Image source={require("../images/wallet/002-wallet.png")} style={{ height: 40, width: 40}} />
+                                    <Text style={[tw``, {fontSize: 22, fontWeight: "500"}]}>72 000fr  </Text>
+                                </View>
+                                
+                            </View>
                         </View>
-                    </View>
                     </>
                 )
             }

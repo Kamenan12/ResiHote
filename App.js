@@ -7,6 +7,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LogScreen from './Components/LogScreen';
 import SignIn from './Components/SignIn';
 import HomeView from './Components/HomeScreens/HomeView';
+import ResidenceView from './Components/ResidenceScreens/ResidenceView';
+import ReservationView from './Components/ReservationScreen/ReservationView';
+import NotificationView from './Components/NotificationScreen/NotificationView';
+import ChambreView from './Components/ChambreScreen/ChambreView';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
@@ -15,15 +19,61 @@ import tw from 'twrnc'
 
 
 
+ 
+
+
+
+
+
+
+  const ChambreStack = createNativeStackNavigator();
+
+  function ChambreScreen () {
+      return (
+        <ChambreStack.Navigator>
+          <ChambreStack.Screen name='Chambre'  component={ChambreView} />
+        </ChambreStack.Navigator>
+      )
+  }
+
+
+  const NotificationStack = createNativeStackNavigator();
+
+  function NotificationScreen () {
+    return (
+      <NotificationStack.Navigator>
+        <NotificationStack.Screen name="Notifications" component={NotificationView} />
+      </NotificationStack.Navigator>
+    )
+  }
+
+  const ReservationStack = createNativeStackNavigator();
+  function ReservationScreen () {
+    return (
+      <ReservationStack.Navigator>
+        <ReservationStack.Screen name="Resavation" component={ReservationView} />
+      </ReservationStack.Navigator>
+    ) 
+  }
+
+  const ResidenceStack = createNativeStackNavigator();
+
+  function ResidenceScreen () {
+    return (
+        <ResidenceStack.Navigator>
+          <ResidenceStack.Screen name="Residence" component={ResidenceView} />
+        </ResidenceStack.Navigator>
+    )
+  }
   const HomeStack = createNativeStackNavigator();
 
-function HomeScreen () {
-  return (
-      <HomeStack.Navigator>
-        <HomeStack.Screen  name="Home" component={HomeView} options={{ headerShown: false, }}/>
-      </HomeStack.Navigator>
-  )
-}
+  function HomeScreen () {
+    return (
+        <HomeStack.Navigator>
+          <HomeStack.Screen  name="Home" component={HomeView} options={{ headerShown: false, }}/>
+        </HomeStack.Navigator>
+    )
+  }
 
 const Tab = createBottomTabNavigator();
 
@@ -71,7 +121,7 @@ function TabNavigation () {
          tabBarInactiveTintColor: '#B4BEC3'
          }}/>
 
-        <Tab.Screen name="Chambres" component={HomeScreen} options={{ headerShown: false, 
+        <Tab.Screen name="Residences" component={ResidenceScreen} options={{ headerShown: false, 
          tabBarIcon: ({color, size}) => (
           <Icon type='ionicon' name='md-bed-sharp' size={26}   color={color} />
         ),
@@ -83,7 +133,7 @@ function TabNavigation () {
 
      
         
-        <Tab.Screen name="Reservation" component={HomeScreen} options={{ headerShown: false, 
+        <Tab.Screen name="Reservation" component={ReservationScreen} options={{ headerShown: false, 
         tabBarIcon: ({color, size}) => (
           <Icon type='antdesign' name='wallet' size={26}   color={color} />
         ),
@@ -91,7 +141,7 @@ function TabNavigation () {
         tabBarInactiveTintColor: '#B4BEC3'
         }}/>
 
-        <Tab.Screen name="Notification" component={HomeScreen} options={{ headerShown: false, 
+        <Tab.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false, 
         tabBarIcon: ({color, size}) => (
           <Icon type='antdesign' name='notification' size={26}   color={color} />
         ),
@@ -99,7 +149,7 @@ function TabNavigation () {
         tabBarInactiveTintColor: '#B4BEC3'
         }}/>
 
-<Tab.Screen name="Creer" component={HomeScreen} options={{ headerShown: false, 
+        <Tab.Screen name="Creer" component={ChambreScreen} options={{ headerShown: false, 
           tabBarIcon: ({color, size}) => (
             <View style={[tw``, styles.elevation]}>
               <LinearGradient 

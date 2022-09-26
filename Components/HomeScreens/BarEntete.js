@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
-// import { auth } from "../../firebase";
-import { getAuth } from "firebase/auth";
+import { auth } from "../../firebase";
+// import { getAuth } from "firebase/auth";
 import { db } from "../../firebase";
 import tw from 'twrnc'
 
@@ -14,7 +14,7 @@ import { collection, getDocs, where, query, onSnapshot } from "firebase/firestor
 
 
 const BarEntete = () => {
-        const auth = getAuth();
+        // const auth = getAuth();
     const user = auth.currentUser;
     const [userDoc, setUserDoc] = useState();
 
@@ -25,9 +25,10 @@ const BarEntete = () => {
             const dc = []; 
             querySnapshot.forEach((doc) => {
                 dc.push(doc.data())
+                // console.log("les doc", dc)
             }); 
-            setUserDoc(dc[0]);
-        }); 
+            setUserDoc(dc[0]); 
+        });  
         console.log("Doc user", userDoc);
     }
 
@@ -42,7 +43,7 @@ const BarEntete = () => {
         <>
         <View style={[tw`pt-18 flex flex-row justify-between px-7`]}> 
             <View>
-                <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee!  </Text>
+                <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! </Text>
                 <Text style={{ fontSize: 25, fontWeight: "bold", fontFamily: "sans-serif"}}>Bienvenue chez R+ </Text>
             </View>
             <View >
