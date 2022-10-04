@@ -28,7 +28,7 @@ const Home =() => {
                      <BarEntete />
                      <StatGen />
                     <Text>Bienvenue cher Reservation plus </Text> 
-                    <Text style={[tw`bg-red-500 w-30`]} onPress={()=> Decon()}> Deconnnection</Text>   
+                    {/* <Text style={[tw`bg-red-500 w-30`]} onPress={()=> Decon()}> Deconnnection</Text>    */}
         </View>
                
         </>

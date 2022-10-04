@@ -43,20 +43,9 @@ const BarEntete = () => {
         <>
         <View style={[tw`pt-18 flex flex-row justify-between px-7`]}> 
             <View>
-                { userDoc != null ?
-                 (
-                    <View>
-                 <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! {userDoc.nom} </Text>
-                 <Text style={{ fontSize: 25, fontWeight: "bold", fontFamily: "sans-serif"}}>Bienvenue chez R+ </Text> </View>
-                 )
-                 : (
-                    <View>
-                <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee!  </Text>
-                <Text style={{ fontSize: 25, fontWeight: "bold", fontFamily: "sans-serif"}}>Bienvenue chez R+ </Text>
-                    </View>
-                 )
-                 }
-                
+                 <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! {userDoc ? userDoc.nom : "rien"} </Text>
+                 <Text style={{ fontSize: 25, fontWeight: "bold", fontFamily: "sans-serif"}}>Bienvenue chez R+ </Text> 
+
             </View>
             <View >
                 <View style={[tw`border border-slate-300 rounded-lg p-2 shadow-`,]}>
