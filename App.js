@@ -31,7 +31,7 @@ import tw from 'twrnc'
   function ChambreScreen () {
       return (
         <ChambreStack.Navigator>
-          <ChambreStack.Screen name='Chambre'  component={ChambreView} />
+          <ChambreStack.Screen name='Chambres'  component={ChambreView} />
         </ChambreStack.Navigator>
       )
   }
@@ -45,7 +45,7 @@ import tw from 'twrnc'
         <NotificationStack.Screen name="Notifications" component={NotificationView} />
       </NotificationStack.Navigator>
     )
-  }
+  } 
 
   const ReservationStack = createNativeStackNavigator();
   function ReservationScreen () {
