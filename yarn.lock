@@ -5711,6 +5711,7 @@
     "temp" "0.8.3"
     "uuid" "3.2.1"
 
+<<<<<<< HEAD
 "heroku@^7.3.0":
   "integrity" "sha512-B6li1Uuy2FQ0HrJwYGtwv5h8cQFyZgKGmjg/PCZ/euEhF0/0yzsFUg8L7pGePe3EhgueAYrgyWjY1vjY4kzBew=="
   "resolved" "https://registry.npmjs.org/heroku/-/heroku-7.60.2.tgz"
@@ -5764,6 +5765,8 @@
     "tslib" "1.14.1"
     "uuid" "3.3.2"
 
+=======
+>>>>>>> master
 "hoist-non-react-statics@^3.3.2":
   "integrity" "sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw=="
   "resolved" "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"

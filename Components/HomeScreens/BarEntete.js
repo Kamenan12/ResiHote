@@ -65,4 +65,5 @@ export default BarEntete;
 
 const styles = StyleSheet.create({
 
+
 })

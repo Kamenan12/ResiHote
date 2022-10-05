@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 
 import tw from 'twrnc'
+import InfoNewResi from "./InfoNewResi";
 
 
 
@@ -13,7 +14,7 @@ const ChambreView = () => {
         setStep(step + 1)
     }
 
-    const precedent = () => {
+    const Precedent = () => {
         setStep(step - 1)
     }
 
@@ -24,25 +25,7 @@ const ChambreView = () => {
                     case 1:
                         return (
                         <View style={[tw`bg-white items-center`]}>
-                            <Text style={[{ fontSize: 50, fontWeight:"600", fontFamily:"serif"}, tw``]}> Localite</Text>
-                            <View style={[tw`pt-10`]}>
-                                <View>
-                                    <Text style={[tw``, {color: "#7C8593", fontSize: 20}]}> Nom  </Text>
-                                    <TextInput   style={[styles.Input, {height: 40}]}/>
-                                </View>
-                                <View>
-                                    <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Description  </Text>
-                                    <TextInput   style={[tw``, styles.Input, {}]} multiline={ true}/>
-                                </View>
-                                <View>
-                                    <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                    <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                </View>
-                            </View>
-                            <View style={tw`flex-row justify-evenly w-60`}>
-                                
-                                <Text style={tw`bg-blue-300`} onPress={()=> Suivant()}> Suivant </Text>
-                            </View>
+                           <InfoNewResi  suivant={Suivant} />
                         </View> 
                         );
                     case 2: 
@@ -65,7 +48,7 @@ const ChambreView = () => {
                             </View>
                             <View style={tw`flex-row justify-evenly w-60`}>
                                 
-                                <Text style={tw`bg-blue-300`} onPress={()=> precedent()}> precedent </Text>
+                                <Text style={tw`bg-blue-300`} onPress={()=> Precedent()}> precedent </Text>
                                 <Text style={tw`bg-blue-300`} onPress={()=> Suivant()}> Suivant </Text>
                             </View>
                         </View> 
@@ -73,7 +56,16 @@ const ChambreView = () => {
                 
                     default:
                         return (
+                            <View>
+
                             <Text> 0</Text>
+
+                            <View style={tw`flex-row justify-evenly w-60`}>
+                                
+                                <Text style={tw`bg-blue-300`} onPress={()=> precedent()}> precedent </Text>
+                                <Text style={tw`bg-blue-300`} onPress={()=> Suivant()}> Suivant </Text>
+                            </View>
+                            </View>
                         )
                 }
             })() }

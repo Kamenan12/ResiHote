@@ -108,6 +108,8 @@ function TabNavigation () {
       headerShown: false
     })}
     >
+
+         {/* debut bouton de home screnn  */}
         <Tab.Screen name="Home-S" component={HomeScreen} options={{ headerShown: false,
        
          tabBarIcon: ({color, size}) => (
@@ -120,6 +122,7 @@ function TabNavigation () {
          tabBarActiveTintColor: '#062737',
          tabBarInactiveTintColor: '#B4BEC3'
          }}/>
+            {/* fin de bouton Home screen  */}
 
         <Tab.Screen name="Residences" component={ResidenceScreen} options={{ headerShown: false, 
          tabBarIcon: ({color, size}) => (
