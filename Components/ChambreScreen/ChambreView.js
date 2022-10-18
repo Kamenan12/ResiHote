@@ -5,6 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
 import InfoNewResi from "./InfoNewResi";
+import { itemsTypeResi } from "../Data/Data";
 
 
 
@@ -28,64 +29,9 @@ const ChambreView = () => {
     //   donner pour type de residances
       const [openTypeResi, setOpenTypeResi] = useState(false)
       
-    const itemsTypeResi = [
-        {label:"Villa",
-         value: "Villa",
-        icon: () => <Icon name="home" type="ionicon" color="black" size={28} />
-        }, 
-        {label: "Appartement",
-         value: "Appartement",
-         icon: () => <Icon name="building" type="font-awesome-5" color="black" size={28} />
-        },
-        {label: "Studio",
-         value: "Studio",
-         icon: () => <Icon name="md-bed-outline" type="ionicon" color="black" size={28} />
-        }
-    ]
+   
     const [openNbreChambre, setOpenNbreChambre] = useState(false)
-    const itemsChambre = [
-        {
-            label: "1",
-            value: 1,
-        },
-        {
-            label: "2",
-            value: 2,
-        },
-        {
-            label: "3",
-            value: 3,
-        },
-        {
-            label: "4",
-            value: 4,
-        },
-        {
-            label: "5",
-            value: 5,
-        },
-        {
-            label: "6",
-            value: 6,
-        },
-        {
-            label: "7",
-            value:7,
-        },
-        {
-            label: "8",
-            value:8,
-        },
-        {
-            label: "9",
-            value:9,
-        },
-        {
-            label: "10",
-            value: 10,
-        },
-
-    ]
+    
 
     // code des foncions 
     const Suivant = () => {
@@ -105,11 +51,11 @@ const ChambreView = () => {
                         return (
                             <View style={tw`bg-white`}>
                                 <ScrollView nestedScrollEnabled={true}>
-                            <Text style={[{ fontSize: 50, fontWeight:"600", fontFamily:"serif"}, tw``]}> Localite dans </Text>
+                            <Text style={[{ fontSize: 22, fontWeight:"600", fontFamily:"serif"}, tw``]}> Localite dans </Text>
                                            <View style={[tw`pt-10`]}>
                                             {/* Type de Residences a choisir  */}
                                                <View style={[tw`px-3`]}>
-                                                   <Text style={[tw`pb-4`, {color: "black", fontSize: 25}]}> Type de residence </Text>
+                                                   <Text style={[tw`pb-4`, {color: "black", fontSize: 20}]}> Type de residence </Text>
                                                    <Controller 
                                                    control={control}
                                                    render={({field: {onChange, onBlur, value}}) => (
@@ -121,15 +67,10 @@ const ChambreView = () => {
                                                             setValue={value => onChange(value)}
                                                             placeholder="Type de residences"
                                                             dropDownDirection="AUTO"
+                                                            listMode="MODAL"
                                                             style={{
                                                                 borderRadius: 0,
                                                             }}
-                                                            containerStyle={{
-                                                            width: 300,
-                                                            zIndex: 2,
-                                                            }}
-                                                            
-                                                            
                                                     />
                                                    
                                                    )}
@@ -142,34 +83,14 @@ const ChambreView = () => {
                                                {/* Type de Residences a choisir  */}
                                                <View style={[tw`px-3`]}>
                                                    <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 25, color: "black"}]}> Nombre de pieces  </Text>
-                                                   <View style={[tw`flex-row py-3 justify-between`]}>
+                                                   <View style={[tw` py-3`]}>
                                                             <View style={[tw`py-3`]}>
                                                                 <Text style={[tw``, {fontSize: 19,}]}> Nombre de Chambre :</Text>
                                                             </View>
                                                             <Controller 
                                                             control={control}
                                                             render={({field: {onChange, onBlur, value}}) => (
-                                                             <DropDownPicker 
-                                                                     open={openNbreChambre}
-                                                                     value={valeur}
-                                                                     items={itemsChambre}
-                                                                     setOpen={setOpenNbreChambre}
-                                                                     setValue={setValeur}
-                                                                     placeholder="1"
-                                                                     listMode="MODAL"
-                                                                     modalContentContainerStyle={{
-                                                                        backgroundColor: "red"
-                                                                      }}
-                                                                     style={{
-                                                                        borderRadius: 0,
-                                                                     }}
-                                                                     containerStyle={{
-                                                                     width: 90,
-                                                                     zIndex: 5,
-                                                                     }}
-                                                                     
-                                                                     
-                                                             />
+                                                                <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
                                                             
                                                          )}
                                                             name="Nbre_chambre"
@@ -186,50 +107,9 @@ const ChambreView = () => {
                                                    <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
                                                    <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
                                                </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
+                                             
+                                              
+                                               
                                            </View>
                                            <View style={tw`flex-row justify-evenly w-60`}>
                                                
