@@ -26,15 +26,15 @@ import tw from 'twrnc'
 
 
 
-  const ChambreStack = createNativeStackNavigator();
+  // const ChambreStack = createNativeStackNavigator();
 
-  function ChambreScreen () {
-      return (
-        <ChambreStack.Navigator>
-          <ChambreStack.Screen name='Chambres'  component={ChambreView} />
-        </ChambreStack.Navigator>
-      )
-  }
+  // function ChambreScreen () {
+  //     return (
+  //       <ChambreStack.Navigator>
+  //         <ChambreStack.Screen name='Chambres'  component={ChambreView} />
+  //       </ChambreStack.Navigator>
+  //     )
+  // }
 
 
   const NotificationStack = createNativeStackNavigator();
@@ -62,6 +62,7 @@ import tw from 'twrnc'
     return (
         <ResidenceStack.Navigator>
           <ResidenceStack.Screen name="Residence" component={ResidenceView} options={{ headerShown: false, }}/>
+          <ResidenceStack.Screen name="Chambres" component={ChambreView} />
         </ResidenceStack.Navigator>
     )
   }

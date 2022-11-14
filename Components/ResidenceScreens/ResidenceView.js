@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "@rneui/themed";
-
+import { useNavigation } from "@react-navigation/native";
 import tw from 'twrnc';
 
 
@@ -8,7 +8,17 @@ import tw from 'twrnc';
 
 const ResidenceView = () => {
 
+    const Navigation = useNavigation();
 
+
+
+
+
+
+
+    const AjoutChambre = () => {
+        Navigation.navigate('Chambres')
+    }
 
     return (
         <View style={tw`pt-15`}> 
@@ -19,7 +29,7 @@ const ResidenceView = () => {
             <Button 
             title='Ajout de residences'
             color='secondary'
-                
+            onPress={() => AjoutChambre()}
                 />
         </View>
     )   
