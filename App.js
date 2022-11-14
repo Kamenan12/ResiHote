@@ -61,7 +61,7 @@ import tw from 'twrnc'
   function ResidenceScreen () {
     return (
         <ResidenceStack.Navigator>
-          <ResidenceStack.Screen name="Residence" component={ResidenceView} />
+          <ResidenceStack.Screen name="Residence" component={ResidenceView} options={{ headerShown: false, }}/>
         </ResidenceStack.Navigator>
     )
   }
@@ -81,7 +81,7 @@ function TabNavigation () {
   return (
     <Tab.Navigator 
     screenOptions={({ route }) => ({
-      tabBarStyle: { backgroundColor: "white", height: 60,  },
+      tabBarStyle: { backgroundColor: "white", height: 60,},
       tabBarLabelStyle: { fontSize: 15, fontFamily: 'sans-serif', fontWeight: '500', },
       tabBarShowLabel:  false,
       // tabBarIcon: ({ focused, color, size }) => {
@@ -115,7 +115,7 @@ function TabNavigation () {
          tabBarIcon: ({color, size}) => (
           <View style={[tw``]}>
 
-            <Icon type='ionicon' name='home-sharp' size={26}   color={color} />
+            <Icon type='ionicon' name='home-sharp' size={29}   color={color} />
           </View>
          ),
          
@@ -126,7 +126,7 @@ function TabNavigation () {
 
         <Tab.Screen name="Residences" component={ResidenceScreen} options={{ headerShown: false, 
          tabBarIcon: ({color, size}) => (
-          <Icon type='ionicon' name='md-bed-sharp' size={26}   color={color} />
+          <Icon type='ionicon' name='md-bed-sharp' size={29}   color={color} />
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
@@ -138,7 +138,7 @@ function TabNavigation () {
         
         <Tab.Screen name="Reservation" component={ReservationScreen} options={{ headerShown: false, 
         tabBarIcon: ({color, size}) => (
-          <Icon type='antdesign' name='wallet' size={26}   color={color} />
+          <Icon type='antdesign' name='wallet' size={29}   color={color} />
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
@@ -146,13 +146,13 @@ function TabNavigation () {
 
         <Tab.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false, 
         tabBarIcon: ({color, size}) => (
-          <Icon type='antdesign' name='notification' size={26}   color={color} />
+          <Icon type='antdesign' name='notification' size={29}   color={color} />
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
         }}/>
 
-        <Tab.Screen name="Creer" component={ChambreScreen} options={{ headerShown: false, 
+        {/* <Tab.Screen name="Creer" component={ChambreScreen} options={{ headerShown: false, 
           tabBarIcon: ({color, size}) => (
             <View style={[tw``, styles.elevation]}>
               <LinearGradient 
@@ -172,7 +172,7 @@ function TabNavigation () {
           ),
          tabBarActiveTintColor: "",
          tabBarInactiveTintColor: "#B4BEC3"
-        }}/>
+        }}/> */}
 
       
 
