@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import { useForm, Controller } from 'react-hook-form';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { Icon } from "@rneui/themed";
+import { Icon, Button, BottomSheet, ListItem } from "@rneui/themed";
 import tw from 'twrnc'
 import InfoNewResi from "./InfoNewResi";
 import { itemsTypeResi } from "../Data/Data";
@@ -12,10 +12,13 @@ import { itemsTypeResi } from "../Data/Data";
 const ChambreView = () => {
     // initialsation des constante 
     const [step, setStep] = useState(1); // initalisation des etape
-    const [valeur, setValeur] = useState()
+    // const [valeur, setValeur] = useState()
+
+    // constante pour les ouverture de modal
+    const [typeResi, setTypeResi] = useState(false)
 
     // Intialisation des champ a controller par useForm 
-    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+    const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
           type_residence: '',
           Nbre_chambre: '',
@@ -26,11 +29,11 @@ const ChambreView = () => {
       });
 
 
+      const WatchType_residence = watch('type_residence')
+
+
     //   donner pour type de residances
-      const [openTypeResi, setOpenTypeResi] = useState(false)
-      
-   
-    const [openNbreChambre, setOpenNbreChambre] = useState(false)
+     
     
 
     // code des foncions 
@@ -42,6 +45,35 @@ const ChambreView = () => {
         setStep(step - 1)
     }
 
+
+    /// ICi les donnees de chaque composant
+
+    const list2 = [
+        { title: 'Villa',
+          value: 'villa',
+          icon: <Icon  name='home' type='material' size={20}/>,
+        //   onPress: () => TapTypeResi('Villa')
+    
+        },
+        { title: 'Appartement',
+          value: 'Appartement',
+          icon: <Icon name='apartment' type='material' size={20} />,
+        //   onPress: () => TapTypeResi('Appartement')
+        },
+        {
+          title: 'Studio',
+          value: 'studio',
+          icon: <Icon name='bed' type='material-community' size={20} />,
+        //   onPress: () => TapTypeResi('studio')
+        },
+        {
+            title: 'Annuler',
+            containerStyle: { backgroundColor: 'red' },
+            titleStyle: { color: 'white' },
+            onPress: () => setTypeResi(false),
+        },
+       ]
+
     return (
         <>
             {(() => {
@@ -50,73 +82,54 @@ const ChambreView = () => {
                     case 1:
                         return (
                             <View style={tw`bg-white`}>
-                                <ScrollView nestedScrollEnabled={true}>
-                            <Text style={[{ fontSize: 22, fontWeight:"600", fontFamily:"serif"}, tw``]}> Localite dans </Text>
-                                           <View style={[tw`pt-10`]}>
-                                            {/* Type de Residences a choisir  */}
-                                               <View style={[tw`px-3`]}>
-                                                   <Text style={[tw`pb-4`, {color: "black", fontSize: 20}]}> Type de residence </Text>
-                                                   <Controller 
-                                                   control={control}
-                                                   render={({field: {onChange, onBlur, value}}) => (
-                                                    <DropDownPicker 
-                                                            open={openTypeResi}
-                                                            value={value}
-                                                            items={itemsTypeResi }
-                                                            setOpen={setOpenTypeResi}
-                                                            setValue={value => onChange(value)}
-                                                            placeholder="Type de residences"
-                                                            dropDownDirection="AUTO"
-                                                            listMode="MODAL"
-                                                            style={{
-                                                                borderRadius: 0,
-                                                            }}
-                                                    />
-                                                   
-                                                   )}
-                                                   name="type_residence"
-                                                   rules={{ required: true, maxLength: 50}}
-                                                   />
-                                               </View>
-                                               {errors.nom?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Le Type obligatoire*</Text>}
-                                               {/* {errors.nom?.type === "minLength" && <Text style={{ color: "white", fontSize: 18}}>*Minimum de caractere 2 * </Text>} */}
-                                               {/* Type de Residences a choisir  */}
-                                               <View style={[tw`px-3`]}>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 25, color: "black"}]}> Nombre de pieces  </Text>
-                                                   <View style={[tw` py-3`]}>
-                                                            <View style={[tw`py-3`]}>
-                                                                <Text style={[tw``, {fontSize: 19,}]}> Nombre de Chambre :</Text>
-                                                            </View>
-                                                            <Controller 
-                                                            control={control}
-                                                            render={({field: {onChange, onBlur, value}}) => (
-                                                                <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                                            
-                                                         )}
-                                                            name="Nbre_chambre"
-                                                            rules={{ required: true, maxLength: 50}}
-                                                            /> 
-                                                   </View>
-                                                   {/* <TextInput   style={[tw``, styles.Input, {}]} multiline={ true}/> */}
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                               <View>
-                                                   <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                                   <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                               </View>
-                                             
-                                              
-                                               
-                                           </View>
-                                           <View style={tw`flex-row justify-evenly w-60`}>
-                                               
-                                               <Text style={tw`bg-blue-300`} onPress={()=> Suivant()}> Suivant </Text>
-                                           </View>
-                                           </ScrollView>
-                       </View>
+                                <View>
+                                    <View> 
+                                        <Text> Info sur la Residences</Text>
+                                    </View>
+                                    <View>
+                                    <Button 
+                                        title={WatchType_residence ? WatchType_residence : "Type de Residences"}
+                                        onPress={() => setTypeResi(!typeResi)}
+                                        buttonStyle={{
+                                            backgroundColor: 'rgb(221, 221, 221)',
+                                            height:  50,
+
+                                        }}
+                                        icon={{
+                                            name: "arrow-alt-circle-right",
+                                            type: "font-awesome-5",
+                                            size: 15,
+                                            
+                                        }}
+                                        iconContainerStyle={{
+                                            right: 70
+                                        }}
+                                        iconRight
+                                    />
+                                    <BottomSheet modalProps={{}} isVisible={typeResi}>
+                                                <Controller 
+                                                control={control}
+                                                render={({field: {onBlur, onChange, value}}) => (
+                                                list2.map((l, i) => (
+                                                    <ListItem 
+                                                        key={i}
+                                                        containerStyle={l.containerStyle}
+                                                        onPress={value => [onChange(l.value), setTypeResi(false)]}
+                                                    >
+                                                        <ListItem.Content>
+                                                            <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+                                                        </ListItem.Content>
+                                                    </ListItem>
+                                                ))
+                                                )}
+                                                name="type_residence"
+                                                rules={{required: true}}
+                                                />
+                                            </BottomSheet>
+
+                                    </View>
+                                </View>
+                            </View>
                         );
                     case 2: 
                         return (
