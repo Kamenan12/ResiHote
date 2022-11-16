@@ -259,18 +259,7 @@ const ChambreView = () => {
                             <View style={[tw`bg-white items-center`]}>
                             <Text >  les champ de chambre etape {step}</Text>
                             <View>
-                                <View>
-                                    <Text style={[tw``, {color: "#7C8593", fontSize: 20}]}> Nom  </Text>
-                                    <TextInput   style={[styles.Input, {height: 40}]}/>
-                                </View>
-                                <View>
-                                    <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Description  </Text>
-                                    <TextInput   style={[tw``, styles.Input, {}]} multiline={ true}/>
-                                </View>
-                                <View>
-                                    <Text style={[tw`pt-6`, {color: "#7C8593", fontSize: 20}]}> Prix  </Text>
-                                    <TextInput   style={[tw``, styles.Input, {}]} keyboardType={"number-pad"} />
-                                </View>
+                               
                             </View>
                             <View style={tw`flex-row justify-evenly w-60`}>
                                 
