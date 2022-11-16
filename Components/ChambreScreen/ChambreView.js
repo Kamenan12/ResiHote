@@ -6,6 +6,7 @@ import { Icon, Button, BottomSheet, ListItem, Input, CheckBox } from "@rneui/the
 import tw from 'twrnc'
 import InfoNewResi from "./InfoNewResi";
 import { itemsTypeResi } from "../Data/Data";
+import MapScreen from "./MapScreen";
 
 
 
@@ -510,7 +511,15 @@ const ChambreView = () => {
                                 />
                             </View>
                         </View> 
-                        )
+                        );
+                    case 3: 
+                    return (
+                        <View style={[tw`bg-white`]}>
+                            <Text> 3eme etape </Text>
+
+                            <MapScreen />
+                        </View>
+                    );
                 
                     default:
                         return (
