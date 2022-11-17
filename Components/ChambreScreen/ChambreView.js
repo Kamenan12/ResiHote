@@ -560,7 +560,7 @@ const ChambreView = () => {
                               
                         openImage === false ? (
                                       
-                            <View style={[tw`top-20`]}>
+                            <View style={[tw``]}>
                                 <View>
                                 <Button title='bouton ouvre Image' 
                                     onPress={() => setOpenImage(!openImage)}
@@ -624,7 +624,7 @@ const ChambreView = () => {
                                         />
                                 </View>
                                 
-                                 <View>
+                                 <View style={[tw`flex-row justify-around w-95`]}>
                                      <Button title="suivant"
                                          onPress={() => Suivant()} 
                                          />
