@@ -7,6 +7,7 @@ import tw from 'twrnc'
 import InfoNewResi from "./InfoNewResi";
 import { itemsTypeResi } from "../Data/Data";
 import MapScreen from "./MapScreen";
+import Img from "./Img";
 
 
 
@@ -547,7 +548,12 @@ const ChambreView = () => {
                                 </View>
                         </View>
                     );
-                
+                    case 4: 
+                    return (
+                        
+                            <Img />
+                        
+                    )
                     default:
                         return (
                             <View>
