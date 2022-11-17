@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView, Image } from "react-native";
 import { useForm, Controller } from 'react-hook-form';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon, Button, BottomSheet, ListItem, Input, CheckBox } from "@rneui/themed";
@@ -28,6 +28,9 @@ const ChambreView = () => {
     // Equipement extra 
     const [jardin, setJardin] = useState(false)
     const [garage, setGarage] = useState(false)
+
+    // pour la selection desimage de residences
+    const [openImage, setOpenImage] = useState(false);
  
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -41,7 +44,9 @@ const ChambreView = () => {
           Equipement_extra: [],
           Prix: '',
           Localisation: [],
-          
+          Images: [],
+          Titre: '',
+          Description: ''
         }
       });
 
@@ -53,7 +58,8 @@ const ChambreView = () => {
       const WatchCapacite_acceuil = watch('Capacite_acceuil');
       const WatchEquipement_bases = watch('Equipement_bases');
       const WatchEquipement_extra = watch('Equipement_extra');
-      const WatchLocalisation = watch('Localisation')
+      const WatchLocalisation = watch('Localisation');
+      const WatchImage = watch('Images');
 
     //   donner pour type de residances
      
@@ -551,7 +557,100 @@ const ChambreView = () => {
                     case 4: 
                     return (
                         
-                            <Img />
+                              
+                        openImage === false ? (
+                                      
+                            <View style={[tw`top-20`]}>
+                                <View>
+                                <Button title='bouton ouvre Image' 
+                                    onPress={() => setOpenImage(!openImage)}
+                                    color='green'
+                                 />
+                                 {
+                                    WatchImage ? (
+                                        <ScrollView horizontal>
+                                            <View  style={[tw`flex-row`]}>
+                                               { WatchImage.map((img, index) => (
+                                                <View key={index} >
+                                                    <Image source={{uri: img.uri}} style={{ height: 250, width: 250}} />
+                                                </View>
+                                                ))}
+                                            </View>
+                                        </ScrollView>
+                                    ) :
+                                    (null)
+                                 }
+                                </View>
+                                <View>
+                                    <Text> Titre de l'annonce</Text>
+                                    <Controller   
+                                        control={control}
+                                        render={({field: {onChange, onBlur,value}}) => (
+                                            <Input
+                                            placeholder="Titre de l'annonce "
+                                                                                                    
+                                            onChangeText={value => onChange(value)}
+                                            
+                                        />
+                                        )}
+                                        name="Titre"
+                                        rules={{required: true}}
+                                        />
+                                </View>
+                                <View>
+                                    <Text> Description de la chambre</Text>
+                                    <Controller   
+                                        control={control}
+                                        render={({field: {onChange, onBlur,value}}) => (
+                                            <Input
+                                            placeholder="Description Resumee de la chambre"
+                                            multiline
+                                            numberOfLines={6}
+                                            maxLength={250}
+                                            onChangeText={value => onChange(value)}
+                                            // containerStyle={{
+                                            //     height: 120,
+                                            // }}
+                                            rightIcon={
+                                                <View style={{ width: 28, height: 40, top: 40}}>
+                                                    <Text style={{ fontSize: 15, color: "gray"}}> 250</Text>
+                                                </View>
+                                            }
+                                        />
+                                        // <TextArea />
+                                        )}
+                                        name="Description"
+                                        rules={{required: true}}
+                                        />
+                                </View>
+                                
+                                 <View>
+                                     <Button title="suivant"
+                                         onPress={() => Suivant()} 
+                                         />
+                                         <Button title="precedent"
+                                         onPress={() => Precedent()} 
+                                         /> 
+                                 </View>
+                                {/* {console.log("les inage selectionnes", WatchImage)} */}
+                            </View>
+                        ) : (
+                            <Controller 
+                                control={control}
+                                render={({field: {onChange, onBlur, value }}) => (
+
+                                    <Img open={setOpenImage} onChange={onChange}/>
+                                )}
+                                name="Images"
+                            />
+                            
+                            // <View>
+                            //     <Text>OUIIIIII</Text>
+                            //     <Button title="bou ferme image" 
+                            //         onPress={() => setOpenImage(!openImage)}
+                            //     />
+                            // </View>
+                        )
                         
                     )
                     default:
