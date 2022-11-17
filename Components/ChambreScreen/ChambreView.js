@@ -39,6 +39,7 @@ const ChambreView = () => {
           Equipement_bases: [],
           Equipement_extra: [],
           Prix: '',
+          Localisation: [],
           
         }
       });
@@ -51,6 +52,7 @@ const ChambreView = () => {
       const WatchCapacite_acceuil = watch('Capacite_acceuil');
       const WatchEquipement_bases = watch('Equipement_bases');
       const WatchEquipement_extra = watch('Equipement_extra');
+      const WatchLocalisation = watch('Localisation')
 
     //   donner pour type de residances
      
@@ -515,9 +517,34 @@ const ChambreView = () => {
                     case 3: 
                     return (
                         <View style={[tw`bg-white`]}>
-                            <Text> 3eme etape </Text>
+                            {/* <Text> 3eme etape </Text> */}
 
-                            <MapScreen />
+                            <View style={[tw` `]}> 
+                                <Controller
+                                control={control} 
+                                render={({ field: {onChange, onBlur, value}}) => (
+
+                                    // <Localite onChange={onChange}/>
+                                    <MapScreen onChange={onChange}/>
+                                )}
+                                name="Localisation"
+                                /> 
+                                {console.log('lcalisation', WatchLocalisation)}
+                            </View>
+                            {/* <MapScreen /> */}
+                            <View style={[tw`flex-row justify-around w-95`, {position: "absolute", top: 550}]}>
+                                    
+                                   
+                                    <Button title="precedent"
+                                    onPress={() => Precedent()} 
+                                    />
+                                     <Button title="suivant"
+                                    onPress={() => Suivant()} 
+                                    />
+                                    {/* <Button title="handle"
+                                    onPress={handleSubmit(tapContro)}
+                                        /> */}
+                                </View>
                         </View>
                     );
                 

@@ -62,7 +62,7 @@ import tw from 'twrnc'
     return (
         <ResidenceStack.Navigator>
           <ResidenceStack.Screen name="Residence" component={ResidenceView} options={{ headerShown: false, }}/>
-          <ResidenceStack.Screen name="Chambres" component={ChambreView} />
+          <ResidenceStack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
         </ResidenceStack.Navigator>
     )
   }
