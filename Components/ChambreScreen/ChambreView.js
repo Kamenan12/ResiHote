@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TextInput, ScrollView, Image } from "react-nati
 import { useForm, Controller } from 'react-hook-form';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon, Button, BottomSheet, ListItem, Input, CheckBox } from "@rneui/themed";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import tw from 'twrnc'
 import InfoNewResi from "./InfoNewResi";
 import { itemsTypeResi } from "../Data/Data";
@@ -166,6 +168,7 @@ const ChambreView = () => {
                     // code de la premiere etape 
                     case 1:
                         return (
+                        <KeyboardAwareScrollView extraHeight={15} enableOnAndroid={true} >
                             <View style={tw`bg-white`}>
                                 <View>
                                     <View> 
@@ -333,6 +336,7 @@ const ChambreView = () => {
                                     </View>
                                 </View>
                             </View>
+                        </KeyboardAwareScrollView>
                         );
                     case 2: 
                         return (
@@ -559,7 +563,7 @@ const ChambreView = () => {
                         
                               
                         openImage === false ? (
-                                      
+                         <KeyboardAwareScrollView extraHeight={150} enableOnAndroid={true} >
                             <View style={[tw``]}>
                                 <View>
                                 <Button title='bouton ouvre Image' 
@@ -625,15 +629,17 @@ const ChambreView = () => {
                                 </View>
                                 
                                  <View style={[tw`flex-row justify-around w-95`]}>
-                                     <Button title="suivant"
-                                         onPress={() => Suivant()} 
-                                         />
+                                     
                                          <Button title="precedent"
                                          onPress={() => Precedent()} 
                                          /> 
+                                        <Button title="suivant"
+                                            onPress={() => Suivant()} 
+                                        />
                                  </View>
                                 {/* {console.log("les inage selectionnes", WatchImage)} */}
                             </View>
+                         </KeyboardAwareScrollView>
                         ) : (
                             <Controller 
                                 control={control}
@@ -706,5 +712,8 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         
        
+    },
+    KeyBoardScroll: {
+        paddingVertical: 50
     }
 })
