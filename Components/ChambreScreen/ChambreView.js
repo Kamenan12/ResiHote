@@ -10,6 +10,7 @@ import InfoNewResi from "./InfoNewResi";
 import { itemsTypeResi } from "../Data/Data";
 import MapScreen from "./MapScreen";
 import Img from "./Img";
+import Calendrier from "./Calendrier";
 
 
 
@@ -658,6 +659,13 @@ const ChambreView = () => {
                             // </View>
                         )
                         
+                    );
+                    case 5: 
+                    return (
+                        <View>
+                            <Text> Ici calendrier </Text>
+                            <Calendrier />
+                        </View>
                     )
                     default:
                         return (
