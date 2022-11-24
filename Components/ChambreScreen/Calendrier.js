@@ -20,7 +20,8 @@ const Calendrier = () => {
     const minDate = new Date();
     const startDate = selectedStartDate ? moment(selectedStartDate).format('yyyy-MM-DD') : '';
     const endDate = selectedEndDate ? moment(selectedEndDate).format('YYYY-MM-DD') : '' ;
-    const NbreDate = endDate ? moment(endDate).diff(startDate, 'day'): '';
+    // const NbreDate = endDate ? moment(endDate).diff(startDate, 'day'): '';
+    const NbreDate = moment(endDate).diff(startDate, 'day');
     // const rang = dispo ? moment(startDate).add
     // const dur = endDate ? moment().startOf(startDate, 'day').from(endDate, 'day'): "";
 
@@ -28,7 +29,7 @@ const Calendrier = () => {
     const onDateChange = (date, type) => {
         if (type === 'END_DATE') {
             setSelectedEndDate(date)
-            console.log(selectedEndDate);
+            // console.log(selectedEndDate);
             console.log("type", type);
             // console.log("dureee", dur)
         } else {
@@ -93,13 +94,26 @@ const Calendrier = () => {
                 previousTitle="Precedent"
                 nextTitle="Suivant"
                 weekdays={['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'sam', 'Dim']}
+                customDatesStyles={[{
+                    date: '2022-11-26',
+                    style: {
+                        backgroundColor: 'red'
+                    },
+                    textStyle: {
+                        color: 'white'
+                    }, 
+                    containerStyle: {
+                        backgroundColor: 'green'
+                    }
+                }]}
             />
 
             <View>
                 <Text> Debut de jours:  {startDate}</Text>
                 <Text> Fin de jours:  {endDate}</Text>
-                <Text> nombre de jour : {NbreDate}</Text>
+                {<Text> nombre de jour : {NbreDate}</Text>}
                 {/* <Text> durrrr: {dur}</Text> */}
+                 {/* { NbreDate ? <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> : null } */}
                  { NbreDate ? <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> : null }
                 { dispo.map((d, key) => (
                     <View key={key}>
