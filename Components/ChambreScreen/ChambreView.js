@@ -683,8 +683,95 @@ const ChambreView = () => {
                                         <Button title="suivant"
                                             onPress={() => Suivant()} 
                                         />
-                                 </View>
+                            </View>
                                  {console.log("On change calendar ", WatchCalendrier)}
+                        </View>
+                    )
+                    case 6: 
+                    return (
+                        <View >
+                            <ScrollView>
+                                <Text>
+                                    Verification de toute les donner 
+                                </Text>
+                                <View>
+                                    <ScrollView horizontal>
+                                        <View  style={[tw`flex-row`]}>
+                                            { WatchImage.map((img, index) => (
+                                            <View key={index} >
+                                                <Image source={{uri: img.uri}} style={{ height: 250, width: 250}} />
+                                            </View>
+                                            ))}
+                                        </View>
+                                    </ScrollView>
+                                </View>
+                                <View>
+                                    <View>
+                                        <Text>Type de residence: </Text> 
+                                        <Text> {WatchType_residence}</Text>
+                                    </View>
+                                    <View>
+                                        <Text>Nombre de chambre: </Text> 
+                                        <Text> {WatchNbre_chambre}</Text>
+                                    </View>
+                                    <View>
+                                        <Text>Nombre de salon: </Text> 
+                                        <Text> {WatchNbre_salon}</Text>
+                                    </View>
+                                    <View>
+                                        <Text>Nombre de salel de bain: </Text> 
+                                        <Text> {WatchNbre_bain}</Text>
+                                    </View>
+                                    <View>
+                                        <Text>Nombre de personne admis: </Text> 
+                                        <Text> {WatchCapacite_acceuil}</Text>
+                                    </View>
+                                    <View>
+                                        <Text>Equipement de bases : </Text> 
+                                        {WatchEquipement_bases.map((b, key) => (
+                                            <Text>-{b}</Text>
+                                        ))}
+                                        
+                                    </View>
+                                    <View>
+                                        <Text>Equipement Extra : </Text> 
+                                        {WatchEquipement_extra.map((e, key) => (
+                                            <Text>-{e}</Text>
+                                        ))}
+                                        
+                                    </View>
+                                    <View>
+                                        <Text>La localisation : </Text> 
+                                        <Text> {WatchLocalisation.description}</Text>
+                                        <Text> Latitude: {WatchLocalisation.localisation.lat}</Text>
+                                        <Text> Logitude: {WatchLocalisation.localisation.lng}</Text>
+                                        
+                                    </View>
+                                    <View>
+                                        <Text>Occupe: </Text> 
+                                        {WatchCalendrier.map((o, key) => (
+                                            o.map((c, key) => (
+                                                <View>
+                                                    <Text >Occuper: {c.jour}</Text>
+                                                </View>
+                                            ))
+                                        ))}
+                                        
+                                    </View>
+                                </View>
+
+
+
+                                <View style={[tw`flex-row justify-around w-95`]}>
+                                    
+                                    <Button title="precedent"
+                                    onPress={() => Precedent()} 
+                                    /> 
+                                    <Button title="suivant"
+                                    onPress={() => Suivant()} 
+                                    />
+                                </View>
+                            </ScrollView>
                         </View>
                     )
                     default:

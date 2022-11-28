@@ -22,6 +22,7 @@ const Calendrier = (props) => {
     const endDate = selectedEndDate ? moment(selectedEndDate).format('YYYY-MM-DD') : '' ;
     // const NbreDate = endDate ? moment(endDate).diff(startDate, 'day'): '';
     const NbreDate = moment(endDate).diff(startDate, 'day');
+    const maxDate  = moment(minDate).add(3,'month').format('YYYY-MM-DD');
     // const rang = dispo ? moment(startDate).add
     // const dur = endDate ? moment().startOf(startDate, 'day').from(endDate, 'day'): "";
     // const [disable, setDisable] = useState([])
@@ -31,7 +32,7 @@ const Calendrier = (props) => {
     //     ))
     // ))
     const CalendarRef = useRef(null)
-
+    
     ////*****//////////////// */
     const DisableDay = []
     ran.map( (dat) => (
@@ -47,7 +48,7 @@ const Calendrier = (props) => {
     // "2022-11-29",
     // "2022-11-30",]
 
-    const test2 = ['James', 'John', 'Paul', 'Ringo', 'George'];
+    // const test2 = ['James', 'John', 'Paul', 'Ringo', 'George'];
     // pour le Css des date selecionne
     const CustumStyleDate = [] 
     ran.map( (dat) => (
@@ -122,7 +123,7 @@ const Calendrier = (props) => {
         // }
         console.log("raaann", ran)
         CalendarRef.current.resetSelections()
-        props.onChange(ran)
+        
     }
 
     const Sup = (d) => {
@@ -165,8 +166,9 @@ const Calendrier = (props) => {
         // console.log("ccc", ccc)
         // console.log("ccc", ccc)
         setRan(c2)
-        props.onChange(ran)
+        
     } 
+    // props.onChange(ran);
 
     
 
@@ -178,12 +180,14 @@ const Calendrier = (props) => {
                 startFromMonday={true}
                 allowRangeSelection={true}
                 minDate={minDate}
+                maxDate={maxDate}
                 todayBackgroundColor='blue'
                 selectedDayTextColor="yellow"
                 onDateChange={onDateChange}
                 previousTitle="Precedent"
                 nextTitle="Suivant"
                 weekdays={['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'sam', 'Dim']}
+                months={['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Otobre', 'Novembre', 'Decembre']}
                 customDatesStyles={CustumStyleDate}
                 
                 // disabledDates={DisableDay}
