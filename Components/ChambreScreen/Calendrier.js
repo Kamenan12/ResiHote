@@ -1,4 +1,4 @@
-import  React, { useState, useEffect, useLayoutEffect } from "react";
+import  React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 
@@ -30,6 +30,7 @@ const Calendrier = () => {
     //         disable.push(d.jour,)
     //     ))
     // ))
+    const CalendarRef = useRef(null)
 
     ////*****//////////////// */
     const DisableDay = []
@@ -60,9 +61,9 @@ const Calendrier = () => {
                     color: 'white'
                 }, 
                 containerStyle: {
-                    backgroundColor: 'green'
+                    // backgroundColor: 'red'
                 },
-                // allowDisabled: false
+                allowDisabled: false
 
             })
         ))
@@ -120,6 +121,7 @@ const Calendrier = () => {
             // setDispo([...dispo, rang])
         // }
         console.log("raaann", ran)
+        CalendarRef.current.resetSelections()
     }
 
     const Sup = (d) => {
@@ -168,6 +170,7 @@ const Calendrier = () => {
         <View>
             <Text> Calendier</Text>
             <CalendarPicker 
+                ref={CalendarRef}
                 startFromMonday={true}
                 allowRangeSelection={true}
                 minDate={minDate}
@@ -178,7 +181,8 @@ const Calendrier = () => {
                 nextTitle="Suivant"
                 weekdays={['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'sam', 'Dim']}
                 customDatesStyles={CustumStyleDate}
-                disabledDates={DisableDay}
+                
+                // disabledDates={DisableDay}
             />
 
             <View>
@@ -187,7 +191,7 @@ const Calendrier = () => {
                 {<Text> nombre de jour : {NbreDate}</Text>}
                 {/* <Text> durrrr: {dur}</Text> */}
                  {/* { NbreDate ? <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> : null } */}
-                 { NbreDate ? <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> : null }
+                <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> 
                 { dispo.map((d, key) => (
                     <View key={key}>
                         <Text > du: {d.debut}</Text>
