@@ -11,7 +11,7 @@ import tw from 'twrnc'
 
 
 
-const Calendrier = () => {
+const Calendrier = (props) => {
 
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -122,6 +122,7 @@ const Calendrier = () => {
         // }
         console.log("raaann", ran)
         CalendarRef.current.resetSelections()
+        props.onChange(ran)
     }
 
     const Sup = (d) => {
@@ -164,7 +165,10 @@ const Calendrier = () => {
         // console.log("ccc", ccc)
         // console.log("ccc", ccc)
         setRan(c2)
+        props.onChange(ran)
     } 
+
+    
 
     return (
         <View>

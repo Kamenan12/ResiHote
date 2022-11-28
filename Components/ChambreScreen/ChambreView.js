@@ -49,7 +49,8 @@ const ChambreView = () => {
           Localisation: [],
           Images: [],
           Titre: '',
-          Description: ''
+          Description: '',
+          Calendrier: [],
         }
       });
 
@@ -63,6 +64,7 @@ const ChambreView = () => {
       const WatchEquipement_extra = watch('Equipement_extra');
       const WatchLocalisation = watch('Localisation');
       const WatchImage = watch('Images');
+      const WatchCalendrier = watch('Calendrier');
 
     //   donner pour type de residances
      
@@ -664,7 +666,25 @@ const ChambreView = () => {
                     return (
                         <View>
                             <Text> Ici calendrier </Text>
-                            <Calendrier />
+                            <Controller 
+                            control={control}
+                            render={({field: {onChange, onBlur, value}}) => (
+
+                                <Calendrier onChange={onChange}/>
+                            )}
+                            name="Calendrier"
+                            />
+                            
+                            <View style={[tw`flex-row justify-around w-95`]}>
+                                     
+                                         <Button title="precedent"
+                                         onPress={() => Precedent()} 
+                                         /> 
+                                        <Button title="suivant"
+                                            onPress={() => Suivant()} 
+                                        />
+                                 </View>
+                                 {console.log("On change calendar ", WatchCalendrier)}
                         </View>
                     )
                     default:
