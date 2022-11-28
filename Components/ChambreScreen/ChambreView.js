@@ -742,9 +742,9 @@ const ChambreView = () => {
                                     </View>
                                     <View>
                                         <Text>La localisation : </Text> 
-                                        <Text> {WatchLocalisation.description}</Text>
+                                        {/* <Text> {WatchLocalisation.description}</Text>
                                         <Text> Latitude: {WatchLocalisation.localisation.lat}</Text>
-                                        <Text> Logitude: {WatchLocalisation.localisation.lng}</Text>
+                                        <Text> Logitude: {WatchLocalisation.localisation.lng}</Text> */}
                                         
                                     </View>
                                     <View>

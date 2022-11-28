@@ -37,7 +37,7 @@ const Calendrier = (props) => {
     const DisableDay = []
     ran.map( (dat) => (
         dat.map((d) => (
-            DisableDay.push(d.jour,)
+            DisableDay.push(d.jour)
         ))
     ))
     // const test = [
@@ -122,6 +122,7 @@ const Calendrier = (props) => {
             // setDispo([...dispo, rang])
         // }
         console.log("raaann", ran)
+        ValideRan()
         CalendarRef.current.resetSelections()
         
     }
@@ -153,8 +154,8 @@ const Calendrier = (props) => {
         let cc
         console.log("ranSupp", ran)
         ran.map((dis, key) => {
-              cc = dis.filter(di => di.jour !== d)
-              c2 = [...c2, cc]
+            cc = dis.filter(di => di.jour !== d)
+            c2 = [...c2, cc]
         })
         console.log("cc", cc)
         console.log("222", c2)
@@ -166,11 +167,17 @@ const Calendrier = (props) => {
         // console.log("ccc", ccc)
         // console.log("ccc", ccc)
         setRan(c2)
-        
+        ValideRan()
     } 
+    
+    const ValideRan = () => {
+        props.onChange(ran)
+    }
     // props.onChange(ran);
 
-    
+    useEffect(() => (
+        ValideRan()
+    ), [ran])
 
     return (
         <View>
@@ -199,7 +206,7 @@ const Calendrier = (props) => {
                 {<Text> nombre de jour : {NbreDate}</Text>}
                 {/* <Text> durrrr: {dur}</Text> */}
                  {/* { NbreDate ? <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> : null } */}
-                <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> 
+                <Text onPress={() => [Ajout(), ValideRan()]}> Ajouter sur tableau</Text> 
                 { dispo.map((d, key) => (
                     <View key={key}>
                         <Text > du: {d.debut}</Text>
