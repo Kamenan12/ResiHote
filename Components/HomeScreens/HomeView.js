@@ -12,7 +12,7 @@ import PasConnexion from "../Connexion/PasConnexion";
 
 
 const Home =() => {
-    const NetInfo = useNetInfo();
+    // const NetInfo = useNetInfo();
     const auth = getAuth();
     const Curentuser = auth.currentUser;
     const navigation = useNavigation();

@@ -4,6 +4,10 @@ import { useForm, Controller } from 'react-hook-form';
 // import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon, Button, BottomSheet, ListItem, Input, CheckBox } from "@rneui/themed";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { auth } from "../../firebase";
+import { db } from '../../firebase';
+import { query, addDoc, collection, onSnapshot, where, getDocs, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { storage } from '../../firebase';
 
 import tw from 'twrnc'
 // import InfoNewResi from "./InfoNewResi";
@@ -11,10 +15,32 @@ import { itemsTypeResi } from "../Data/Data";
 import MapScreen from "./MapScreen";
 import Img from "./Img";
 import Calendrier from "./Calendrier";
+import { useEffect } from "react";
 
 
 
 const ChambreView = () => {
+
+    // les const de firestore et firbase 
+    const CurrentUser = auth.currentUser;
+    // const recuperation du document de user 
+    const [userdoc, setUserdoc] = useState();
+
+    // foncton pour recupuer les info de l'user connctee
+
+    const getUSerDoc = async() => {
+        const q = query(collection(db, "users"), where("user", "==", CurrentUser.uid));
+            const querySnapshot = await getDocs(q);
+            const dc = [];
+            querySnapshot.forEach((doc) => {   
+                dc.push(doc)
+            });
+        setUserdoc(dc[0]); 
+            // console.log("id doc user",dc) 
+            console.log("UserDoc", userdoc)
+    }
+
+
     // initialsation des constante 
     const [step, setStep] = useState(1); // initalisation des etape
     // const [valeur, setValeur] = useState()
@@ -163,6 +189,13 @@ const ChambreView = () => {
        ]
 
        //// fin des donneees 
+
+    //    les fonctions de firestores
+    
+    
+    useEffect(() => {
+        getUSerDoc();
+    }, [])
 
     return (
         <>
