@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, Image,  } from "react-native";
+import {useNetInfo} from '@react-native-community/netinfo';
 
 
 
 import tw from  "twrnc"
+import PasConnexion from "../Connexion/PasConnexion";
 
 
 
@@ -10,6 +12,7 @@ import tw from  "twrnc"
 
 
 const StatGen = () => {
+    const NetInfo = useNetInfo();
     return (
         <View style={[tw`flex px-2`]}>
            <View>
@@ -23,7 +26,14 @@ const StatGen = () => {
                     <Image source={require("../images/wallet/001-wallet-1.png")} style={{ height: 120, width: 120}} />
                 </View>
             </View>
-
+            {
+                NetInfo.isConnected ? 
+                null : 
+                <View style={tw`pt-3`}>
+                    <PasConnexion />
+                </View> 
+            }
+            
             <View style={[tw`flex flex-row justify-between pt-3`]}>
                 
                     {/* ajouter le composant chanbre */}
