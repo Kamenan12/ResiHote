@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView, Image } from "react-native";
 import { useForm, Controller } from 'react-hook-form';
-import DropDownPicker from 'react-native-dropdown-picker';
+// import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon, Button, BottomSheet, ListItem, Input, CheckBox } from "@rneui/themed";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import tw from 'twrnc'
-import InfoNewResi from "./InfoNewResi";
+// import InfoNewResi from "./InfoNewResi";
 import { itemsTypeResi } from "../Data/Data";
 import MapScreen from "./MapScreen";
 import Img from "./Img";
@@ -767,7 +767,7 @@ const ChambreView = () => {
                                     <Button title="precedent"
                                     onPress={() => Precedent()} 
                                     /> 
-                                    <Button title="suivant"
+                                    <Button title="Soumettre"
                                     onPress={() => Suivant()} 
                                     />
                                 </View>
@@ -781,9 +781,11 @@ const ChambreView = () => {
                             <Text> 0</Text>
 
                             <View style={tw`flex-row justify-evenly w-60`}>
-                                
-                                <Text style={tw`bg-blue-300`} onPress={()=> precedent()}> precedent </Text>
-                                <Text style={tw`bg-blue-300`} onPress={()=> Suivant()}> Suivant </Text>
+                                <View>
+                                    <Text> La page n'existe pas ou n'est plus disponible </Text>
+                                </View>
+                                <Text style={tw`bg-blue-300`} onPress={()=> Precedent()}> precedent </Text>
+                               
                             </View>
                             </View>
                         )
