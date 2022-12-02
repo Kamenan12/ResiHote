@@ -21,47 +21,8 @@ import { useEffect } from "react";
 
 const ChambreView = () => {
 
-    // les const de firestore et firbase 
-    const CurrentUser = auth.currentUser;
-    // const recuperation du document de user 
-    const [userdoc, setUserdoc] = useState();
 
-    // foncton pour recupuer les info de l'user connctee
 
-    const getUSerDoc = async() => {
-        const q = query(collection(db, "users"), where("user", "==", CurrentUser.uid));
-            const querySnapshot = await getDocs(q);
-            const dc = [];
-            querySnapshot.forEach((doc) => {   
-                dc.push(doc)
-            });
-        setUserdoc(dc[0]); 
-            // console.log("id doc user",dc) 
-            console.log("UserDoc Chambre", userdoc.id)
-    }
-
-    // Fonction pour ajouter la residences a la base des donnees
-
-    // initialsation des constante 
-    const [step, setStep] = useState(1); // initalisation des etape
-    // const [valeur, setValeur] = useState()
-
-    // constante pour les ouverture de modal
-    const [typeResi, setTypeResi] = useState(false)
-    const [equipBase, setEquipBase] = useState(false)
-    const [equipExtra, setEquipExtra] = useState(false)
-
-    // state de equipement de basee
-    const [tv, setTv] = useState(false);
-    const [refrigerateur, setRefrigerateur] = useState(false);
-    const [climatiseur, setClimatiseur] = useState(false)
-    // Equipement extra 
-    const [jardin, setJardin] = useState(false)
-    const [garage, setGarage] = useState(false)
-
-    // pour la selection desimage de residences
-    const [openImage, setOpenImage] = useState(false);
- 
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
@@ -81,21 +42,46 @@ const ChambreView = () => {
         }
       });
 
+    // les const de firestore et firbase 
+    const CurrentUser = auth.currentUser;
+    // const recuperation du document de user 
+    const [userdoc, setUserdoc] = useState();
 
-      const WatchType_residence = watch('type_residence');
-      const WatchNbre_chambre = watch('Nbre_chambre');
-      const WatchNbre_salon = watch('Nbre_salon');
-      const WatchNbre_bain = watch('Nbre_bain');
-      const WatchCapacite_acceuil = watch('Capacite_acceuil');
-      const WatchEquipement_bases = watch('Equipement_bases');
-      const WatchEquipement_extra = watch('Equipement_extra');
-      const WatchLocalisation = watch('Localisation');
-      const WatchImage = watch('Images');
-      const WatchCalendrier = watch('Calendrier');
-
-    //   donner pour type de residances
+     // initialsation des constante 
+     const [step, setStep] = useState(1); // initalisation des etape
+     // const [valeur, setValeur] = useState()
+ 
+     // constante pour les ouverture de modal
+     const [typeResi, setTypeResi] = useState(false)
+     const [equipBase, setEquipBase] = useState(false)
+     const [equipExtra, setEquipExtra] = useState(false)
+ 
+     // state de equipement de basee
+     const [tv, setTv] = useState(false);
+     const [refrigerateur, setRefrigerateur] = useState(false);
+     const [climatiseur, setClimatiseur] = useState(false)
+     // Equipement extra 
+     const [jardin, setJardin] = useState(false)
+     const [garage, setGarage] = useState(false)
+ 
+     // pour la selection desimage de residences
+     const [openImage, setOpenImage] = useState(false);
+  
      
-    
+ 
+ 
+       const WatchType_residence = watch('type_residence');
+       const WatchNbre_chambre = watch('Nbre_chambre');
+       const WatchNbre_salon = watch('Nbre_salon');
+       const WatchNbre_bain = watch('Nbre_bain');
+       const WatchCapacite_acceuil = watch('Capacite_acceuil');
+       const WatchEquipement_bases = watch('Equipement_bases');
+       const WatchEquipement_extra = watch('Equipement_extra');
+       const WatchLocalisation = watch('Localisation');
+       const WatchImage = watch('Images');
+       const WatchCalendrier = watch('Calendrier');
+ 
+     
 
     // code des foncions 
     const Suivant = () => {
@@ -192,6 +178,121 @@ const ChambreView = () => {
        //// fin des donneees 
 
     //    les fonctions de firestores
+
+
+    //   donner pour type de residances
+      
+     
+
+    // foncton pour recupuer les info de l'user connctee
+
+    const getUSerDoc = async() => {
+        const q = query(collection(db, "users"), where("user", "==", CurrentUser.uid));
+            const querySnapshot = await getDocs(q);
+            const dc = [];
+            querySnapshot.forEach((doc) => {   
+                dc.push(doc)
+            });
+        setUserdoc(dc[0]); 
+            // console.log("id doc user",dc) 
+            console.log("UserDoc Chambre", userdoc.id)
+    }
+
+    //*************************** */ Fonction pour ajouter la residences a la base des donnees  *************************
+
+
+    const uploadImg = async( img) => {
+        
+        
+        const blob = await new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+              resolve(xhr.response);
+            };
+            xhr.onerror = function() {
+              reject(new TypeError('Network request failed'));
+            };
+            xhr.responseType = 'blob';
+            xhr.open('GET',img.uri, true);
+            xhr.send(null);
+          });
+        
+        
+         const imagRef = ref(storage, `images/${img.filename}`);
+        
+           const task =  uploadBytes(imagRef,blob).then(() => {
+            console.log("ajouter img");
+           })
+
+             try {
+                await task; 
+                const url = await getDownloadURL(imagRef)
+                
+                console.log(url)
+                return url
+                // console.log("imgURl", imgUrl)
+             } catch(e) {
+                console.log(e)
+             }
+            
+            
+        
+    } 
+
+
+
+
+    const AddResidence = async(data) => {
+        let image = []
+    
+                   try {
+                            data.Images.map(async(img, index) => {
+    
+                                const imageurl =  await uploadImg(img);
+                                console.log(index);
+                                image.push(
+                                    {
+                                    "image": index,
+                                    url: imageurl
+                                        // `image${index}:${imageurl}`
+                                    }
+                                          );
+                                console.log("imgpush", image)
+                                if (image.length == data.Images.length) {
+                                    console.log("imageurl", image)
+                                    
+                                    await addDoc(collection(db, `users/${userdoc.id}/residences`),{
+                                                Type_residence: data.type_residence,
+                                                Nombre_chambre: data.Nbre_chambre,
+                                                Nombre_salon: data.Nbre_salon,
+                                                Nombre_bain: data.Nbre_bain,  
+                                                Images: image,
+                                                Titre: data.Titre,
+                                                Description: data.Description,
+                                                valide: "non",
+                                                Resi: "hote",
+                                                
+                                                date_create: serverTimestamp()
+                                                
+                                     })
+                                            console.log("Residence ajouter")
+                                }
+    
+                            })
+                         
+    
+                                } catch (e) {
+                                    console.log(e)
+                                }
+                            
+    
+                // })
+                // navigation.navigate("Home")
+        // console.log(querySnapshot.data())
+       }
+    //******************** */  Finnnnnn  Fonction pour ajouter la residences a la base des donnees **************
+
+   
     
     
     useEffect(() => {
@@ -802,7 +903,7 @@ const ChambreView = () => {
                                     onPress={() => Precedent()} 
                                     /> 
                                     <Button title="Soumettre"
-                                    onPress={() => Suivant()} 
+                                    onPress={handleSubmit()} 
                                     />
                                 </View>
                             </ScrollView>
