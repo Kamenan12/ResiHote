@@ -37,9 +37,10 @@ const ChambreView = () => {
             });
         setUserdoc(dc[0]); 
             // console.log("id doc user",dc) 
-            console.log("UserDoc", userdoc)
+            console.log("UserDoc Chambre", userdoc.id)
     }
 
+    // Fonction pour ajouter la residences a la base des donnees
 
     // initialsation des constante 
     const [step, setStep] = useState(1); // initalisation des etape
