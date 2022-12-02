@@ -8,6 +8,8 @@ import { auth } from "../../firebase";
 import { db } from '../../firebase';
 import { query, addDoc, collection, onSnapshot, where, getDocs, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { storage } from '../../firebase';
+import { ref, uploadBytes, putFile, getDownloadURL } from 'firebase/storage';
+
 
 import tw from 'twrnc'
 // import InfoNewResi from "./InfoNewResi";
@@ -39,7 +41,7 @@ const ChambreView = () => {
           Titre: '',
           Description: '',
           Calendrier: [],
-        }
+        } 
       });
 
     // les const de firestore et firbase 
@@ -191,11 +193,11 @@ const ChambreView = () => {
             const querySnapshot = await getDocs(q);
             const dc = [];
             querySnapshot.forEach((doc) => {   
-                dc.push(doc)
+                dc.push(doc.id)
             });
-        setUserdoc(dc[0]); 
+            setUserdoc(dc[0]);  
             // console.log("id doc user",dc) 
-            console.log("UserDoc Chambre", userdoc.id)
+            console.log("UserDoc Chamb", userdoc)
     }
 
     //*************************** */ Fonction pour ajouter la residences a la base des donnees  *************************
@@ -213,7 +215,7 @@ const ChambreView = () => {
               reject(new TypeError('Network request failed'));
             };
             xhr.responseType = 'blob';
-            xhr.open('GET',img.uri, true);
+            xhr.open('GET',img.uri, true);  
             xhr.send(null);
           });
         
@@ -261,18 +263,17 @@ const ChambreView = () => {
                                 if (image.length == data.Images.length) {
                                     console.log("imageurl", image)
                                     
-                                    await addDoc(collection(db, `users/${userdoc.id}/residences`),{
-                                                Type_residence: data.type_residence,
-                                                Nombre_chambre: data.Nbre_chambre,
-                                                Nombre_salon: data.Nbre_salon,
-                                                Nombre_bain: data.Nbre_bain,  
-                                                Images: image,
-                                                Titre: data.Titre,
-                                                Description: data.Description,
-                                                valide: "non",
-                                                Resi: "hote",
-                                                
-                                                date_create: serverTimestamp()
+                                    await addDoc(collection(db, `users/${userdoc}/residences`),{
+                                        Type_residence: data.type_residence,
+                                        Nombre_chambre: data.Nbre_chambre,
+                                        Nombre_salon: data.Nbre_salon,
+                                        Nombre_bain: data.Nbre_bain,  
+                                        Images: image,
+                                        Titre: data.Titre,
+                                        Description: data.Description,
+                                        valide: "non",
+                                        Resi: "hote",
+                                        date_create: serverTimestamp()
                                                 
                                      })
                                             console.log("Residence ajouter")
@@ -903,7 +904,7 @@ const ChambreView = () => {
                                     onPress={() => Precedent()} 
                                     /> 
                                     <Button title="Soumettre"
-                                    onPress={handleSubmit()} 
+                                    onPress={handleSubmit(AddResidence)} 
                                     />
                                 </View>
                             </ScrollView>
