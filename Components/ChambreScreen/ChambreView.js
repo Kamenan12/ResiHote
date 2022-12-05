@@ -9,6 +9,7 @@ import { db } from '../../firebase';
 import { query, addDoc, collection, onSnapshot, where, getDocs, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { storage } from '../../firebase';
 import { ref, uploadBytes, putFile, getDownloadURL } from 'firebase/storage';
+import { useNavigation } from "@react-navigation/native";
 
 
 import tw from 'twrnc'
@@ -46,6 +47,8 @@ const ChambreView = () => {
 
     // les const de firestore et firbase 
     const CurrentUser = auth.currentUser;
+    // const de navigaton 
+    const navigation = useNavigation()
     // const recuperation du document de user 
     const [userdoc, setUserdoc] = useState();
 
@@ -273,6 +276,7 @@ const ChambreView = () => {
                                         Description: data.Description,
                                         valide: "non",
                                         Resi: "hote",
+                                        Statut: "En attente",
                                         date_create: serverTimestamp()
                                                 
                                      })
@@ -288,7 +292,7 @@ const ChambreView = () => {
                             
     
                 // })
-                // navigation.navigate("Home")
+                navigation.navigate('Chambres')
         // console.log(querySnapshot.data())
        }
     //******************** */  Finnnnnn  Fonction pour ajouter la residences a la base des donnees **************
