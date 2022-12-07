@@ -29,7 +29,7 @@ const BarEntete = () => {
             }); 
             setUserDoc(dc[0]); 
         });  
-        console.log("Doc user", userDoc.user);
+        console.log("Doc user", userDoc);
     }
 
 
