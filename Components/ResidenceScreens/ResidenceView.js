@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
@@ -147,12 +147,21 @@ export default ResidenceView;
 const Residence = (props) => {
     const residen = props.residence
     return (
-        <View>
+        <View style={tw`bg-white flex`}>
+            <View style={tw`h-40 w-80`}>
+                <Image source={{uri: residen.Images[0].url}} style={[styles.img]} />
+            </View>
             <Text>{residen.Titre} </Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-
+    img: {
+        // aspectRatio: 1,
+         width: '100%',
+         height: '100%',
+        // flex: 1,
+        resizeMode: 'cover'
+    }
 })
