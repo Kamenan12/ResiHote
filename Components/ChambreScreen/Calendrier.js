@@ -35,11 +35,11 @@ const Calendrier = (props) => {
     
     ////*****//////////////// */
     const DisableDay = []
-    ran.map( (dat) => (
-        dat.map((d) => (
-            DisableDay.push(d.jour)
-        ))
-    ))
+    // ran.map( (dat) => (
+    //     dat.map((d) => (
+    //         DisableDay.push(d.jour)   modif
+    //     ))
+    // ))
     // const test = [
     // "2022-11-25",
     // "2022-11-26",
@@ -51,24 +51,24 @@ const Calendrier = (props) => {
     // const test2 = ['James', 'John', 'Paul', 'Ringo', 'George'];
     // pour le Css des date selecionne
     const CustumStyleDate = [] 
-    ran.map( (dat) => (
-        dat.map((d) => (
-            CustumStyleDate.push({
-                date: d.jour,
-                style: {
-                    backgroundColor: 'red'
-                },
-                textStyle: {
-                    color: 'white'
-                }, 
-                containerStyle: {
-                    // backgroundColor: 'red'
-                },
-                allowDisabled: false
+    // ran.map( (dat) => (
+    //     dat.map((d) => (
+    //         CustumStyleDate.push({
+    //             date: d.jour,
+    //             style: {
+    //                 backgroundColor: 'red'
+    //             },
+    //             textStyle: {
+    //                 color: 'white'
+    //             }, 
+    //             containerStyle: {
+    //                 // backgroundColor: 'red'
+    //             },
+    //             allowDisabled: false
 
-            })
-        ))
-    ))
+    //         })
+    //     ))
+    // ))
 
     const onDateChange = (date, type) => {
         if (type === 'END_DATE') {
@@ -87,8 +87,9 @@ const Calendrier = (props) => {
     const Ajout = () => {
         let PrDate = startDate
         let DrDate = endDate
-        let jour = []
+        let Tab = [] // Modif
         let nombre = 0
+        let range = {}
         // let plus = moment(PrDate).add(1, "day").format('yyyy-MM-DD')
         // if (PrDate < DrDate) {
         //     // setRange(PrDate)
@@ -96,7 +97,7 @@ const Calendrier = (props) => {
         //     // PrDate = moment(PrDate).add(1, "day").format('yyyy-MM-DD')
         // }
         while (PrDate <= DrDate) {
-            
+            nombre = nombre + 1
             // console.log("bonnnnplus")
             console.log("PRR", PrDate)
             
@@ -105,15 +106,17 @@ const Calendrier = (props) => {
             }
             
             console.log("eee", rg)
-            jour = [...jour, rg]
-            
+            Tab = [...Tab, rg] // Modif
+            range ={
+                Tab
+            }
             // console.log("range", range)
             PrDate = moment(PrDate).add(1, "day").format('yyyy-MM-DD')
             // nombre = nombre + 1
              
         }
-        console.log("jour", jour)
-        setRan([...ran, jour])  
+        console.log("jour", Tab)
+        setRan([...ran, range])  
         // if (endDate) {
             // let rang = {
             //     "debut" : startDate,
@@ -222,10 +225,12 @@ const Calendrier = (props) => {
                             </View>
                     </View>
                 ))} */}
-                { ran.map((d, key) => (
+
+                
+                {/* { ran.map((d, key) => (
                     <View key={key}>
                         <View>
-                            {/* <Text>jour {d.jour}</Text> */}
+                            <Text>jour {d.jour}</Text>
                             {d.map((r,key) => (
                             <View key={key} style={tw`flex-row pt-2`}>
                                 <Text> jour: {r.jour}</Text>  
@@ -234,7 +239,10 @@ const Calendrier = (props) => {
                             ))}
                         </View>
                     </View>
-                ))}
+                ))} */}
+                {console.log("teste obje", ran)}
+
+
 
                 {/* <View>
                     <Text> ICICCI test filte</Text>
