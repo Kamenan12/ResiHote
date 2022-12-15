@@ -6,6 +6,7 @@ import { db } from "../../firebase";
 import { auth } from "../../firebase";
 import { collection, onSnapshot, query, where,orderBy } from "firebase/firestore";
 import tw from 'twrnc';
+import { Icon } from "@rneui/themed";
 
 
 
@@ -125,12 +126,15 @@ const ResidenceView = () => {
                 <View>
 
                     <Text> texte ici mettre les residences!</Text>
-                    {
+                    { resi ? 
                         resi.map((Resi, index) => (
                             <View key={index} style={[tw`items-center`]}>
                                 <Residence residence={Resi} />
                             </View>
-                            ))
+                            )) : 
+                            <View> 
+                                <Text> Aucune residences</Text>
+                            </View>
                     }
                     {/* {console.log("resi", resi)} */}
                     
@@ -147,11 +151,35 @@ export default ResidenceView;
 const Residence = (props) => {
     const residen = props.residence
     return (
-        <View style={tw`bg-white flex`}>
-            <View style={tw`h-40 w-80`}>
-                <Image source={{uri: residen.Images[0].url}} style={[styles.img]} />
+        // <View style={tw`bg-white flex`}>
+        //     <View style={tw`h-40 w-80`}>
+        //         <Image source={{uri: residen.Images[0].url}} style={[styles.img]} />
+        //     </View>
+        //     <Text>{residen.Titre} </Text>
+        // </View>
+        <View style={[tw` p-3`, ]}>
+            <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
+                <View>
+                    <Image source={{uri: residen.Images[0].url}} style={[{width:120, height: 120}, tw`rounded-3xl`]}   />
+                </View>
+
+                <View style={tw`pl-4`}>
+                    
+                <View>
+                    <Text style={{fontSize: 22, fontWeight: "900", fontFamily: "sans-serif",}}>{residen.Titre} </Text>
+                    </View>
+                    <View style={tw`flex-row `}>
+                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Nombre_chambre} Chambre(s)</Text>
+                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw`pl-2`]}>{residen.Nombre_salon} Salon(s) </Text>
+                    </View>
+                    <View style={tw`flex-row `}>
+                        <View style={tw`flex-row`}>
+                            <Icon  name="location" color="black" type="entypo" size={25}/>
+                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Type_residences}</Text>
+                        </View>
+                    </View>
+                </View>
             </View>
-            <Text>{residen.Titre} </Text>
         </View>
     )
 }
