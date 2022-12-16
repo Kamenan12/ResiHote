@@ -35,11 +35,11 @@ const Calendrier = (props) => {
     
     ////*****//////////////// */
     const DisableDay = []
-    // ran.map( (dat) => (
-    //     dat.map((d) => (
-    //         DisableDay.push(d.jour)   modif
-    //     ))
-    // ))
+    ran.map( (dat) => (
+        dat.Tab.map((d) => (
+            DisableDay.push(d.jour)   
+        ))
+    ))
     // const test = [
     // "2022-11-25",
     // "2022-11-26",
@@ -51,24 +51,24 @@ const Calendrier = (props) => {
     // const test2 = ['James', 'John', 'Paul', 'Ringo', 'George'];
     // pour le Css des date selecionne
     const CustumStyleDate = [] 
-    // ran.map( (dat) => (
-    //     dat.map((d) => (
-    //         CustumStyleDate.push({
-    //             date: d.jour,
-    //             style: {
-    //                 backgroundColor: 'red'
-    //             },
-    //             textStyle: {
-    //                 color: 'white'
-    //             }, 
-    //             containerStyle: {
-    //                 // backgroundColor: 'red'
-    //             },
-    //             allowDisabled: false
+    ran.map( (dat) => (
+        dat.Tab.map((d) => (
+            CustumStyleDate.push({
+                date: d.jour,
+                style: {
+                    backgroundColor: 'red'
+                },
+                textStyle: {
+                    color: 'white'
+                }, 
+                containerStyle: {
+                    // backgroundColor: 'red'
+                },
+                allowDisabled: true
 
-    //         })
-    //     ))
-    // ))
+            })
+        ))
+    ))
 
     const onDateChange = (date, type) => {
         if (type === 'END_DATE') {
@@ -153,15 +153,15 @@ const Calendrier = (props) => {
         //         m.filter(dis => dis !== d)
         //     })
         // }
-        let c2 = []
-        let cc
+        let cc = {}
+        let Tab
         console.log("ranSupp", ran)
         ran.map((dis, key) => {
-            cc = dis.filter(di => di.jour !== d)
-            c2 = [...c2, cc]
+            Tab = dis.Tab.filter(di => di.jour !== d)
+            cc = {...cc, Tab}
         })
-        console.log("cc", cc)
-        console.log("222", c2)
+        // console.log("cc", cc)
+        console.log("Tab11111", cc)
         // let ccc = ran.filter(
         //     dis => {
         //        console.log("filtre", dis[0])
@@ -169,7 +169,7 @@ const Calendrier = (props) => {
         // )
         // console.log("ccc", ccc)
         // console.log("ccc", ccc)
-        setRan(c2)
+        setRan([cc])
         ValideRan()
     } 
     
@@ -227,11 +227,11 @@ const Calendrier = (props) => {
                 ))} */}
 
                 
-                {/* { ran.map((d, key) => (
+                { ran.map((d, key) => (
                     <View key={key}>
                         <View>
-                            <Text>jour {d.jour}</Text>
-                            {d.map((r,key) => (
+                            {/* <Text>jour {d.jour}</Text> */}
+                            {d.Tab.map((r,key) => (
                             <View key={key} style={tw`flex-row pt-2`}>
                                 <Text> jour: {r.jour}</Text>  
                                 <Text style={tw`bg-red-300 ml-2`} onPress={() => Sup(r.jour)}>Supprimer </Text>
@@ -239,7 +239,7 @@ const Calendrier = (props) => {
                             ))}
                         </View>
                     </View>
-                ))} */}
+                ))}
                 {console.log("teste obje", ran)}
 
 
