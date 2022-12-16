@@ -896,7 +896,7 @@ const ChambreView = () => {
                                     <View>
                                         <Text>Occupe: </Text> 
                                         {WatchCalendrier.map((o, key) => (
-                                            o.map((c, key) => (
+                                            o.Tab.map((c, key) => (
                                                 <View>
                                                     <Text >Occuper: {c.jour}</Text>
                                                 </View>

@@ -200,7 +200,7 @@ const Calendrier = (props) => {
                 months={['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Otobre', 'Novembre', 'Decembre']}
                 customDatesStyles={CustumStyleDate}
                 
-                // disabledDates={DisableDay}
+                disabledDates={DisableDay} 
             />
 
             <View>
