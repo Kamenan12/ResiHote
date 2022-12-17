@@ -169,13 +169,13 @@ const Residence = (props) => {
                     <Text style={{fontSize: 22, fontWeight: "900", fontFamily: "sans-serif",}}>{residen.Titre} </Text>
                     </View>
                     <View style={tw`flex-row `}>
-                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Nombre_chambre} Chambre(s)</Text>
-                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw`pl-2`]}>{residen.Nombre_salon} Salon(s) </Text>
+                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.chambre} Chambre(s)</Text>
+                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw`pl-2`]}>{residen.salon} Salon(s) </Text>
                     </View>
                     <View style={tw`flex-row `}>
                         <View style={tw`flex-row`}>
                             <Icon  name="location" color="black" type="entypo" size={25}/>
-                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Type_residences}</Text>
+                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Location.description}</Text>
                         </View>
                     </View>
                 </View>

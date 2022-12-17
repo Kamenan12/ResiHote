@@ -297,8 +297,8 @@ const ChambreView = () => {
                                 }
                             
     
-                // })
-                navigation.navigate('Chambres')
+                
+                navigation.navigate('Residence')
         // console.log(querySnapshot.data())
        }
     //******************** */  Finnnnnn  Fonction pour ajouter la residences a la base des donnees **************

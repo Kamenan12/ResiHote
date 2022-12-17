@@ -99,9 +99,11 @@ const MapScreen = (props) => {
         <View > 
             <GooglePlacesAutocomplete 
             query={{key: "AIzaSyCiuN2o8Iv39Ei4YNg6hHeEbNZ44tIOsiw",
-                    language: 'fr'}}
+                    language: 'fr', components: "country:ci"}}
             onPress={(data, details = null) => {
-                // console.log(data.description);
+                // console.log(data);  
+                console.log("Details" ,details.address_components[2]);
+                // console.log("data", data.terms);
                 // console.log(details.geometry.location)
                 props.onChange({
                     localisation: localisation,
