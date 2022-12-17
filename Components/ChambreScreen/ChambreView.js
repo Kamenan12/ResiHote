@@ -68,6 +68,8 @@ const ChambreView = () => {
      // Equipement extra 
      const [jardin, setJardin] = useState(false)
      const [garage, setGarage] = useState(false)
+     // Les info de localite 
+     const [ville, setVille] = useState(false)
  
      // pour la selection desimage de residences
      const [openImage, setOpenImage] = useState(false);
@@ -97,7 +99,52 @@ const ChambreView = () => {
         setStep(step - 1)
     }
 
+    //Donnees des villes
 
+    const Villes = [
+        {
+            title: "Abidjan",
+            value: "Abidjan", 
+            communes: [
+                {
+                    title: "Koumassi",
+                    Value: "Koumassi",
+                    gps: {
+                        lat: "111",
+                        lng: "444"
+
+                    }
+                },
+                {
+                    title: "Marcory",
+                    Value: "Marcory",
+                    gps: {
+                        lat: "111",
+                        lng: "444"
+
+                    }
+                },
+
+            ]
+        },
+        {
+            title: "Bouake",
+            value: "Bouake"
+        },
+        {
+            title: "Yamoussoukro",
+            value: "Yamoussoukro"
+        },
+        {
+            title: "Korhogo",
+            value: "korhogo"
+        },
+        {
+            title: "Daloa",
+            value: "Daloa"
+        },
+
+    ]
     /// ICi les donnees de chaque composant
 
     const list2 = [
@@ -674,7 +721,46 @@ const ChambreView = () => {
                             </View>
                         </View> 
                         );
-                    case 3: 
+                    case 3 :
+                        return (
+                            <View>
+                                <Text> Ici pour champ des villes</Text>
+
+                                <View>
+                                    <Button title="Ville " 
+                                        onPress={() => setVille(!ville)}
+                                    />
+
+                                    <BottomSheet modalProps={{}} isVisible={ville}>
+
+                                        {
+                                            Villes.map((ville, i) => (
+                                                <ListItem
+                                                    key={i}
+                                                    containerStyle={ville.containerStyle}
+                                                    onPress={()=> [console.log("ville", ville.value), setVille(false)]} >
+
+                                                    <ListItem.Content>
+                                                        <ListItem.Title>{ville.title}</ListItem.Title>
+                                                    </ListItem.Content>
+                                                    </ListItem>
+                                            ))
+                                        }
+                                    </BottomSheet>
+                                </View>
+
+                                <View style={tw`flex-row justify-evenly w-60`}>
+                                
+                                <Button title="suivant"
+                                    onPress={() => Suivant()} 
+                                />
+                                <Button title="precedent"
+                                    onPress={() => Precedent()} 
+                                />
+                            </View>
+                            </View>
+                        )
+                    case 4: 
                     return (
                         <View style={[tw`bg-white`]}>
                             {/* <Text> 3eme etape </Text> */}
@@ -707,7 +793,7 @@ const ChambreView = () => {
                                 </View>
                         </View>
                     );
-                    case 4: 
+                    case 5: 
                     return (
                         
                               
@@ -808,7 +894,7 @@ const ChambreView = () => {
                         )
                         
                     );
-                    case 5: 
+                    case 6: 
                     return (
                         <View>
                             <Text> Ici calendrier </Text>
@@ -833,7 +919,7 @@ const ChambreView = () => {
                                  {console.log("On change calendar ", WatchCalendrier)}
                         </View>
                     )
-                    case 6: 
+                    case 7: 
                     return (
                         <View >
                             <ScrollView>

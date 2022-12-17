@@ -101,9 +101,11 @@ const MapScreen = (props) => {
             query={{key: "AIzaSyCiuN2o8Iv39Ei4YNg6hHeEbNZ44tIOsiw",
                     language: 'fr', components: "country:ci"}}
             onPress={(data, details = null) => {
-                // console.log(data);  
-                console.log("Details" ,details.address_components[2]);
-                // console.log("data", data.terms);
+                // console.log(data);   
+                let commue = details.address_components.filter(com => com.types[1] === "sublocality")
+                console.log("Commune 11" , commue[0].long_name); 
+                // console.log("Ville" ,details.address_components[2]); 
+                // console.log("data", data);
                 // console.log(details.geometry.location)
                 props.onChange({
                     localisation: localisation,
