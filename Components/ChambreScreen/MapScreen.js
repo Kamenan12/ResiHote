@@ -24,6 +24,8 @@ const MapScreen = (props) => {
             // lat: 7.539989,
             // lng: -5.547080.
             // }
+            const [commune, setCommune] = useState('')
+            const [ville, setVille] = useState('')
             const [description, setDescription] = useState('')
             const [localisation, setLocalisation] = useState({
                 lat: 7.539988999999999,
@@ -71,7 +73,9 @@ const MapScreen = (props) => {
             const localite = () => {
                 props.onChange({
                     localisation: localisation,
-                    description: description
+                    description: description,
+                    ville: ville,
+                    commune: commune
                 }
                 )
                 // console.log("localite")
@@ -106,9 +110,9 @@ const MapScreen = (props) => {
                     language: 'fr', components: "country:ci"}}
             onPress={(data, details = null) => {
                 // console.log(data);   
-                let commue = details.address_components.filter(com => com.types[1] === "sublocality")
-                let ville = details.address_components.filter(com => com.types[0] === "locality")
-                commue[0]  ?  console.log("il est la ", commue) : setVisibleAlert(!visibleAlert) ; 
+                let commu = details.address_components.filter(com => com.types[1] === "sublocality")
+                let vill = details.address_components.filter(com => com.types[0] === "locality")
+                commu[0]  ?  console.log("il est la ", commu) : setVisibleAlert(!visibleAlert) ; 
                 // ville ? console.log("Ville 11" , ville[0].long_name): null; 
                 // console.log("Ville" ,details.address_components[2]); 
                 // console.log("data", data);
@@ -116,12 +120,14 @@ const MapScreen = (props) => {
                 props.onChange({
                     localisation: localisation,
                     description: data.description,
-                    ville: ville[0].long_name,
-                    commune: commue[0].long_name ? commue[0].long_name : ""
+                    ville: vill[0].long_name,
+                    commune: commu[0].long_name ? commu[0].long_name : ""
                 }
-                )
+                ) 
                 setDescription(data.description)
                 setLocalisation(details.geometry.location)
+                setVille(vill[0].long_name)
+                setCommune(commu[0].long_name) 
                 MoveTo(details.geometry.location)
             }}
             listViewDisplayed={false}

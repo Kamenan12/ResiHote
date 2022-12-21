@@ -721,49 +721,49 @@ const ChambreView = () => {
                             </View>
                         </View> 
                         );
-                    case 3 :
-                        return (
-                            <View>
-                                <Text> Ici pour champ des villes</Text>
+                    // case 3 :
+                    //     return (
+                    //         <View>
+                    //             <Text> Ici pour champ des villes</Text>
 
-                                <View>
-                                    <Button title="Ville " 
-                                        onPress={() => setVille(!ville)}
-                                    />
+                    //             <View>
+                    //                 <Button title="Ville " 
+                    //                     onPress={() => setVille(!ville)}
+                    //                 />
  
                                    
 
 
-                                    {/* <BottomSheet modalProps={{}} isVisible={ville}>
+                    //                 {/* <BottomSheet modalProps={{}} isVisible={ville}>
 
-                                        {
-                                            Villes.map((ville, i) => (
-                                                <ListItem
-                                                    key={i}
-                                                    containerStyle={ville.containerStyle}
-                                                    onPress={()=> [console.log("ville", ville.value), setVille(false)]} >
+                    //                     {
+                    //                         Villes.map((ville, i) => (
+                    //                             <ListItem
+                    //                                 key={i}
+                    //                                 containerStyle={ville.containerStyle}
+                    //                                 onPress={()=> [console.log("ville", ville.value), setVille(false)]} >
 
-                                                    <ListItem.Content>
-                                                        <ListItem.Title>{ville.title}</ListItem.Title>
-                                                    </ListItem.Content>
-                                                    </ListItem>
-                                            ))
-                                        }
-                                    </BottomSheet> */}
-                                </View>
+                    //                                 <ListItem.Content>
+                    //                                     <ListItem.Title>{ville.title}</ListItem.Title>
+                    //                                 </ListItem.Content>
+                    //                                 </ListItem>
+                    //                         ))
+                    //                     }
+                    //                 </BottomSheet> */}
+                    //             </View>
 
-                                <View style={tw`flex-row justify-evenly w-60`}>
+                    //             <View style={tw`flex-row justify-evenly w-60`}>
                                 
-                                <Button title="suivant"
-                                    onPress={() => Suivant()} 
-                                />
-                                <Button title="precedent"
-                                    onPress={() => Precedent()} 
-                                />
-                            </View>
-                            </View>
-                        )
-                    case 4: 
+                    //             <Button title="suivant"
+                    //                 onPress={() => Suivant()} 
+                    //             />
+                    //             <Button title="precedent"
+                    //                 onPress={() => Precedent()} 
+                    //             />
+                    //         </View>
+                    //         </View>
+                    //     )
+                    case 3: 
                     return (
                         <View style={[tw`bg-white`]}>
                             {/* <Text> 3eme etape </Text> */}
@@ -796,7 +796,7 @@ const ChambreView = () => {
                                 </View>
                         </View>
                     );
-                    case 5: 
+                    case 4: 
                     return (
                         
                               
@@ -897,7 +897,7 @@ const ChambreView = () => {
                         )
                         
                     );
-                    case 6: 
+                    case 5: 
                     return (
                         <View>
                             <Text> Ici calendrier </Text>
@@ -922,7 +922,7 @@ const ChambreView = () => {
                                  {console.log("On change calendar ", WatchCalendrier)}
                         </View>
                     )
-                    case 7: 
+                    case 6: 
                     return (
                         <View >
                             <ScrollView>
