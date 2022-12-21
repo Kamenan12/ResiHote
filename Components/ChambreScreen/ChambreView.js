@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView, Image } from "react-native";
 import { useForm, Controller } from 'react-hook-form';
 // import DropDownPicker from 'react-native-dropdown-picker';
-import { Icon, Button, BottomSheet, ListItem, Input, CheckBox } from "@rneui/themed";
+import { Icon, Button, BottomSheet, ListItem, Input, CheckBox, Dialog } from "@rneui/themed";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { auth } from "../../firebase";
 import { db } from '../../firebase';
@@ -730,8 +730,11 @@ const ChambreView = () => {
                                     <Button title="Ville " 
                                         onPress={() => setVille(!ville)}
                                     />
+ 
+                                   
 
-                                    <BottomSheet modalProps={{}} isVisible={ville}>
+
+                                    {/* <BottomSheet modalProps={{}} isVisible={ville}>
 
                                         {
                                             Villes.map((ville, i) => (
@@ -746,7 +749,7 @@ const ChambreView = () => {
                                                     </ListItem>
                                             ))
                                         }
-                                    </BottomSheet>
+                                    </BottomSheet> */}
                                 </View>
 
                                 <View style={tw`flex-row justify-evenly w-60`}>

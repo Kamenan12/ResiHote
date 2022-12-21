@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { Icon } from "@rneui/themed";
+import { Icon, Dialog} from "@rneui/themed";
 
 import tw from 'twrnc'
 
@@ -29,6 +29,8 @@ const MapScreen = (props) => {
                 lat: 7.539988999999999,
                 lng: -5.547079999999999
             })
+
+            const [visibleAlert, setVisibleAlert] = useState(false)
         // const Origin = props.carte.localisation ? props.carte.localisation : {
         //     lat: 37.78825,
         //     lng: -122.4324 
@@ -88,7 +90,9 @@ const MapScreen = (props) => {
             // }
         // }, [localisation])
 
-
+            const FermeAlert = () => {
+                setVisibleAlert(!visibleAlert)
+            }
 
 
 
@@ -104,16 +108,16 @@ const MapScreen = (props) => {
                 // console.log(data);   
                 let commue = details.address_components.filter(com => com.types[1] === "sublocality")
                 let ville = details.address_components.filter(com => com.types[0] === "locality")
-                commue ? alert("Pas de commune ") : console.log("Ouiiiiiiiii"); 
-                ville ? console.log("Ville 11" , ville[0].long_name): null; 
+                commue[0]  ?  console.log("il est la ", commue) : setVisibleAlert(!visibleAlert) ; 
+                // ville ? console.log("Ville 11" , ville[0].long_name): null; 
                 // console.log("Ville" ,details.address_components[2]); 
                 // console.log("data", data);
-                // console.log(details.geometry.location)
+                // console.log(details.geometry.location) 
                 props.onChange({
                     localisation: localisation,
                     description: data.description,
-                    // ville: ville[0].long_name,
-                    // commune: commue[0].long_name,
+                    ville: ville[0].long_name,
+                    commune: commue[0].long_name ? commue[0].long_name : ""
                 }
                 )
                 setDescription(data.description)
@@ -153,7 +157,21 @@ const MapScreen = (props) => {
                 }
             }}/>
             {/* Ajout de google cherche ici */}
-
+                    <View>
+                        <Dialog isVisible={visibleAlert}
+                        onBackdropPress={FermeAlert}
+                        >
+                            <Dialog.Title  title="Attention !"/>
+                            <Text> 1:Veuillez bien choisir le quarier ou la rue </Text>
+                            <Text> 2:Veuillez bien pionter le Marker a l'endroit exacte de la residence </Text>
+                            <Text style={{ fontWeight: "600"}}>NB: Cela permet au client de mieux s'oriennter </Text>
+                            <Dialog.Actions>
+                                <Dialog.Button
+                                title="compris"
+                                onPress={FermeAlert} />
+                            </Dialog.Actions>
+                        </Dialog>
+                    </View>
              <MapView
                 ref={mapRef}
                 style={styles.map}
