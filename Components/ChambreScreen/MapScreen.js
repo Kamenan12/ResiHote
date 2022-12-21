@@ -103,13 +103,17 @@ const MapScreen = (props) => {
             onPress={(data, details = null) => {
                 // console.log(data);   
                 let commue = details.address_components.filter(com => com.types[1] === "sublocality")
-                console.log("Commune 11" , commue[0].long_name); 
+                let ville = details.address_components.filter(com => com.types[0] === "locality")
+                commue ? alert("Pas de commune ") : console.log("Ouiiiiiiiii"); 
+                ville ? console.log("Ville 11" , ville[0].long_name): null; 
                 // console.log("Ville" ,details.address_components[2]); 
                 // console.log("data", data);
                 // console.log(details.geometry.location)
                 props.onChange({
                     localisation: localisation,
-                    description: data.description
+                    description: data.description,
+                    // ville: ville[0].long_name,
+                    // commune: commue[0].long_name,
                 }
                 )
                 setDescription(data.description)
@@ -125,7 +129,7 @@ const MapScreen = (props) => {
             <View style={[tw``, {marginRight: 10, marginTop: 15}]}> 
                 <Icon type="entypo" name="location" color=""  />
             </View>}
-            placeholder="localite" 
+            placeholder="Commune, Quarier" 
             styles={{
                 container: {
                     flex: 0,
