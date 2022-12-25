@@ -14,6 +14,7 @@ import ChambreView from './Components/ChambreScreen/ChambreView';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
+import DetailsView from './Components/ResidenceScreens/DetailsView';
 
 
 
@@ -63,6 +64,7 @@ import tw from 'twrnc'
         <ResidenceStack.Navigator>
           <ResidenceStack.Screen name="Residence" component={ResidenceView} options={{ headerShown: false, }}/>
           <ResidenceStack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
+          <ResidenceStack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false}} />
         </ResidenceStack.Navigator>
     )
   }

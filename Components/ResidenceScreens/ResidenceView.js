@@ -97,14 +97,14 @@ const ResidenceView = () => {
     }
 
 
-
-
-
-
     const AjoutChambre = () => {
         Navigation.navigate('Chambres')
     }
 
+
+    const AfficheDetail = (props) => {
+        Navigation.navigate('DetailsResidences');
+    }
     console.log("Id user:", CurrentUser)
 
 
@@ -112,7 +112,7 @@ const ResidenceView = () => {
         getMesResi()
     }, [])
 
-    
+
     return (
         <View style={tw`pt-15`}> 
             <View>
@@ -131,7 +131,7 @@ const ResidenceView = () => {
                     { resi ? 
                         resi.map((Resi, index) => (
                             <View key={index} style={[tw`items-center`]}>
-                                <Residence residence={Resi} />
+                                <Residence residence={Resi} detail={AfficheDetail}/>
                             </View>
                             )) : 
                             <View> 
@@ -159,7 +159,7 @@ const Residence = (props) => {
         //     </View>
         //     <Text>{residen.Titre} </Text>
         // </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.detail()}>
             <View style={[tw` p-3`, ]}>
                 <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
                     <View>
