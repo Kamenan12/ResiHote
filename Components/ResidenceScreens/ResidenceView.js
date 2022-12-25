@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
@@ -111,6 +111,8 @@ const ResidenceView = () => {
     useEffect( () => {
         getMesResi()
     }, [])
+
+    
     return (
         <View style={tw`pt-15`}> 
             <View>
@@ -157,60 +159,62 @@ const Residence = (props) => {
         //     </View>
         //     <Text>{residen.Titre} </Text>
         // </View>
-        <View style={[tw` p-3`, ]}>
-            <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
-                <View>
-                    <Image source={{uri: residen.Images[0].url}} style={[{width:120, height: 120}, tw`rounded-3xl`]}   />
-                </View>
+        <TouchableOpacity>
+            <View style={[tw` p-3`, ]}>
+                <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
+                    <View>
+                        <Image source={{uri: residen.Images[0].url}} style={[{width:120, height: 120}, tw`rounded-3xl`]}   />
+                    </View>
 
-                <View style={tw`pl-4`}>
-                    
-                <View>
-                    <Text style={{fontSize: 22, fontWeight: "900", fontFamily: "sans-serif",}}>{residen.Titre} </Text>
-                    </View>
-                    <View style={tw`flex-row `}>
-                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.chambre} Chambre(s)</Text>
-                        <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw`pl-2`]}>{residen.salon} Salon(s) </Text> 
-                    </View>
-                    <View style={tw`flex-row `}>
-                        <View style={tw`flex-row`}>
-                            <Icon  name="location" color="black" type="entypo" size={25}/>
-                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Location.ville}</Text>
+                    <View style={tw`pl-4`}>
+                        
+                    <View>
+                        <Text style={{fontSize: 22, fontWeight: "900", fontFamily: "sans-serif",}}>{residen.Titre} </Text>
                         </View>
-                        <View style={tw`flex-row`}>
-                            <Icon  name="location-pin" color="black" type="entypo" size={25}/>
-                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Location.commune}</Text>
+                        <View style={tw`flex-row `}>
+                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.chambre} Chambre(s)</Text>
+                            <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw`pl-2`]}>{residen.salon} Salon(s) </Text> 
                         </View>
-                    </View>
-                    <View style={tw`flex-row pl-2 pt-2 justify-between`}>
-                                <View style={tw`flex-row`}>
-                                {residen.Equipement_bases.map((equip, index)=> (
-                                    <View key={index} style={tw` flex-row`}>
-                                        { equip === "Wifi" ? 
-                                        <Icon  name="wifi" color="#9CA3AF" type="materiallcons" size={25}/> : <Text></Text>
-                                        }
+                        <View style={tw`flex-row `}>
+                            <View style={tw`flex-row`}>
+                                <Icon  name="location" color="black" type="entypo" size={25}/>
+                                <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Location.ville}</Text>
+                            </View>
+                            <View style={tw`flex-row`}>
+                                <Icon  name="location-pin" color="black" type="entypo" size={25}/>
+                                <Text style={[{fontSize: 16, fontWeight: "500", fontFamily: "sans-serif", color:"black"}, tw``]}>{residen.Location.commune}</Text>
+                            </View>
+                        </View>
+                        <View style={tw`flex-row pl-2 pt-2 justify-between`}>
+                                    <View style={tw`flex-row`}>
+                                    {residen.Equipement_bases.map((equip, index)=> (
+                                        <View key={index} style={tw` flex-row`}>
+                                            { equip === "Wifi" ? 
+                                            <Icon  name="wifi" color="#9CA3AF" type="materiallcons" size={25}/> : <Text></Text>
+                                            }
+                                            
+                                            {equip === "Televison" ?
+                                                <Icon  name="tv-outline" type="ionicon" color="#9CA3AF" size={25}/> : <Text></Text>
+                                            }
+                                            {equip === "Refrigerateur" ?
+                                                <Icon  name="fridge-alert-outline" type="material-community" color="#9CA3AF" size={25}/> : <Text></Text>
+                                            }
+                                            {/* {equip === "piscine" ?
+                                                <Icon  name="pool" color="#9CA3AF" type="materiallcons" size={25}/> : <Text></Text>
+                                            } */}
+                                        </View>
                                         
-                                        {equip === "Televison" ?
-                                             <Icon  name="tv-outline" type="ionicon" color="#9CA3AF" size={25}/> : <Text></Text>
-                                        }
-                                        {equip === "Refrigerateur" ?
-                                             <Icon  name="fridge-alert-outline" type="material-community" color="#9CA3AF" size={25}/> : <Text></Text>
-                                        }
-                                        {/* {equip === "piscine" ?
-                                             <Icon  name="pool" color="#9CA3AF" type="materiallcons" size={25}/> : <Text></Text>
-                                        } */}
+                                    ))}
                                     </View>
                                     
-                                ))}
-                                </View>
-                                
-                                <View style={tw`bg-black p-2 rounded-2xl ml-3`}>
-                                <Text style={[{fontSize: 16, fontWeight: "700", fontFamily: "sans-serif", color:"white"}, tw``]}>{residen.Prix}/jour</Text>
-                                </View>
-                            </View>
+                                    <View style={tw`bg-black p-2 rounded-2xl ml-3`}>
+                                    <Text style={[{fontSize: 16, fontWeight: "700", fontFamily: "sans-serif", color:"white"}, tw``]}>{residen.Prix}/jour</Text>
+                                    </View>
+                        </View>
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
