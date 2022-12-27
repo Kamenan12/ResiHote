@@ -57,7 +57,10 @@ const ResidenceView = () => {
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
                             queryResi.forEach((doc) => {
-                                re.push(doc.data())
+                                re.push({
+                                    id: doc.id, 
+                                    data: [doc.data()]}),
+                                console.log("ID du Doc", doc.id)
                             })
                             console.log("les Resss", re)
                             setResi(re)
@@ -129,11 +132,13 @@ const ResidenceView = () => {
 
                     <Text> texte ici mettre les residences!</Text>
                     { resi ? 
-                        resi.map((Resi, index) => (
-                            <View key={index} style={[tw`items-center`]}>
-                                <Residence residence={Resi} detail={AfficheDetail}/>
-                            </View>
-                            )) : 
+                        resi.map((R, index) => (
+                            R.data.map((Resi, index) => (
+                                <View key={index} style={[tw`items-center`]}>
+                                    <Residence residence={Resi} detail={AfficheDetail} idDoc={R.id}/>
+                                </View>
+                            ))
+                        )) : 
                             <View> 
                                 <Text> Aucune residences</Text>
                             </View>
@@ -152,6 +157,7 @@ export default ResidenceView;
 
 const Residence = (props) => {
     const residen = props.residence
+    const Id = props.idDoc
     return (
         // <View style={tw`bg-white flex`}>
         //     <View style={tw`h-40 w-80`}>
@@ -159,7 +165,7 @@ const Residence = (props) => {
         //     </View>
         //     <Text>{residen.Titre} </Text>
         // </View>
-        <TouchableOpacity onPress={() => props.detail()}>
+        <TouchableOpacity onPress={() => props.detail(residen, Id)}>
             <View style={[tw` p-3`, ]}>
                 <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
                     <View>
@@ -167,7 +173,7 @@ const Residence = (props) => {
                     </View>
 
                     <View style={tw`pl-4`}>
-                        
+
                     <View>
                         <Text style={{fontSize: 22, fontWeight: "900", fontFamily: "sans-serif",}}>{residen.Titre} </Text>
                         </View>
