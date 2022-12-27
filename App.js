@@ -64,7 +64,7 @@ import DetailsView from './Components/ResidenceScreens/DetailsView';
         <ResidenceStack.Navigator>
           <ResidenceStack.Screen name="Residence" component={ResidenceView} options={{ headerShown: false, }}/>
           <ResidenceStack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
-          <ResidenceStack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false}} />
+          <ResidenceStack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false, headerShown: false,}} />
         </ResidenceStack.Navigator>
     )
   }
