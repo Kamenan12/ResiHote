@@ -1,15 +1,18 @@
 import { View, Text, StyleSheet } from "react-native";
+import Images from "./Details/Images";
 
 
 
-const DetailsView = () => {
+const DetailsView = (props) => {
 
 
-
+    const Detail = props.route.params
+    const retour = props.navigation.goBack
+    console.log('details,', props.route.params)
 
     return (
         <View>
-            <Text> ici est les details de la chambre</Text>
+            <Images img={Detail.residences.Images} retour={retour}/>
         </View>
     )
 }

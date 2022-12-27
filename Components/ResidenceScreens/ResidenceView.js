@@ -105,8 +105,11 @@ const ResidenceView = () => {
     }
 
 
-    const AfficheDetail = (props) => {
-        Navigation.navigate('DetailsResidences');
+    const AfficheDetail = (residence, id) => {
+        Navigation.navigate('DetailsResidences', {
+            residences: residence,
+            resiID: id
+        });
     }
     console.log("Id user:", CurrentUser)
 
