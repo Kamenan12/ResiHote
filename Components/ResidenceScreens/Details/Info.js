@@ -28,7 +28,7 @@ const Info = (props) => {
                     </View>
              
                     <View style={tw`pt-5`}>
-                        <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description}</Text>
+                        <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus expedita aperiam at praesentium odit magni! Voluptatem voluptas dolore cum maxime dolorum repellendus cumque, atque tempora doloremque, tenetur necessitatibus, soluta quos.</Text>
                     </View>
         </>
     )
