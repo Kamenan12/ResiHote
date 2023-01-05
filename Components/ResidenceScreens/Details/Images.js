@@ -25,6 +25,9 @@ const Images = (props) => {
                     </View>
                 </View>
             </ScrollView>
+            <View style={tw` absolute top-10 p-2`} >   
+                <Icon  name="arrow-left-circle" color="white" type="feather" size={32} onPress={() => props.retour()} />
+            </View>
             {/* <View style={ tw`bg-white h-full`}>
                 <View style={tw` h-100, bg-white shadow-2xl`}>
                     
