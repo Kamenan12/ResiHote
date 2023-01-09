@@ -63,8 +63,8 @@ import DetailsView from './Components/ResidenceScreens/DetailsView';
     return (
         <ResidenceStack.Navigator>
           <ResidenceStack.Screen name="Residence" component={ResidenceView} options={{ headerShown: false, }}/>
-          <ResidenceStack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
-          <ResidenceStack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false, headerShown: false,}} />
+          {/* <ResidenceStack.Screen  />  */}
+          {/* <ResidenceStack.Screen /> */}
         </ResidenceStack.Navigator>
     )
   }
@@ -197,6 +197,8 @@ export default function App() {
         <Stack.Screen name="Login" component={Login}  options={{ headerShown: false, }} />
         <Stack.Screen name="SignIn" component={SignIn}  options={{ headerShown: false, }} />
         <Stack.Screen name="Home-G" component={TabNavigation}  options={{ headerShown: false, }} />
+        <Stack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false, headerShown: false,}} />
+        <Stack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
