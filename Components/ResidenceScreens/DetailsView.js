@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import Calendrier from "./Details/Calendrier";
 import Equipement from "./Details/Equipement";
 import Images from "./Details/Images";
 import Info from "./Details/Info";
@@ -22,6 +23,7 @@ const DetailsView = (props) => {
                 <Info Titre={Detail.residences.Titre} Localite={Detail.residences.Location} Description={Detail.residences.Description} />
                 <Piece Type={Detail.residences.Type_residence} Chambre={Detail.residences.chambre} Salon={Detail.residences.salon} Prix={Detail.residences.Prix}/>
                 <Equipement EquiBase={Detail.residences.Equipement_bases} EquiExtra={Detail.residences.Equipement_extra}/>
+                <Calendrier />
             </View>
         </ScrollView>
         </>
