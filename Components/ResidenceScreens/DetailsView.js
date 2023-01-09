@@ -23,7 +23,7 @@ const DetailsView = (props) => {
                 <Info Titre={Detail.residences.Titre} Localite={Detail.residences.Location} Description={Detail.residences.Description} />
                 <Piece Type={Detail.residences.Type_residence} Chambre={Detail.residences.chambre} Salon={Detail.residences.salon} Prix={Detail.residences.Prix}/>
                 <Equipement EquiBase={Detail.residences.Equipement_bases} EquiExtra={Detail.residences.Equipement_extra}/>
-                <Calendrier />
+                <Calendrier Calendrier={Detail.residences.Calendrier}/>
             </View>
         </ScrollView>
         </>
