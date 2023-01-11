@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
-
-import {Button, Icon} from '@rneui/themed'
-import tw from "twrnc"
 import { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { useForm, Controller } from 'react-hook-form';
+import {Button, Icon, Input} from '@rneui/themed'
+import tw from "twrnc"
+
 
 
 
@@ -49,10 +50,61 @@ const Info = (props) => {
 
 
 const ModifInfo = (props) => {
+
+    const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues: {
+          
+          Titre: '',
+          Description: '',
+        } 
+      });
     return (
 
         <View>
-            <Text>iici modif info </Text>
+            <View>
+                <Text> Titre de l'annonce</Text>
+                <Controller   
+                    control={control}
+                    render={({field: {onChange, onBlur,value}}) => (
+                        <Input
+                        placeholder="Titre de l'annonce "
+                                                                                
+                        onChangeText={value => onChange(value)}
+                        
+                    />
+                    )}
+                    name="Titre"
+                    rules={{required: true}}
+                    />
+            </View>
+
+            <View>
+                <Text> Description de la chambre</Text>
+                <Controller   
+                    control={control}
+                    render={({field: {onChange, onBlur,value}}) => (
+                        <Input
+                        placeholder="Description Resumee de la chambre"
+                        multiline
+                        numberOfLines={6}
+                        maxLength={250}
+                        onChangeText={value => onChange(value)}
+                        // containerStyle={{
+                        //     height: 120,
+                        // }}
+                        rightIcon={
+                            <View style={{ width: 28, height: 40, top: 40}}>
+                                <Text style={{ fontSize: 15, color: "gray"}}> 250</Text>
+                            </View>
+                        }
+                    />
+                    // <TextArea />
+                    )}
+                    name="Description"
+                    rules={{required: true}}
+                    />
+            </View>
+
             <Button title="annueler" onPress={() => props.modif(false)}/> 
         </View>
     )

@@ -49,18 +49,19 @@ const ResidenceView = () => {
 
                 const unUser = onSnapshot(q, (queryUser) => {
                     const us = []
-                    queryUser.forEach((doc) => {
+                    queryUser.forEach((docUser) => {
                         // us.push(
                         //     doc.id
                         // )
-                        let r = query(collection(db,`users/${doc.id}/residences`));
+                        let r = query(collection(db,`users/${docUser.id}/residences`));
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
                             queryResi.forEach((doc) => {
                                 re.push({
-                                    id: doc.id, 
-                                    data: [doc.data()]}),
-                                console.log("ID du Doc", doc.id)
+                                    docUser: docUser.id,
+                                    idDoc: doc.id, 
+                                    data: [doc.data()]})
+                                // console.log("ID du Doc", doc.id)
                             })
                             console.log("les Resss", re)
                             setResi(re)
@@ -105,13 +106,14 @@ const ResidenceView = () => {
     }
 
 
-    const AfficheDetail = (residence, id) => {
+    const AfficheDetail = (residence, id, docUser) => {
         Navigation.navigate('DetailsResidences', {
             residences: residence,
-            resiID: id
+            resiID: id,
+            idDocUser: docUser
         });
     }
-    console.log("Id user:", CurrentUser)
+    // console.log("Id user:", CurrentUser)
 
 
     useEffect( () => {
@@ -138,7 +140,7 @@ const ResidenceView = () => {
                         resi.map((R, index) => (
                             R.data.map((Resi, index) => (
                                 <View key={index} style={[tw`items-center`]}>
-                                    <Residence residence={Resi} detail={AfficheDetail} idDoc={R.id}/>
+                                    <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docUser={R.docUser}/>
                                 </View>
                             ))
                         )) : 
@@ -161,6 +163,7 @@ export default ResidenceView;
 const Residence = (props) => {
     const residen = props.residence
     const Id = props.idDoc
+    const docUser = props.docUser
     return (
         // <View style={tw`bg-white flex`}>
         //     <View style={tw`h-40 w-80`}>
@@ -168,7 +171,7 @@ const Residence = (props) => {
         //     </View>
         //     <Text>{residen.Titre} </Text>
         // </View>
-        <TouchableOpacity onPress={() => props.detail(residen, Id)}>
+        <TouchableOpacity onPress={() => props.detail(residen, Id, docUser)}>
             <View style={[tw` p-3`, ]}>
                 <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
                     <View>
