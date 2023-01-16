@@ -10,7 +10,20 @@ import tw from "twrnc"
 
 
 const Info = (props) => {
+
+    const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues: {
+          Titre: '',
+          Description: '',
+        } 
+      });
     const [modif, SetModif] = useState(false)
+
+    const ValInfo = async (data) => {
+        console.log("donner", data.Titre)
+      }
+
+
     return (
 
         modif === false ? (
@@ -41,7 +54,95 @@ const Info = (props) => {
                     </View>
                     <Button title="modifier" onPress={() => SetModif(true)}/>
         </>
-        ) : <ModifInfo  modif={SetModif}/>
+        ) :  (
+
+            <View style={tw`py-5 px-2`}>
+                    <View>
+                        <Text> Titre de l'annonce</Text>
+                        <Controller   
+                            control={control}
+                            render={({field: {onChange, onBlur,value}}) => (
+                                <Input
+                                    placeholder="Titre de l'annonce "
+                                    
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            )}
+                            name="Titre"
+                            rules={{ required: true, minLength: 10}}
+                            />
+
+                            {/* {errors.Titre?.type === "required" && <Text style={{  fontSize: 18}}>*Le Titre est obligatoire*</Text>} */}
+                            {/* {errors.nom?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>* Pas de caractere special * </Text>} */}
+                            {errors.Titre?.type === "minLength" && <Text style={{ fontSize: 15}}>*Minimum de caractere 10 * </Text>}
+                            {errors.Titre?.type === "required" && <Text style={{  fontSize: 18}}>*Le Titre est obligatoire*</Text>}
+                            
+                    </View>
+                    <View>
+                        <Text> Description de la chambre</Text>
+                        <Controller   
+                            control={control}
+                            render={({field: {onChange, onBlur,value}}) => (
+                                <Input
+                                placeholder="Description Resumee de la chambre"
+                                multiline
+                                numberOfLines={6}
+                                maxLength={250}
+                                onChangeText={value => onChange(value)}
+                                // containerStyle={{
+                                //     height: 120,
+                                // }}
+                                rightIcon={
+                                    <View style={{ width: 28, height: 40, top: 40}}>
+                                        <Text style={{ fontSize: 15, color: "gray"}}> 250</Text>
+                                    </View>
+                                }
+                            />
+                            // <TextArea />
+                            )}
+                            name="Description"
+                            rules={{required: true, maxLength: 250, minLength: 30}}
+                            />
+
+                            {errors.Description?.type === "required" && <Text style={{  fontSize: 18}}>*La Description est obligatoire*</Text>}
+                            {errors.Description?.type === "minLength" && <Text style={{ fontSize: 15}}>*Minimum de caractere 30 * </Text>}
+                            {errors.Description?.type === "maxLength" && <Text style={{  fontSize: 18}}>*Le Maximun de caractere est 250*</Text>}
+                    </View>
+                    <View style={tw`flex-row w-80 justify-between pt-5 px-5`}>
+                        <Button title="annueler" onPress={() => SetModif(false)}
+                            buttonStyle={tw`bg-transparent border rounded-xl`}
+                            titleStyle={{
+                                color: "red"
+                            }}
+                            icon={{
+                                name: "cancel",
+                                type: "material",
+                                size: 15,
+                                color: "red"
+                                
+                            }}
+                            
+                            iconRight
+                        /> 
+                        <Button title="Valder" onPress={handleSubmit(ValInfo)}
+                            buttonStyle={tw`bg-transparent border rounded-xl`}
+                            titleStyle={{
+                                color: "red"
+                            }}
+                            icon={{
+                                name: "checkcircle",
+                                type: "antdesign",
+                                size: 15,
+                                color: "red"
+                                
+                            }}
+                            
+                            iconRight
+                        /> 
+                    </View>
+            </View>
+        )
     )
 }
 
@@ -49,66 +150,98 @@ const Info = (props) => {
 
 
 
-const ModifInfo = (props) => {
+// const ModifInfo = (props) => {
 
-    const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
-        defaultValues: {
-          
-          Titre: '',
-          Description: '',
-        } 
-      });
-    return (
+    
 
-        <View>
-            <View>
-                <Text> Titre de l'annonce</Text>
-                <Controller   
-                    control={control}
-                    render={({field: {onChange, onBlur,value}}) => (
-                        <Input
-                        placeholder="Titre de l'annonce "
-                                                                                
-                        onChangeText={value => onChange(value)}
+      
+//     return (
+
+//         <View style={tw`py-5 px-2`}>
+//             <View>
+//                 <Text> Titre de l'annonce</Text>
+//                 <Controller   
+//                     control={control}
+//                     render={({field: {onChange, onBlur,value}}) => (
+//                         <Input
+//                             placeholder="Titre de l'annonce "
+                            
+//                             onChangeText={value => onChange(value)}
+//                             value={value}
+//                         />
+//                     )}
+//                     name="Titre"
+//                     rules={{ required: true, minLength: 10}}
+//                     />
+
+//                     {/* {errors.Titre?.type === "required" && <Text style={{  fontSize: 18}}>*Le Titre est obligatoire*</Text>} */}
+//                     {/* {errors.Titre?.type === "minLength" && <Text style={{ color: "red", fontSize: 18}}>*Minimum de caractere 10 * </Text>} */}
+//                     {/* {errors.nom?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>* Pas de caractere special * </Text>} */}
+//                      <View>
+//                         {errors.Titre?.type === "required" && <Text style={{  fontSize: 18}}>*Le Titre est obligatoire*</Text>}
+//                      </View>
+//             </View>
+//             <View>
+//                 <Text> Description de la chambre</Text>
+//                 <Controller   
+//                     control={control}
+//                     render={({field: {onChange, onBlur,value}}) => (
+//                         <Input
+//                         placeholder="Description Resumee de la chambre"
+//                         multiline
+//                         numberOfLines={6}
+//                         maxLength={250}
+//                         onChangeText={value => onChange(value)}
+//                         // containerStyle={{
+//                         //     height: 120,
+//                         // }}
+//                         rightIcon={
+//                             <View style={{ width: 28, height: 40, top: 40}}>
+//                                 <Text style={{ fontSize: 15, color: "gray"}}> 250</Text>
+//                             </View>
+//                         }
+//                     />
+//                     // <TextArea />
+//                     )}
+//                     name="Description"
+//                     rules={{required: true}}
+//                     />
+//             </View>
+//             <View style={tw`flex-row w-80 justify-between pt-5 px-5`}>
+//                 <Button title="annueler" onPress={() => props.modif(false)}
+//                     buttonStyle={tw`bg-transparent border rounded-xl`}
+//                     titleStyle={{
+//                         color: "red"
+//                     }}
+//                     icon={{
+//                         name: "cancel",
+//                         type: "material",
+//                         size: 15,
+//                         color: "red"
                         
-                    />
-                    )}
-                    name="Titre"
-                    rules={{required: true}}
-                    />
-            </View>
-
-            <View>
-                <Text> Description de la chambre</Text>
-                <Controller   
-                    control={control}
-                    render={({field: {onChange, onBlur,value}}) => (
-                        <Input
-                        placeholder="Description Resumee de la chambre"
-                        multiline
-                        numberOfLines={6}
-                        maxLength={250}
-                        onChangeText={value => onChange(value)}
-                        // containerStyle={{
-                        //     height: 120,
-                        // }}
-                        rightIcon={
-                            <View style={{ width: 28, height: 40, top: 40}}>
-                                <Text style={{ fontSize: 15, color: "gray"}}> 250</Text>
-                            </View>
-                        }
-                    />
-                    // <TextArea />
-                    )}
-                    name="Description"
-                    rules={{required: true}}
-                    />
-            </View>
-
-            <Button title="annueler" onPress={() => props.modif(false)}/> 
-        </View>
-    )
-}
+//                     }}
+                    
+//                     iconRight
+//                 /> 
+//                 <Button title="Valder" onPress={() => [ handleSubmit(ValideInfo)]}
+//                     buttonStyle={tw`bg-transparent border rounded-xl`}
+//                     titleStyle={{
+//                         color: "red"
+//                     }}
+//                     icon={{
+//                         name: "checkcircle",
+//                         type: "antdesign",
+//                         size: 15,
+//                         color: "red"
+                        
+//                     }}
+                    
+//                     iconRight
+//                 /> 
+//             </View>
+//         </View>
+//     )
+// }
 
 
 export default Info;
