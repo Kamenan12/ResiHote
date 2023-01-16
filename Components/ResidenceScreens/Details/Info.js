@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useForm, Controller } from 'react-hook-form';
+import { useNavigation } from "@react-navigation/native";
+import { auth } from "../../../firebase";
+import { db } from '../../../firebase';
+import { query, addDoc, collection, onSnapshot, where, getDocs, doc, setDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import {Button, Icon, Input} from '@rneui/themed'
 import tw from "twrnc"
 
@@ -11,6 +15,11 @@ import tw from "twrnc"
 
 const Info = (props) => {
 
+    const Navigation = useNavigation();
+
+    const idDoc = props.idDoc
+    const idDocUser = props.idDocUser
+
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
           Titre: '',
@@ -19,8 +28,33 @@ const Info = (props) => {
       });
     const [modif, SetModif] = useState(false)
 
+    
     const ValInfo = async (data) => {
-        console.log("donner", data.Titre)
+        
+    
+        try {
+                
+                     if (data) {
+                         
+                         
+                        await updateDoc(doc(db, `users/${idDocUser}/residences/`, idDoc),{
+                            Titre: data.Titre,
+                            Description: data.Description,
+                            date_update: serverTimestamp()
+                          })
+                        console.log("Residence ajouter")
+                     }
+
+                
+              
+
+                     } catch (e) {
+                         console.log(e)
+                     }
+                 
+
+     
+     Navigation.navigate('Residence')
       }
 
 
