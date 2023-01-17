@@ -1,10 +1,20 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import { Icon, Button } from "@rneui/themed";
 import tw from "twrnc"
 
 
 const Equipement = (props) => {
+
+    const Navigation = useNavigation(); 
+
+
+    const ModifEquip = (idDoc, IdDocUser) => {
+        Navigation.navigate('ModifEquipement', {
+            idDoc: idDoc,
+            idDocUser: IdDocUser
+        });
+    }
 
     return (
         <>
@@ -29,7 +39,7 @@ const Equipement = (props) => {
                             </View>
                         </ScrollView>
                         <View style={tw`items-end pt-5 px-5`}>
-                        <Button title="Modifier" 
+                        <Button title="Modifier" onPress={() => ModifEquip(props.idDoc, props.idDocUser)}
                             buttonStyle={tw`bg-transparent border rounded-xl`}
                             titleStyle={{
                                 color: "red"

@@ -12,6 +12,7 @@ import ReservationView from './Components/ReservationScreen/ReservationView';
 import NotificationView from './Components/NotificationScreen/NotificationView';
 import ChambreView from './Components/ChambreScreen/ChambreView';
 import ImageModif from './Components/ResidenceScreens/Details/Modif/Images';
+import EquipementModif from './Components/ResidenceScreens/Details/Modif/Equipement';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
@@ -201,6 +202,7 @@ export default function App() {
         <Stack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false, headerShown: false,}} />
         <Stack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
         <Stack.Screen name="ModifImage" component={ImageModif}  options={{ headerShown: false }}/>
+        <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
