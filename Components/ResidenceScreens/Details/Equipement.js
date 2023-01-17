@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
-import { Icon } from "@rneui/themed";
+import { Icon, Button } from "@rneui/themed";
 import tw from "twrnc"
 
 
@@ -28,7 +28,23 @@ const Equipement = (props) => {
                                 ))}
                             </View>
                         </ScrollView>
-                        
+                        <View style={tw`items-end pt-5 px-5`}>
+                        <Button title="Modifier" 
+                            buttonStyle={tw`bg-transparent border rounded-xl`}
+                            titleStyle={{
+                                color: "red"
+                            }}
+                            // icon={{
+                            //     name: "cancel",
+                            //     type: "material",
+                            //     size: 15,
+                            //     color: "red"
+                                
+                            // }}
+                            
+                            // iconRight
+                        /> 
+                        </View>
                 </View>
 
                 

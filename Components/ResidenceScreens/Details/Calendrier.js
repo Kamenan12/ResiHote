@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
-
+import { Icon, Button } from "@rneui/themed";
+import tw from "twrnc"
 import moment from "moment";
 
 
@@ -18,11 +19,11 @@ const Calendrier = (props) => {
         <View>
             <Text style={[{ fontSize: 24, fontWeight: "700", fontFamily: "serif"}]}>Disponibilite </Text>
             <View>
-                <View>
+                {/* <View>
                     {jourIndispo.map((j, index) => (
                         <Text key={index}>{j}</Text>
                     ))}
-                </View>
+                </View> */}
                 <CalendarPicker 
                 minDate={jourJ}
                 enableDateChange={false}
@@ -34,6 +35,23 @@ const Calendrier = (props) => {
                 disabledDates={jourIndispo}
                 />
             </View>
+            <View style={tw`items-end pt-5 px-5`}>
+                        <Button title="modifier" onPress={() => SetModif(true)}
+                            buttonStyle={tw`bg-transparent border rounded-xl`}
+                            titleStyle={{
+                                color: "red"
+                            }}
+                            // icon={{
+                            //     name: "cancel",
+                            //     type: "material",
+                            //     size: 15,
+                            //     color: "red"
+                                
+                            // }}
+                            
+                            // iconRight
+                        />
+                    </View>
         </View>
     )
 }

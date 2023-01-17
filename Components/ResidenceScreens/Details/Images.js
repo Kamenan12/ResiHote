@@ -50,7 +50,25 @@ const Images = (props) => {
                     <Icon  name="arrow-left-circle" color="white" type="feather" size={32} onPress={() => props.retour()} />
                 </View>
             </View> */}
-            <Button title="modifier" onPress={() => ModifImg(props.idDoc, props.idDocUser)} />
+            <View style={tw`items-end pt-5 px-5`}>
+                
+                <Button title="modifier" onPress={() => ModifImg(props.idDoc, props.idDocUser)} 
+                buttonStyle={tw`bg-transparent border rounded-xl`}
+                            titleStyle={{
+                                color: "red"
+                            }}
+                            // icon={{
+                            //     name: "cancel",
+                            //     type: "material",
+                            //     size: 15,
+                            //     color: "red"
+                                
+                            // }}
+                            
+                            // iconRight
+                            />
+
+            </View>
         </View>
          
     )
