@@ -153,12 +153,12 @@ const Calendrier = (props) => {
         //         m.filter(dis => dis !== d)
         //     })
         // }
-        let cc = {}
+        let cc = []
         let Tab
         console.log("ranSupp", ran)
         ran.map((dis, key) => {
             Tab = dis.Tab.filter(di => di.jour !== d)
-            cc = {...cc, Tab}
+            cc = [...cc, {Tab}]
         })
         // console.log("cc", cc)
         console.log("Tab11111", cc)
@@ -169,7 +169,7 @@ const Calendrier = (props) => {
         // )
         // console.log("ccc", ccc)
         // console.log("ccc", ccc)
-        setRan([cc])
+        setRan(cc)
         ValideRan()
     } 
     

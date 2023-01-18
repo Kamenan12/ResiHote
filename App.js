@@ -13,6 +13,7 @@ import NotificationView from './Components/NotificationScreen/NotificationView';
 import ChambreView from './Components/ChambreScreen/ChambreView';
 import ImageModif from './Components/ResidenceScreens/Details/Modif/Images';
 import EquipementModif from './Components/ResidenceScreens/Details/Modif/Equipement';
+import CalendrierModif from './Components/ResidenceScreens/Details/Modif/Calendrier';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
@@ -203,6 +204,7 @@ export default function App() {
         <Stack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
         <Stack.Screen name="ModifImage" component={ImageModif}  options={{ headerShown: false }}/>
         <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
+        <Stack.Screen name="ModifCalendrier" component={CalendrierModif}  options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
