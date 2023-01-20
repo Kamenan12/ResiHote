@@ -137,7 +137,7 @@ function TabNavigation () {
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
         }}/>
-
+ 
 
 
      
