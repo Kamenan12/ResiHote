@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { auth } from "../../firebase";
 // import { getAuth } from "firebase/auth";
 import { db } from "../../firebase";
@@ -15,6 +15,7 @@ import { collection, getDocs, where, query, onSnapshot } from "firebase/firestor
 
 const BarEntete = () => {
         // const auth = getAuth();
+    const Navigation = useNavigation();
     const user = auth.currentUser;
     const [userDoc, setUserDoc] = useState();
 
@@ -34,7 +35,9 @@ const BarEntete = () => {
 
 
 
- 
+ const ProfilMenu = () => {
+    Navigation.navigate('Profil');
+ }
 
     useEffect(() => {
         getUserDoc();
@@ -48,10 +51,12 @@ const BarEntete = () => {
 
             </View>
             <View >
-                <View style={[tw`border border-slate-300 rounded-lg p-2 shadow-`,]}>
+            <TouchableOpacity onPress={() => ProfilMenu()}>
 
+                <View style={[tw`border border-slate-300 rounded-lg p-2 shadow-`,]}>
                     <Image source={require("../images/profil/002-man.png")} style={{ height: 30, width: 30, resizeMode: 'contain'}} />
                 </View>
+            </TouchableOpacity>
                 
             </View>
         </View>
