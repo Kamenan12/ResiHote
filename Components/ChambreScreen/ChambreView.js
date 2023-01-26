@@ -87,6 +87,9 @@ const ChambreView = () => {
        const WatchLocalisation = watch('Localisation');
        const WatchImage = watch('Images');
        const WatchCalendrier = watch('Calendrier');
+       const WatchPrix = watch("Prix");
+       const WatchTitre = watch("Titre");
+       const WatchDescription = watch('Description')
  
      
 
@@ -419,7 +422,7 @@ const ChambreView = () => {
                                             control={control}
                                             render={({field: {onChange, onBlur,value}}) => (
                                                 <Input
-                                                placeholder="nombre de Chambre"
+                                                placeholder="nombre de chambres"
                                                 rightIcon={{
                                                     type:"ionicon",
                                                     name: "bed-outline",
@@ -448,7 +451,7 @@ const ChambreView = () => {
                                                         control={control}
                                                         render={({field: {onChange, onBlur,value}}) => (
                                                             <Input
-                                                            placeholder="nombre de salons"
+                                                            placeholder={"nombre de salons"}
                                                             rightIcon={{
                                                                 type:"font-awesome-5",
                                                                 name: "chair",
@@ -476,7 +479,7 @@ const ChambreView = () => {
                                             control={control}
                                             render={({field: {onChange, onBlur,value}}) => (
                                                 <Input
-                                                placeholder="nombre de salle de bain"
+                                                placeholder={"nombre de salle de bain"}
                                                 rightIcon={{
                                                     type:"font-awesome",
                                                     name: "bathtub",
@@ -500,7 +503,7 @@ const ChambreView = () => {
                                                 control={control}
                                                 render={({field: {onChange, onBlur,value}}) => (
                                                     <Input
-                                                    placeholder="nombre de personnes"
+                                                    placeholder={"nombre de personnes"}
                                                     rightIcon={{
                                                         type:"foundation",
                                                         name: "torsos-all",
@@ -518,7 +521,7 @@ const ChambreView = () => {
                                     </View>
                                     <View>
                                     {
-                                        WatchType_residence === '' | WatchNbre_chambre === '' | WatchCapacite_acceuil === '' | WatchNbre_salon === '' ?
+                                        WatchType_residence === '' | WatchNbre_chambre === '' | WatchCapacite_acceuil === ''  ?
 
                                         <Button title="suivant" 
                                         disabled={true}
@@ -710,14 +713,23 @@ const ChambreView = () => {
 
                                 />
                             </View>
-                            <View style={tw`flex-row justify-evenly w-60`}>
+                            <View style={tw`flex-row justify-evenly w-90 pt-5`}>
                                 
-                                <Button title="suivant"
-                                    onPress={() => Suivant()} 
-                                />
                                 <Button title="precedent"
                                     onPress={() => Precedent()} 
                                 />
+                                {
+                                    WatchEquipement_bases.length == 0 || WatchEquipement_extra.length == 0 || WatchPrix === "" ? 
+                                    <Button title="suivant"
+                                        onPress={() => Suivant()} 
+                                        disabled
+                                    /> : 
+                                    <Button title="suivant"
+                                        onPress={() => Suivant()} 
+                                        
+                                    />
+                                }
+                                
                             </View>
                         </View> 
                         );
@@ -787,9 +799,15 @@ const ChambreView = () => {
                                     <Button title="precedent"
                                     onPress={() => Precedent()} 
                                     />
-                                     <Button title="suivant"
-                                    onPress={() => Suivant()} 
-                                    />
+                                    {
+                                        WatchLocalisation.length == 0 ? 
+                                        <Button title="suivant"
+                                       onPress={() => Suivant()} disabled
+                                       /> :
+                                       <Button title="suivant"
+                                       onPress={() => Suivant()} 
+                                       />
+                                    }
                                     {/* <Button title="handle"
                                     onPress={handleSubmit(tapContro)}
                                         /> */}
@@ -868,12 +886,20 @@ const ChambreView = () => {
                                 
                                  <View style={[tw`flex-row justify-around w-95`]}>
                                      
+                                     
                                          <Button title="precedent"
                                          onPress={() => Precedent()} 
                                          /> 
-                                        <Button title="suivant"
-                                            onPress={() => Suivant()} 
-                                        />
+                                         { 
+                                            WatchImage.length == 0 | WatchTitre == "" | WatchDescription == "" ?
+                                            <Button title="suivant"
+                                                onPress={() => Suivant()} 
+                                                disabled
+                                            /> : 
+                                            <Button title="suivant"
+                                                onPress={() => Suivant()} 
+                                            />
+                                         }
                                  </View>
                                 {/* {console.log("les inage selectionnes", WatchImage)} */}
                             </View>
@@ -915,9 +941,16 @@ const ChambreView = () => {
                                          <Button title="precedent"
                                          onPress={() => Precedent()} 
                                          /> 
-                                        <Button title="suivant"
-                                            onPress={() => Suivant()} 
-                                        />
+
+                                         {
+                                            WatchCalendrier.length == 0 ? 
+                                            <Button title="suivant"
+                                                onPress={() => Suivant()} disabled
+                                            /> : 
+                                            <Button title="suivant"
+                                                onPress={() => Suivant()} 
+                                            />
+                                         }
                             </View>
                                  {console.log("On change calendar ", WatchCalendrier)}
                         </View>
@@ -964,14 +997,14 @@ const ChambreView = () => {
                                     <View>
                                         <Text>Equipement de bases : </Text> 
                                         {WatchEquipement_bases.map((b, key) => (
-                                            <Text>-{b}</Text>
+                                            <Text key={key}>-{b}</Text>
                                         ))}
                                         
                                     </View>
                                     <View>
                                         <Text>Equipement Extra : </Text> 
                                         {WatchEquipement_extra.map((e, key) => (
-                                            <Text>-{e}</Text>
+                                            <Text key={key}>-{e}</Text>
                                         ))}
                                         
                                     </View>
@@ -986,7 +1019,7 @@ const ChambreView = () => {
                                         <Text>Occupe: </Text> 
                                         {WatchCalendrier.map((o, key) => (
                                             o.Tab.map((c, key) => (
-                                                <View>
+                                                <View key={key}>
                                                     <Text >Occuper: {c.jour}</Text>
                                                 </View>
                                             ))
@@ -997,7 +1030,7 @@ const ChambreView = () => {
 
 
 
-                                <View style={[tw`flex-row justify-around w-95`]}>
+                                <View style={[tw`flex-row justify-around w-95 pt-4 pb-4`]}>
                                     
                                     <Button title="precedent"
                                     onPress={() => Precedent()} 

@@ -5,6 +5,7 @@ import { View, Text, StyleSheet } from "react-native";
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from "moment";
 import { set } from "react-hook-form";
+import { Button } from "@rneui/themed";
 
 import tw from 'twrnc'
 
@@ -209,7 +210,18 @@ const Calendrier = (props) => {
                 {<Text> nombre de jour : {NbreDate}</Text>}
                 {/* <Text> durrrr: {dur}</Text> */}
                  {/* { NbreDate ? <Text onPress={() => Ajout()}> Ajouter sur tableau</Text> : null } */}
-                <Text onPress={() => [Ajout(), ValideRan()]}> Ajouter sur tableau</Text> 
+                <View style={tw`items-center`}>
+                    <Button 
+                        title={"Ajouter sur tableau"}
+                        onPress={() => [Ajout(), ValideRan()]}
+                        buttonStyle={tw`bg-transparent border rounded-xlt`}
+                        titleStyle={{
+                            color: "black"
+                        }}
+                        
+                    />
+                </View>
+                {/* <Text onPress={() => [Ajout(), ValideRan()]}> Ajouter sur tableau</Text>  */}
                 { dispo.map((d, key) => (
                     <View key={key}>
                         <Text > du: {d.debut}</Text>
