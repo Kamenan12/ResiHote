@@ -125,7 +125,7 @@ function TabNavigation () {
             <Icon type='ionicon' name='home-sharp' size={29}   color={color} />
           </View>
          ),
-         
+          
          tabBarActiveTintColor: '#062737',
          tabBarInactiveTintColor: '#B4BEC3'
          }}/>
