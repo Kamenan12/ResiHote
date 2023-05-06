@@ -19,7 +19,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from "@rneui/themed";
 import tw from 'twrnc'
 import DetailsView from './Components/ResidenceScreens/DetailsView';
-
+import { Provider } from 'react-redux'
+import { store } from './Components/Store/store';
 
 
 
@@ -195,20 +196,24 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='LogScreen'>
-        <Stack.Screen name="LogScreen" component={LogScreen} options={{ headerShown: false, }} />
-        <Stack.Screen name="Login" component={Login}  options={{ headerShown: false, }} />
-        <Stack.Screen name="SignIn" component={SignIn}  options={{ headerShown: false, }} />
-        <Stack.Screen name="Home-G" component={TabNavigation}  options={{ headerShown: false, }} />
-        <Stack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false, headerShown: false,}} />
-        <Stack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
-        <Stack.Screen name="ModifImage" component={ImageModif}  options={{ headerShown: false }}/>
-        <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
-        <Stack.Screen name="ModifCalendrier" component={CalendrierModif}  options={{ headerShown: false }}/>
-        <Stack.Screen name="Profil" component={MenuParametre}  options={{ headerShown: false }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='LogScreen'>
+          <Stack.Screen name="LogScreen" component={LogScreen} options={{ headerShown: false, }} />
+          <Stack.Screen name="Login" component={Login}  options={{ headerShown: false, }} />
+          <Stack.Screen name="SignIn" component={SignIn}  options={{ headerShown: false, }} />
+          <Stack.Screen name="Home-G" component={TabNavigation}  options={{ headerShown: false, }} />
+          <Stack.Screen name="DetailsResidences" component={DetailsView} options={{ tabBarVisible: false, headerShown: false,}} />
+          <Stack.Screen name="Chambres" component={ChambreView} options={{ tabBarVisible: false}} />
+          <Stack.Screen name="ModifImage" component={ImageModif}  options={{ headerShown: false }}/>
+          <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
+          <Stack.Screen name="ModifCalendrier" component={CalendrierModif}  options={{ headerShown: false }}/>
+          <Stack.Screen name="Profil" component={MenuParametre}  options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+
   );
 } 
 
