@@ -49,7 +49,7 @@ const ResidenceView = () => {
 
                 const unUser = onSnapshot(q, (queryUser) => {
                     const us = []
-                    queryUser.forEach((docUser) => {
+                    queryUser.forEach((docUser) => { 
                         // us.push(
                         //     doc.id
                         // )

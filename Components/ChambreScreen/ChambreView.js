@@ -19,12 +19,13 @@ import MapScreen from "./MapScreen";
 import Img from "./Img";
 import Calendrier from "./Calendrier";
 import { useEffect } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
 
 
 const ChambreView = () => {
 
-
+    const userdoc = useSelector((state) => state.user.idDoc)
+    const idHote = useSelector((state) => state.user.user)
 
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -50,7 +51,7 @@ const ChambreView = () => {
     // const de navigaton 
     const navigation = useNavigation()
     // const recuperation du document de user 
-    const [userdoc, setUserdoc] = useState();
+    // const [userdoc, setUserdoc] = useState();
 
      // initialsation des constante 
      const [step, setStep] = useState(1); // initalisation des etape
@@ -241,17 +242,17 @@ const ChambreView = () => {
 
     // foncton pour recupuer les info de l'user connctee
 
-    const getUSerDoc = async() => {
-        const q = query(collection(db, "users"), where("user", "==", CurrentUser.uid));
-            const querySnapshot = await getDocs(q);
-            const dc = [];
-            querySnapshot.forEach((doc) => {   
-                dc.push(doc.id)
-            });
-            setUserdoc(dc[0]);  
-            // console.log("id doc user",dc) 
-            console.log("UserDoc Chamb", userdoc)
-    }
+    // const getUSerDoc = async() => {
+    //     const q = query(collection(db, "users"), where("user", "==", CurrentUser.uid));
+    //         const querySnapshot = await getDocs(q);
+    //         const dc = [];
+    //         querySnapshot.forEach((doc) => {   
+    //             dc.push(doc.id)
+    //         });
+    //         setUserdoc(dc[0]);  
+    //         // console.log("id doc user",dc) 
+    //         console.log("UserDoc Chamb", userdoc)
+    // }
 
     //*************************** */ Fonction pour ajouter la residences a la base des donnees  *************************
 
