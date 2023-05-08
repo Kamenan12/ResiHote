@@ -1,6 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+import { signOut, getAuth } from "firebase/auth";
+
+import { auth } from "../../firebase";
 import { Icon, Divider } from "@rneui/themed";
 import tw from "twrnc"
 
@@ -8,6 +11,14 @@ import tw from "twrnc"
 
 const MenuParametre = () => {
     const Navigation = useNavigation();
+
+    const Decon = () => {
+        signOut(auth)
+        .then(() => {
+            console.log('User deconnecté');
+            Navigation.navigate("LogScreen")
+        }); 
+    }
 
     return (
         <>
@@ -35,7 +46,7 @@ const MenuParametre = () => {
                </View>
             </TouchableOpacity>
                <Divider />
-               <TouchableOpacity>
+               <TouchableOpacity onPress={() => Decon()}>
                <View style={tw`flex-row py-3 px-4`}>
                     <Icon type="material-community" name="logout" color="red" size={21}/>
                     <Text style={{ fontSize: 15, fontWeight: "500"}}> Déconnexion</Text>

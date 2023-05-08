@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     idDoc: "",
-    user: "",
+    userhote: "",
     nom: "",
     prenom: "",
     pseudo: "",
@@ -19,7 +19,7 @@ export const getUserSlice = createSlice({
     reducers: {
         getUSer: (state, actions) => {
             state.idDoc = actions.payload.idDoc
-            state.user = actions.payload.user
+            state.userhote = actions.payload.userHote
             state.nom = actions.payload.nom
             state.prenom = actions.payload.prenom
             state.pseudo = actions.payload.pseudo

@@ -24,7 +24,7 @@ const BarEntete = () => {
 
 
     const getUserDoc = async() => {
-        const q = query(collection(db, "users"), where("user", "==", user.uid));
+        const q = query(collection(db, "hotes"), where("hoteuser", "==", user.uid));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const dc = []; 
             querySnapshot.forEach((doc) => {
@@ -37,7 +37,7 @@ const BarEntete = () => {
             // setUserDoc(dc[0]); 
             dispatch(getUSer({
                 idDoc: dc[0].id,
-                user: dc[0].data.user,
+                user: dc[0].data.userHote,
                 nom: dc[0].data.nom,
                 prenom: dc[0].data.prenom,
                 pseudo: dc[0].data.pseudo,

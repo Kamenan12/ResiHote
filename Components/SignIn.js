@@ -41,25 +41,27 @@ const SignIn = () => {
             const user = userCredential.user;
 
             try {
-                const docRef  = await addDoc(collection(db, "users"), {
-                    user: user.uid,
+                const docRef  = await addDoc(collection(db, "hotes"), {
+                    userHote: user.uid,
                     nom: data.nom,
                     prenom: data.prenom,
                     pseudo: data.pseudo,
                     email: data.email,
-                    hote: "oui",
                     date_create: serverTimestamp()
 
 
                 })
                 console.log("User ajouter a la collection", docRef.id)
             } catch (e) {
-                console.log("erreur d'ajout de user en collection", e)
+                console.log("erreur d'ajout de user en collection", e.code)
             }
             // navigation.navigate("Home")
         }
 
-        )
+        ).catch((e) => {
+            console.log("Error firebaseCode", e.code)
+            console.log("Error firebaseMessage", e.message)
+        })
     }
 
     useEffect(() => {

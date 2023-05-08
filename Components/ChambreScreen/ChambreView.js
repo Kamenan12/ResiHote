@@ -24,8 +24,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const ChambreView = () => {
 
-    const userdoc = useSelector((state) => state.user.idDoc)
-    const idHote = useSelector((state) => state.user.user)
+    const hotedoc = useSelector((state) => state.user.idDoc)
+    const userhote = useSelector((state) => state.userhote)
 
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -317,7 +317,7 @@ const ChambreView = () => {
                                 if (image.length == data.Images.length) {
                                     console.log("imageurl", image)
                                     
-                                    await addDoc(collection(db, `users/${userdoc}/residences`),{
+                                    await addDoc(collection(db, `hotes/${hotedoc}/residences`),{
                                         Type_residence: data.type_residence,
                                         chambre: data.Nbre_chambre,
                                         salon: data.Nbre_salon,
