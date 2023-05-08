@@ -59,8 +59,11 @@ const SignIn = () => {
         }
 
         ).catch((e) => {
-            console.log("Error firebaseCode", e.code)
-            console.log("Error firebaseMessage", e.message)
+            if (e.code == "auth/email-already-in-use") {
+                alert("Mail deja utilise")
+            }
+            // console.log("Error firebaseCode", e.code)
+            // console.log("Error firebaseMessage", e.message)
         })
     }
 
