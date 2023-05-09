@@ -29,7 +29,7 @@ const BarEntete = () => {
             const dc = []; 
             querySnapshot.forEach((doc) => {
                 dc.push({
-                    id: dc.id,
+                    id: doc.id,
                     data: doc.data()
                 })
                 // console.log("les doc", dc)

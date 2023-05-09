@@ -19,7 +19,7 @@ export const getUserSlice = createSlice({
     reducers: {
         getUSer: (state, actions) => {
             state.idDoc = actions.payload.idDoc
-            state.userhote = actions.payload.userHote
+            state.userhote = actions.payload.user
             state.nom = actions.payload.nom
             state.prenom = actions.payload.prenom
             state.pseudo = actions.payload.pseudo

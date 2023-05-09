@@ -25,7 +25,7 @@ import { useSelector, useDispatch } from "react-redux";
 const ChambreView = () => {
 
     const hotedoc = useSelector((state) => state.user.idDoc)
-    const userhote = useSelector((state) => state.userhote)
+    const userhote = useSelector((state) => state.user.userhote)
 
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -332,10 +332,13 @@ const ChambreView = () => {
                                         Description: data.Description,
                                         Calendrier: data.Calendrier,
                                         valide: "non",
-                                        Resi: "hote",
+                                        userHote: userhote,
+                                        // Resi: "hote",
                                         Statut: "En attente",
                                         date_create: serverTimestamp()
                                                 
+                                     }).catch((e) => {
+                                        alert("reer ajout", e.code)
                                      })
                                             console.log("Residence ajouter")
                                 }
@@ -344,7 +347,8 @@ const ChambreView = () => {
                          
     
                                 } catch (e) {
-                                    console.log(e)
+                                    // console.log(e)
+                                    alert("reer", e)
                                 }
                             
     
@@ -356,10 +360,10 @@ const ChambreView = () => {
 
    
     
-    
-    useEffect(() => {
-        getUSerDoc();
-    }, [])
+    console.log("hotDOCID", userhote)
+    // useEffect(() => {
+    //     getUSerDoc();
+    // }, [])
 
     return (
         <>
