@@ -144,7 +144,7 @@ const CalendrierModif = (props) => {
             if (ran) {
                 
                 
-               await updateDoc(doc(db, `users/${idDocUser}/residences/`, idDoc),{
+               await updateDoc(doc(db, `hotes/${idDocUser}/residences/`, idDoc),{
                     Calendrier: ran,
                 
                  })

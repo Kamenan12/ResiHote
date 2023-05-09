@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
 import { auth } from "../../firebase";
 import { collection, onSnapshot, query, where,orderBy } from "firebase/firestore";
+import { useSelector, useDispatch } from "react-redux";
 import tw from 'twrnc';
 import { Icon } from "@rneui/themed";
 
@@ -13,7 +14,9 @@ import { Icon } from "@rneui/themed";
 
 const ResidenceView = () => {
     // recuperer Id de user
-    const CurrentUser = auth.currentUser.uid;
+    // const CurrentUser = auth.currentUser.uid;
+    const hotedoc = useSelector((state) => state.user.idDoc)
+    const userhote = useSelector((state) => state.user.userhote)
     const [userDoc, setUserDoc] = useState()
 
     const Navigation = useNavigation();
@@ -45,20 +48,19 @@ const ResidenceView = () => {
         //     })
         // })   le
 
-            let q = query(collection(db, "users"), where("user", "==", CurrentUser));
+            // let q = query(collection(db, "users"), where("user", "==", CurrentUser));
 
-                const unUser = onSnapshot(q, (queryUser) => {
-                    const us = []
-                    queryUser.forEach((docUser) => { 
+                // const unUser = onSnapshot(q, (queryUser) => {
+                //     const us = []
+                //     queryUser.forEach((docUser) => { 
                         // us.push(
                         //     doc.id
                         // )
-                        let r = query(collection(db,`users/${docUser.id}/residences`));
+                        let r = query(collection(db,`hotes/${hotedoc}/residences`));
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
                             queryResi.forEach((doc) => {
                                 re.push({
-                                    docUser: docUser.id,
                                     idDoc: doc.id, 
                                     data: [doc.data()]})
                                 // console.log("ID du Doc", doc.id)
@@ -66,10 +68,10 @@ const ResidenceView = () => {
                             console.log("les Resss", re)
                             setResi(re)
                         })
-                    })
+                    // })
                     // console.log("les Resi de user ID", us)
                     //  setUserDoc(us[0])
-                })
+                // })
 
                 // let r = query(collection(db,`users/${CurrentUser.uid}/residences`));
                 // const unResi = onSnapshot(r, (queryResi) => {
@@ -78,7 +80,7 @@ const ResidenceView = () => {
                 //             // let tab = [];
                 //             // tab.push(doc.data())
                 //             rs.push({ 
-                //                 id: doc.id,
+                //                 id: doc.id, 
                 //                 doc:[doc.data()]});
                 //             console.log("id resi: ", doc.id)
                 //         })
@@ -140,7 +142,7 @@ const ResidenceView = () => {
                         resi.map((R, index) => (
                             R.data.map((Resi, index) => (
                                 <View key={index} style={[tw`items-center`]}>
-                                    <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docUser={R.docUser}/>
+                                    <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docHote={hotedoc}/>
                                 </View>
                             ))
                         )) : 
@@ -163,7 +165,7 @@ export default ResidenceView;
 const Residence = (props) => {
     const residen = props.residence
     const Id = props.idDoc
-    const docUser = props.docUser
+    const docUser = props.docHote
     return (
         // <View style={tw`bg-white flex`}>
         //     <View style={tw`h-40 w-80`}>

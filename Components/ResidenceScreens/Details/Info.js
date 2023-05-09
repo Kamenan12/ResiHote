@@ -37,7 +37,7 @@ const Info = (props) => {
                      if (data) {
                          
                          
-                        await updateDoc(doc(db, `users/${idDocUser}/residences/`, idDoc),{
+                        await updateDoc(doc(db, `hotes/${idDocUser}/residences/`, idDoc),{
                             Titre: data.Titre,
                             Description: data.Description,
                             date_update: serverTimestamp()
@@ -84,7 +84,7 @@ const Info = (props) => {
                         </View>
              
                     <View style={tw`pt-5`}>
-                        <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus expedita aperiam at praesentium odit magni! Voluptatem voluptas dolore cum maxime dolorum repellendus cumque, atque tempora doloremque, tenetur necessitatibus, soluta quos.</Text>
+                        <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description} </Text>
                     </View>
                     <View style={tw`items-end pt-5 px-5`}>
                         <Button title="modifier" onPress={() => SetModif(true)}
