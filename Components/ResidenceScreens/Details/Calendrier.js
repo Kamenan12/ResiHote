@@ -33,11 +33,11 @@ const Calendrier = (props) => {
         <View>
             <Text style={[{ fontSize: 24, fontWeight: "700", fontFamily: "serif"}]}>Disponibilite </Text>
             <View>
-                <View>
+                {/* <View>
                     {jourIndispo.map((j, index) => (
                         <Text key={index}>{j}</Text>
                     ))}
-                </View>
+                </View> */}
                 <CalendarPicker 
                 minDate={jourJ}
                 enableDateChange={false}

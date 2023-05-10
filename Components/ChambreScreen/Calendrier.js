@@ -214,7 +214,7 @@ const Calendrier = (props) => {
                     <Button 
                         title={"Ajouter sur tableau"}
                         onPress={() => [Ajout(), ValideRan()]}
-                        buttonStyle={tw`bg-transparent border rounded-xlt`}
+                        buttonStyle={tw`bg-transparent border rounded-xl`}
                         titleStyle={{
                             color: "black"
                         }}
