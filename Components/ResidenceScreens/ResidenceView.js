@@ -56,7 +56,7 @@ const ResidenceView = () => {
                         // us.push(
                         //     doc.id
                         // )
-                        let r = query(collection(db,`hotes/${hotedoc}/residences`));
+                        let r = query(collection(db,"residences"), where("userHote", "==", userhote));
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
                             queryResi.forEach((doc) => {

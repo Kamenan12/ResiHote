@@ -317,7 +317,7 @@ const ChambreView = () => {
                                 if (image.length == data.Images.length) {
                                     console.log("imageurl", image)
                                     
-                                    await addDoc(collection(db, `hotes/${hotedoc}/residences`),{
+                                    await addDoc(collection(db, `residences`),{
                                         Type_residence: data.type_residence,
                                         chambre: data.Nbre_chambre,
                                         salon: data.Nbre_salon,
@@ -333,6 +333,7 @@ const ChambreView = () => {
                                         Calendrier: data.Calendrier,
                                         valide: "non",
                                         userHote: userhote,
+                                        idDocHote: hotedoc,
                                         // Resi: "hote",
                                         Statut: "En attente",
                                         date_create: serverTimestamp()
@@ -360,7 +361,7 @@ const ChambreView = () => {
 
    
     
-    console.log("hotDOCID", userhote)
+    // console.log("hotDOCID", userhote)
     // useEffect(() => {
     //     getUSerDoc();
     // }, [])

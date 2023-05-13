@@ -86,7 +86,7 @@ const ImageModif = (props) => {
                             if (image.length == imageMo.length) {
                                 console.log("imageurl", image)
                                 
-                                await updateDoc(doc(db, `hotes/${idDocUser}/residences/`, idDoc),{
+                                await updateDoc(doc(db, `residences`, idDoc),{
                                             Images: image,
                                             date_update: serverTimestamp()
                                             

@@ -112,7 +112,7 @@ const EquipementModif = (props) => {
             if (data) {
                 
                 
-               await updateDoc(doc(db, `hotes/${idDocUser}/residences/`, idDoc),{
+               await updateDoc(doc(db, `residences`, idDoc),{
                     Equipement_bases: data.Equipement_bases,
                     Equipement_extra: data.Equipement_extra,
                     date_update: serverTimestamp()

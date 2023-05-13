@@ -37,7 +37,7 @@ const Info = (props) => {
                      if (data) {
                          
                          
-                        await updateDoc(doc(db, `hotes/${idDocUser}/residences/`, idDoc),{
+                        await updateDoc(doc(db, `residences`, idDoc),{
                             Titre: data.Titre,
                             Description: data.Description,
                             date_update: serverTimestamp()
