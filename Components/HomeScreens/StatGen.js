@@ -1,10 +1,13 @@
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image,  } from "react-native";
 import {useNetInfo} from '@react-native-community/netinfo';
-
-
+import { db } from "../../firebase";
+import { collection, onSnapshot, query, where,orderBy } from "firebase/firestore";
 
 import tw from  "twrnc"
 import PasConnexion from "../Connexion/PasConnexion";
+// import { query } from "firebase/firestore";
+import { useSelector, useDispatch } from "react-redux";
 
 
 
@@ -12,7 +15,52 @@ import PasConnexion from "../Connexion/PasConnexion";
 
 
 const StatGen = () => {
+
+    const [resi, setResi] = useState([])
+    const [reser, setReser] = useState([])
     const NetInfo = useNetInfo();
+    const HoteDocId = useSelector((state) => state.hote.idDoc)
+    const userhoteId = useSelector((state) => state.hote.userhote)
+
+
+
+
+
+    const getData = async() => {
+
+        let r = query(collection(db,"residences"), where("userHote", "==", userhoteId));
+        const unResi = onSnapshot(r, (queryResi) => {
+            const re = []
+            queryResi.forEach((doc) => {
+                re.push({
+                    idDoc: doc.id, 
+                    data: [doc.data()]
+                })
+                // console.log("ID du Doc", doc.id)
+            })
+            console.log("les Resss", re)
+            setResi(re)
+        });
+        let residences = query(collection(db,"reservations"), where("userHoteIdDoc", "==", HoteDocId));
+        const unReser = onSnapshot(residences, (queryReser) => {
+            const rs = []
+            queryReser.forEach((doc) => {
+                rs.push({
+                    idDoc: doc.id,
+                    data: doc.data()
+                })
+            })
+            console.log(" Les Reserrr", rs)
+            setReser(rs)
+        })
+    }
+
+
+
+
+    useEffect( () => {
+        getData()
+    }, [])
     return (
         <View style={[tw`flex px-2`]}>
            <View>
@@ -37,7 +85,7 @@ const StatGen = () => {
             <View style={[tw`flex flex-row justify-between pt-3`]}>
                 
                     {/* ajouter le composant chanbre */}
-                    <NbChambre />
+                    <NbChambre nombre={resi.length}/>
                     {/* fin de composant chambre  */}
 
                     {/* debur de composant nombre de vu */}
@@ -59,7 +107,7 @@ const StatGen = () => {
 
 
 
-            const NbChambre = () => {
+            const NbChambre = (props) => {
                     return (
                         <>
                             <View style={[tw` h-27 w-42 rounded-xl   shadow-2xl`, {backgroundColor: "#3A86FF"}]}>
@@ -67,7 +115,7 @@ const StatGen = () => {
                                     <Text style={[tw``,{fontSize: 20, color: "white", fontWeight: "400"}]}>Chambres</Text>
                                 </View>
                                 <View style={[tw`flex-row justify-evenly items-center`]}>
-                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> 4</Text> 
+                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre}</Text> 
                                     <Image source={require("../images/house/003-homepage.png")} style={{ height: 70, width: 70}} />
                                 </View>
                             </View>
