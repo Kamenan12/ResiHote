@@ -15,8 +15,8 @@ import { Icon } from "@rneui/themed";
 const ResidenceView = () => {
     // recuperer Id de user
     // const CurrentUser = auth.currentUser.uid;
-    const hotedoc = useSelector((state) => state.user.idDoc)
-    const userhote = useSelector((state) => state.user.userhote)
+    const hotedoc = useSelector((state) => state.hote.idDoc)
+    const userhote = useSelector((state) => state.hote.userhote)
     const [userDoc, setUserDoc] = useState()
 
     const Navigation = useNavigation();

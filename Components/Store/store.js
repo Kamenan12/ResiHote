@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import getUserSlice from './getUserSlice'
+import getHoteSlice from './getHoteSlice'
 
 export const store = configureStore({
   reducer: {
-    user: getUserSlice,
+    hote: getHoteSlice,
   },
 })

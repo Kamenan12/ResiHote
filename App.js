@@ -57,7 +57,7 @@ import { store } from './Components/Store/store';
   function ReservationScreen () {
     return (
       <ReservationStack.Navigator>
-        <ReservationStack.Screen name="Resavation" component={ReservationView} />
+        <ReservationStack.Screen name="Resavation" component={ReservationView} options={{ headerShown: false, }} />
       </ReservationStack.Navigator>
     ) 
   }

@@ -24,8 +24,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const ChambreView = () => {
 
-    const hotedoc = useSelector((state) => state.user.idDoc)
-    const userhote = useSelector((state) => state.user.userhote)
+    const hotedoc = useSelector((state) => state.hote.idDoc)
+    const userhote = useSelector((state) => state.hote.userhote)
 
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({

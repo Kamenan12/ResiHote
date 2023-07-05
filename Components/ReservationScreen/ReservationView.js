@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
+import MesReservation from "./MesReservation";
 
+import tw from "twrnc"
 
 
 
@@ -7,9 +9,16 @@ import { View, Text, StyleSheet } from "react-native";
 const ReservationView = () => {
 
     return (
-        <View>
-            <Text> Page resevation </Text>
+        <>
+
+        <View style={[tw`pt-10`]}>
+            <View>
+                <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
+            </View>
+            {/* <Text> Page resevativvvvon </Text> */}
+            <MesReservation />
         </View>
+        </>
     )
 }
 

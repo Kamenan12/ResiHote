@@ -13,11 +13,11 @@ const initialState = {
 }
 
 
-export const getUserSlice = createSlice({
-    name: "get_user",
+export const getHoteSlice = createSlice({
+    name: "get_hote",
     initialState,
     reducers: {
-        getUSer: (state, actions) => {
+        getHote: (state, actions) => {
             state.idDoc = actions.payload.idDoc
             state.userhote = actions.payload.user
             state.nom = actions.payload.nom
@@ -30,6 +30,6 @@ export const getUserSlice = createSlice({
 })
 
 
-export const {getUSer} = getUserSlice.actions
+export const {getHote} = getHoteSlice.actions
 
-export default getUserSlice.reducer
+export default getHoteSlice.reducer

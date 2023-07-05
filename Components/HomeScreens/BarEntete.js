@@ -8,7 +8,7 @@ import tw from 'twrnc'
 
 import { collection, getDocs, where, query, onSnapshot } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
-import { getUSer } from "../Store/getUserSlice";
+import { getHote } from "../Store/getHoteSlice";
 
 
 
@@ -19,11 +19,11 @@ const BarEntete = () => {
     const Navigation = useNavigation();
     const user = auth.currentUser;
     const [userDoc, setUserDoc] = useState();
-    const UserNom = useSelector((state) => state.user.nom)
+    const UserNom = useSelector((state) => state.hote.nom)
     const dispatch = useDispatch()
 
 
-    const getUserDoc = async() => {
+    const getHoteDoc = async() => {
         const q = query(collection(db, "hotes"), where("userHote", "==", user.uid));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const dc = []; 
@@ -35,7 +35,7 @@ const BarEntete = () => {
                 // console.log("les doc", dc)
             }); 
             // setUserDoc(dc[0]); 
-            dispatch(getUSer({
+            dispatch(getHote({
                 idDoc: dc[0].id,
                 user: dc[0].data.userHote,
                 nom: dc[0].data.nom,
@@ -56,7 +56,7 @@ const BarEntete = () => {
  }
 
     useEffect(() => {
-        getUserDoc();
+        getHoteDoc();
     }, []) 
     return (
         <>
