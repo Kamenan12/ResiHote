@@ -21,6 +21,7 @@ const StatGen = () => {
     const NetInfo = useNetInfo();
     const HoteDocId = useSelector((state) => state.hote.idDoc)
     const userhoteId = useSelector((state) => state.hote.userhote)
+    const NbreResi = useSelector((state) => state.hote.resi)
 
 
 
@@ -28,38 +29,38 @@ const StatGen = () => {
 
     const getData = async() => {
 
-        let r = query(collection(db,"residences"), where("userHote", "==", userhoteId));
-        const unResi = onSnapshot(r, (queryResi) => {
-            const re = []
-            queryResi.forEach((doc) => {
-                re.push({
-                    idDoc: doc.id, 
-                    data: [doc.data()]
-                })
-                // console.log("ID du Doc", doc.id)
-            })
-            console.log("les Resss", re)
-            setResi(re)
-        });
-        let residences = query(collection(db,"reservations"), where("userHoteIdDoc", "==", HoteDocId));
-        const unReser = onSnapshot(residences, (queryReser) => {
-            const rs = []
-            queryReser.forEach((doc) => {
-                rs.push({
-                    idDoc: doc.id,
-                    data: doc.data()
-                })
-            })
-            console.log(" Les Reserrr", rs)
-            setReser(rs)
-        })
+        // let r = query(collection(db,"residences"), where("userHote", "==", userhoteId));
+        // const unResi = onSnapshot(r, (queryResi) => {
+        //     const re = []
+        //     queryResi.forEach((doc) => {
+        //         re.push({
+        //             idDoc: doc.id, 
+        //             data: [doc.data()]
+        //         })
+        //         // console.log("ID du Doc", doc.id)
+        //     })
+        //     console.log("les Resss", re)
+        //     setResi(re)
+        // });
+        // let residences = query(collection(db,"reservations"), where("userHoteIdDoc", "==", HoteDocId));
+        // const unReser = onSnapshot(residences, (queryReser) => {
+        //     const rs = []
+        //     queryReser.forEach((doc) => {
+        //         rs.push({
+        //             idDoc: doc.id,
+        //             data: doc.data()
+        //         })
+        //     })
+        //     console.log(" Les Reserrr", rs)
+        //     setReser(rs)
+        // })
     }
 
 
 
 
     useEffect( () => {
-        getData()
+        getData();
     }, [])
     return (
         <View style={[tw`flex px-2`]}>
@@ -68,6 +69,7 @@ const StatGen = () => {
                 <View style={[tw` py-5 px-2`]}>
                     <Text style={[ tw``, { fontSize: 20, color: "white"}]}> Balance</Text>
                     <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}>663750 Fr</Text>
+                    {/* <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}></Text> */}
                    
                 </View>  
                 <View style={[tw`px-2 py-3`]}>
@@ -85,7 +87,7 @@ const StatGen = () => {
             <View style={[tw`flex flex-row justify-between pt-3`]}>
                 
                     {/* ajouter le composant chanbre */}
-                    <NbChambre nombre={resi.length}/>
+                    <NbChambre nombre={NbreResi}/>
                     {/* fin de composant chambre  */}
 
                     {/* debur de composant nombre de vu */}
