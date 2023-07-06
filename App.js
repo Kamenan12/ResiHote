@@ -21,7 +21,7 @@ import tw from 'twrnc'
 import DetailsView from './Components/ResidenceScreens/DetailsView';
 import { Provider } from 'react-redux'
 import { store } from './Components/Store/store';
-
+OneSignal.setAppId("aa4ac4ba-af7d-4cda-8026-880f02f59063")
 
 
 
