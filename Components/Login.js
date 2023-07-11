@@ -7,7 +7,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import tw from "twrnc"
-
+import OneSignal from 'react-native-onesignal';
 
 
 const Login = () => {
@@ -32,11 +32,45 @@ const Login = () => {
         signInWithEmailAndPassword(auth, data.email, data.passWord).then((
             (userCredentials) => {
                 const user = userCredentials.user;
-                console.log( "est conncete");
+                console.log( "est conncete", user.uid);
+                AddExternalUserIdOneSignal(user.uid)
                 navigation.navigate('Home-G')
             }
         ))
     }
+
+
+
+
+    // ******** Ajout du code de oneSignale pour lier le External_user_id avec Id de user 
+    const AddExternalUserIdOneSignal = async(idUser) => {
+        OneSignal.setExternalUserId(idUser, (results) => {
+        // The results will contain push and email success statuses
+        console.log('Results of setting external user id');
+        console.log(results);
+        
+        // Push can be expected in almost every situation with a success status, but
+        // as a pre-caution its good to verify it exists
+        if (results.push && results.push.success) {
+        console.log('Results of setting external user id push status:');
+        console.log(results.push.success);
+        }
+        
+        // Verify the email is set or check that the results have an email success status
+        if (results.email && results.email.success) {
+        console.log('Results of setting external user id email status:');
+        console.log(results.email.success);
+        }
+    
+        // Verify the number is set or check that the results have an sms success status
+        if (results.sms && results.sms.success) {
+        console.log('Results of setting external user id sms status:');
+        console.log(results.sms.success);
+        }
+    });
+}
+
+// ******* fin de code oneSignal pour External_user_id 
 
     return (
             <View style={[tw`h-full`]}>
