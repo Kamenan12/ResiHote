@@ -124,7 +124,7 @@ const ResidenceView = () => {
 
 
     return (
-        <View style={tw`pt-15`}> 
+        <View style={tw`pt-6`}> 
             <View>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes residences </Text>
             </View>

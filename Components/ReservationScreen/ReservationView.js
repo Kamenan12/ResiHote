@@ -29,7 +29,7 @@ const ReservationView = () => {
                     data: doc.data()
                 })
             })
-            console.log("les ressser",rs)
+            console.log("les ssressser",rs)
         })
     }
 
@@ -46,6 +46,7 @@ const ReservationView = () => {
         <View style={[tw`pt-10`]}>
             <View>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
+                {/* <Text>{rs}</Text> */}
             </View>
             {/* <Text> Page resevativvvvon </Text> */}
             {/* <MesReservation /> */}

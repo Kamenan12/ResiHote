@@ -21,6 +21,9 @@ import tw from 'twrnc'
 import DetailsView from './Components/ResidenceScreens/DetailsView';
 import { Provider } from 'react-redux'
 import { store } from './Components/Store/store';
+import OneSignal from 'react-native-onesignal';
+import Constants from "expo-constants";
+import { useEffect } from 'react';
 OneSignal.setAppId("aa4ac4ba-af7d-4cda-8026-880f02f59063")
 
 
@@ -195,6 +198,17 @@ const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+
+  // const userIdOnesignal = async() => {
+  //   const data = await OneSignal.getDeviceState();
+  //   console.log("dtattaa",data)
+  // }
+
+  // useEffect(() => {
+  //   userIdOnesignal()
+  // }, [])
+
+
   return (
     <Provider store={store}>
 
