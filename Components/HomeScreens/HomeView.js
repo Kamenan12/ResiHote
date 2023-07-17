@@ -7,6 +7,7 @@ import tw from "twrnc"
 import BarEntete from "./BarEntete";
 import StatGen from "./StatGen";
 import PasConnexion from "../Connexion/PasConnexion";
+import OrangeApiSms from "./OrangeTeste/OrangeApiSms";
 
 
 
@@ -34,6 +35,7 @@ const Home =() => {
                     {/* <Text style={[tw`bg-red-500 w-30`]} onPress={()=> Decon()}> Deconnnection</Text>    */}
                     {/* { NetInfo.isConnected ? <Text> Connection actif</Text> : <Text> PAs de conneexion internet</Text>} */}
                     {/* <PasConnexion /> */}
+                    <OrangeApiSms />
         </View>
                
         </>
