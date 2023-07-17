@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import { Buffer } from 'buffer';
 
 import tw from "twrnc"
 
@@ -9,13 +10,55 @@ import tw from "twrnc"
 const OrangeApiSms = () => {
 
     const orangeAuthorization = "Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg=="
+    global.Buffer = Buffer;
 
 
 
+    const getToken = async(orangeAuthorizationHeader) =>{
 
-    const getToken = () =>{
-
+        // const https = require('https');
         const fetch = require(`node-fetch`)
+
+
+
+
+
+
+
+
+
+
+    // let credentials="Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==";
+    // let postData = "";
+    // postData += "grant_type=client_credentials";
+    
+    //     let options = {
+    //         host: 'api.orange.com',
+    //         path: '/oauth/v2/token'
+    //     };
+    //     options['method'] = 'POST';
+    //     options['headers'] = {
+    //         'Authorization': credentials,
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //         'Content-Length': Buffer.byteLength(postData)
+    //     };
+    //     let req = https.request (options, function(response) {
+    //         response.setEncoding('utf8');
+    //         let responseData = '';
+    //         response.on ('data', function(data) { responseData += data; });
+    //         response.on ('end', function() { let result = JSON.parse (responseData); });
+    //    })
+    //    .on('error', (e) => {console.log(e)});
+    //    req.write(postData);
+    //    req.end();
+    
+
+
+
+
+
+
+
 
         // const url = 'https://api.orange.com/oauth/v3/token'
 
@@ -31,31 +74,34 @@ const OrangeApiSms = () => {
         //     body: 
         // }
 
-        // fetch('https://api.orange.com/oauth/v3/token', {
-        //                 method: "POST",
-        //                 body: "grant_type=client_credentials",
-        //                 headers: {
-        //                 Accept: "application/json",
-        //                 Authorization: {orangeAuthorizationHeader},
-        //                 "Content-Type": "application/x-www-form-urlencoded"
-        //                 },
-        //             })
-        //             .then(res => res.json())
-        //             .then(json => console.log(json))
-        //             .catch(err => console.error('error:' + err))
-        //             ;
+        fetch('https://api.orange.com/oauth/v3/token', {
+                        method: "POST",
+                        body: "grant_type=client_credentials",
+                        headers: {
+                        'Accept': "application/json",
+                        'Authorization': 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
+                        "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                    })
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.error('error:' + err))
+                    ;
 
-
+        // let postData = "";
+        // postData += "grant_type=client_credentials";
         // fetch('https://api.orange.com/oauth/v3/token', {
         //             method: 'POST',
         //             headers: {
         //                 'Authorization': 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
         //                 'Accept': 'application/json',
-        //                 "Content-Type": "application/x-www-form-urlencoded"
-        //             },
-        //             body: new URLSearchParams({
-        //                 'grant_type': 'client_credentials'
-        //             })
+        //                 "Content-Type": "application/x-www-form-urlencoded",
+        //                 'Content-Length': "grant_type=client_credentials"
+        //                 // 'Content-Length': Buffer.byteLength(postData)
+        //             }
+        //             // body: new URLSearchParams({
+        //             //     'grant_type': 'client_credentials'
+        //             // })
         //         })
         //         .then(res => res.json())
         //         .then(json => console.log(json))
@@ -68,29 +114,29 @@ const OrangeApiSms = () => {
 
 
 
-        fetch('https://api.orange.com/oauth/v3/token', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'grant_type': 'client_credentials'
-                })
-                })
-                .then(res => res.json())
-                .then(json => console.log(json))
-                .catch(err => console.error('error:' + err))
+        // fetch('https://api.orange.com/oauth/v3/token', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Authorization': 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/x-www-form-urlencoded'
+        //         },
+        //         body: new URLSearchParams({
+        //             'grant_type': 'client_credentials'
+        //         })
+        //         })
+        //         .then(res => res.json())
+        //         .then(json => console.log(json))
+        //         .catch(err => console.error('error:' + err))
 
 
 
 
 
-        //         // console.log("tokkk", tok)
+        // //         // console.log("tokkk", tok)
         // return new Promise(async(resolve)=>{
         //     console.log("lancement api orange")
-        // //   const https = require('https');
+          
         //   let credentials= orangeAuthorizationHeader;
         //   let postData = "";
         //   postData += "grant_type=client_credentials";

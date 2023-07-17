@@ -17,11 +17,13 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@rneui/base": "^4.0.0-rc.5",
     "@rneui/themed": "^4.0.0-rc.5",
+    "buffer": "^6.0.3",
     "expo": "^47.0.0",
     "expo-cli": "^6.3.10",
     "expo-image-multiple-picker": "^4.7.6",
     "expo-linear-gradient": "~12.0.1",
     "expo-media-library": "~15.0.0",
+    "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.6.11",
     "heroku": "^7.3.0",
@@ -44,8 +46,7 @@
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
-    "twrnc": "^3.3.3",
-    "expo-splash-screen": "~0.17.5"
+    "twrnc": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3"
