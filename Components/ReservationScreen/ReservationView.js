@@ -70,7 +70,7 @@ const ReservationView = () => {
                     //    <Text>{re.length}</Text>
                     ))
                 }
-                <Text> {reser.length}</Text>
+                {/* <Text> {reser.length}</Text> */}
             </View>
             {/* <Text> Page resevativvvvon </Text> */}
             {/* <MesReservation /> */}
@@ -81,6 +81,17 @@ const ReservationView = () => {
 
 
 const Reservation = (props) => {
+
+    const Navigation = useNavigation()
+
+    const DetailReservation = (id, infoReser, resi) => {
+        Navigation.navigate("DetailReservation", {
+            id: id,
+            infoReser: infoReser,
+            resi: resi,
+            
+        })
+    }
     
     // const reser = props.rese
 
@@ -91,7 +102,7 @@ const Reservation = (props) => {
     // const hote = props.hote
     // console.log("ttttt", resi) props.details(id, infoReser,resi, hote)
     return (
-        <TouchableOpacity onPress={() => props.details(id, infoReser,resi, hote)}>
+        <TouchableOpacity onPress={() => DetailReservation(id, infoReser,resi)}>
             <View style={tw`flex-row p-4 border-b border-gray-300 `}>
                 <View>
                     <Image source={{uri: resi.Images[0].url}} style={[tw`rounded-lg`,{ width: 80, height: 80}]}/>

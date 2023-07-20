@@ -117,7 +117,7 @@ const StatGen = () => {
                                     <Text style={[tw``,{fontSize: 20, color: "white", fontWeight: "400"}]}>Chambres</Text>
                                 </View>
                                 <View style={[tw`flex-row justify-evenly items-center`]}>
-                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre}</Text> 
+                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> 44</Text> 
                                     <Image source={require("../images/house/003-homepage.png")} style={{ height: 70, width: 70}} />
                                 </View>
                             </View>

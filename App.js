@@ -24,6 +24,7 @@ import { store } from './Components/Store/store';
 import OneSignal from 'react-native-onesignal';
 import Constants from "expo-constants";
 import { useEffect } from 'react';
+import DetailReservation from './Components/ReservationScreen/details/DetailReservation';
 OneSignal.setAppId("aa4ac4ba-af7d-4cda-8026-880f02f59063")
 
 
@@ -224,6 +225,7 @@ export default function App() {
           <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="ModifCalendrier" component={CalendrierModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="Profil" component={MenuParametre}  options={{ headerShown: false }}/>
+          <Stack.Screen name='DetailReservation' component={DetailReservation} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
