@@ -62,7 +62,8 @@ const ResidenceView = () => {
                             queryResi.forEach((doc) => {
                                 re.push({
                                     idDoc: doc.id, 
-                                    data: [doc.data()]})
+                                    data: [doc.data()]
+                                })
                                 // console.log("ID du Doc", doc.id)
                             })
                             console.log("les Resss", re)

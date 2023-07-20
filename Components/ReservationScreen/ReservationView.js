@@ -22,18 +22,24 @@ const ReservationView = () => {
     const getReser = async() => {
         const reser = query(collection(db, "reservations"), where("userHoteIdDoc", "==", hotedocid))
         const unReser = onSnapshot(reser, (queryonSnap) => {
-            const rs = []
+            let rss = [];
             queryonSnap.forEach(async(reserv) => {
+                let rs = []
                 const r = doc(db, `residences`, `${reserv.data().idResidence}`)
                 const resi =  await getDoc(r)
-                rs.push({
-                    idReservation: reserv.id,
-                    Reservation: reserv.data(),
-                    idResidence: resi.id,
-                    Residence: resi.data()
-                })
-                console.log("les ssressser",rs)
-                setReser(rs)
+                if (resi.exists()){
+                    rs.push({
+                        idReservation: reserv.id,
+                        Reservation: reserv.data(),
+                        idResidence: resi.id,
+                        Residence: resi.data()
+                    })
+                    // console.log("les serrr dans ifff",rs.length)
+                    rss = [...rss, rs]
+                }
+                // console.log("les serrr hooo ifff",rs.length)
+                console.log("les serrr  queeerrr",rss)
+                setReser(rss)
             })
         })
     }
@@ -53,13 +59,18 @@ const ReservationView = () => {
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
                 {/* <Text>{rs}</Text> */}
             </View>
-            <View>
+            <View style={tw`h-50`}>
                 {/* <Text>{reser.length}</Text> */}
-                {/* {
-                    reser.map((re, index) => (
-                        <Reservation rese={re} key={index}/>
+                {
+                    reser.map((R, index) => (
+                        R.map((re, index2) => (
+
+                            <Reservation id={re.idReservation} data={re.Reservation} resi={re.Residence} key={index}/>
+                        ))
+                    //    <Text>{re.length}</Text>
                     ))
-                } */}
+                }
+                <Text> {reser.length}</Text>
             </View>
             {/* <Text> Page resevativvvvon </Text> */}
             {/* <MesReservation /> */}
@@ -71,12 +82,12 @@ const ReservationView = () => {
 
 const Reservation = (props) => {
     
-    const reser = props.rese
+    // const reser = props.rese
 
 
-    // const id = props.id
-    // const infoReser = props.data 
-    // const resi = props.resi
+    const id = props.id
+    const infoReser = props.data 
+    const resi = props.resi
     // const hote = props.hote
     // console.log("ttttt", resi) props.details(id, infoReser,resi, hote)
     return (
