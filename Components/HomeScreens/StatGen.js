@@ -21,7 +21,9 @@ const StatGen = () => {
     const NetInfo = useNetInfo();
     const HoteDocId = useSelector((state) => state.hote.idDoc)
     const userhoteId = useSelector((state) => state.hote.userhote)
-    const NbreResi = useSelector((state) => state.hote.resi)
+    const NbreResi = useSelector((state) => state.hote.residences)
+    const NbreReser = useSelector((state) => state.hote.reservations)
+    const affaire = useSelector((state) => state.hote.affaire)
 
 
 
@@ -68,7 +70,7 @@ const StatGen = () => {
             <View style={[tw` h-38 w-86 rounded-xl justify-between flex-row shadow-2xl`, { backgroundColor: "#f78f54"}]}>
                 <View style={[tw` py-5 px-2`]}>
                     <Text style={[ tw``, { fontSize: 20, color: "white"}]}> Balance</Text>
-                    <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}>663750 Fr</Text>
+                    <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}>{affaire} Fr</Text>
                     {/* <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}></Text> */}
                    
                 </View>  
@@ -91,7 +93,7 @@ const StatGen = () => {
                     {/* fin de composant chambre  */}
 
                     {/* debur de composant nombre de vu */}
-                    <NbVues />
+                    <NbVues nombre={NbreReser}/>
                     {/* fin de nombre de vue  */}
             </View>
             <View style={[tw`pt-4`]}>
@@ -117,7 +119,7 @@ const StatGen = () => {
                                     <Text style={[tw``,{fontSize: 20, color: "white", fontWeight: "400"}]}>Chambres</Text>
                                 </View>
                                 <View style={[tw`flex-row justify-evenly items-center`]}>
-                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> 44</Text> 
+                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre}</Text> 
                                     <Image source={require("../images/house/003-homepage.png")} style={{ height: 70, width: 70}} />
                                 </View>
                             </View>
@@ -126,7 +128,7 @@ const StatGen = () => {
                     )
             }
 
-            const NbVues = () => {
+            const NbVues = (props) => {
                 return (
                         <>
                              <View style={[tw` h-27 w-42 rounded-xl shadow-2xl`, {backgroundColor: "#E698A6"}]}>
@@ -134,7 +136,7 @@ const StatGen = () => {
                                     <Text style={[tw``,{fontSize: 20, color: "white", fontWeight: "400"}]}>Vues</Text>
                                 </View>
                                 <View style={[tw` flex-row items-center justify-evenly`]}>
-                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> 167 </Text> 
+                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre} </Text> 
                                     <Image source={require("../images/eyes/003-eye-care.png")} style={{ height: 70, width: 70}} />
                                 </View>
                              </View>

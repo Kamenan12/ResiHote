@@ -9,7 +9,9 @@ const initialState = {
     pseudo: "",
     email: "",
     hote: "",
-    resi: ""
+    residencedences: "",
+    reservations: "",
+    affaire: ""
     
 }
 
@@ -26,7 +28,9 @@ export const getHoteSlice = createSlice({
             state.pseudo = actions.payload.pseudo
             state.email = actions.payload.email
             state.hote = actions.payload.hote
-            state.resi = actions.payload.resi
+            state.residences = actions.payload.residences
+            state.reservations = actions.payload.reservations
+            state.affaire = actions.payload.affaire
         }
     }
 })
