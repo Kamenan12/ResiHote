@@ -46,6 +46,13 @@ const SignIn = () => {
         setStep(step - 1 )
     }
 
+    // const showToast = () => {
+    //     Toast.show({
+    //         type: 'error',
+    //         text1: 'This is an info message'
+    //     })
+    // }
+
     const inscription = async(data) => {
         createUserWithEmailAndPassword(auth, data.email, data.passWord).then( async( userCredential) => {
             const user = userCredential.user;
@@ -298,83 +305,91 @@ const SignIn = () => {
                             )
                             case 3: 
                             return (
-                                <LinearGradient 
-                                    colors={['#FF2A2A','#FF6D21']}
-                                    style={[styles.backGround]}
-                                    >
-                                        {/* debut de champ de mot de passe  */}
-                                            <View style={[tw`mt-40 px-6`]}>
-                                                <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre mot de passe</Text>
-                                                <View style={[tw``]}>
-                                                    <Controller 
-                                                    control={control}
-                                                    render={({field: {onChange, onBlur, value}}) => (
-                                                        <TextInput placeholder="Entrez votre mot de passe" 
-                                                        placeholderTextColor="white"
-                                                        secureTextEntry
-                                                        onBlur={onBlur}
-                                                        onChangeText={value => onChange(value)}
-                                                        value={value}
-                                                        style={[styles.Input]}
-                                                    
-                                                    />
-                                                    )}
-                                                    name="passWord"
-                                                    rules={{ required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/}}
-                                                    />
-                                                    
-                                                    <View style={[tw`absolute right-5 top-5`]}>
-
-                                                        <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
-                                                    </View>
-                                                    {errors.passWord?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Mot de passe obligatoire* </Text>}
-                                                    {errors.passWord?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>*Majuscule, minuscule, Chiffre, entre 6-15* </Text>}
-                                                </View>
-                                            </View>
-
-                                            {/* fin de champ de mot de passe  */}
-
-                                            {/* Debut de champ de verification de mot de passe  */}
-                                            <View style={[tw`mt-15 px-6`]}>
-                                                <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Verification de mot de passe</Text>
-                                                <View style={[tw``]}>
-                                                    <Controller 
-                                                    control={control}
-                                                    render={({field: {onChange, onBlur, value}}) => (
-                                                        <TextInput placeholder="Entrez votre mot de passe " 
-                                                        placeholderTextColor="white"
-                                                        secureTextEntry
-                                                        onBlur={onBlur}
-                                                        onChangeText={value => onChange(value)}
-                                                        value={value}
-                                                        style={[styles.Input]}
+                                <>
+                                    <LinearGradient 
+                                        colors={['#FF2A2A','#FF6D21']}
+                                        style={[styles.backGround]}
+                                        >
+                                            {/* debut de champ de mot de passe  */}
+                                                <View style={[tw`mt-40 px-6`]}>
+                                                    <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre mot de passe</Text>
+                                                    <View style={[tw``]}>
+                                                        <Controller 
+                                                        control={control}
+                                                        render={({field: {onChange, onBlur, value}}) => (
+                                                            <TextInput placeholder="Entrez votre mot de passe" 
+                                                            placeholderTextColor="white"
+                                                            secureTextEntry
+                                                            onBlur={onBlur}
+                                                            onChangeText={value => onChange(value)}
+                                                            value={value}
+                                                            style={[styles.Input]}
                                                         
                                                         />
-                                                    )}
-                                                    name="confirmPassWord"
-                                                    rules={{ required: true, 
-                                                        validate: (val) => {
-                                                            const { passWord } = getValues();
-                                                            return passWord === val 
-                                                    } }}
-                                                    />
-                                                    
-                                                    <View style={[tw`absolute right-5 top-5`]}>
+                                                        )}
+                                                        name="passWord"
+                                                        rules={{ required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/}}
+                                                        />
+                                                        
+                                                        <View style={[tw`absolute right-5 top-5`]}>
 
-                                                        <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
+                                                            <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
+                                                        </View>
+                                                        {errors.passWord?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*Mot de passe obligatoire* </Text>}
+                                                        {errors.passWord?.type === "pattern" && <Text style={{ color: "white", fontSize: 18}}>*Majuscule, minuscule, Chiffre, entre 6-15* </Text>}
                                                     </View>
-                                                    {errors.confirmPassWord?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*confirmation obligatoire </Text>}
-                                                    {errors.confirmPassWord?.type === "validate" && <Text style={{ color: "white", fontSize: 18}}>*mot de passe Different*</Text>}
                                                 </View>
+
+                                                {/* fin de champ de mot de passe  */}
+
+                                                {/* Debut de champ de verification de mot de passe  */}
+                                                <View style={[tw`mt-15 px-6`]}>
+                                                    <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Verification de mot de passe</Text>
+                                                    <View style={[tw``]}>
+                                                        <Controller 
+                                                        control={control}
+                                                        render={({field: {onChange, onBlur, value}}) => (
+                                                            <TextInput placeholder="Entrez votre mot de passe " 
+                                                            placeholderTextColor="white"
+                                                            secureTextEntry
+                                                            onBlur={onBlur}
+                                                            onChangeText={value => onChange(value)}
+                                                            value={value}
+                                                            style={[styles.Input]}
+                                                            
+                                                            />
+                                                        )}
+                                                        name="confirmPassWord"
+                                                        rules={{ required: true, 
+                                                            validate: (val) => {
+                                                                const { passWord } = getValues();
+                                                                return passWord === val 
+                                                        } }}
+                                                        />
+                                                        
+                                                        <View style={[tw`absolute right-5 top-5`]}>
+
+                                                            <Icon name="md-key-outline" type="ionicon" color="white" size={28} />
+                                                        </View>
+                                                        {errors.confirmPassWord?.type === "required" && <Text style={{ color: "white", fontSize: 18}}>*confirmation obligatoire </Text>}
+                                                        {errors.confirmPassWord?.type === "validate" && <Text style={{ color: "white", fontSize: 18}}>*mot de passe Different*</Text>}
+                                                    </View>
+                                                </View>
+                                            {/* Fin de champ de verification de mot de passe  */}
+                                            <View style={[tw`mt-10 items-center mb-50`]}>
+                                            <Button title="Precedent"
+                                                onPress={() => Precedent()}
+                                                buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mb-4`]} 
+                                            />
+                                                <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
+                                                    onPress={handleSubmit(inscription)}> 
+                                                    <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
+                                                </TouchableOpacity>
                                             </View>
-                                        {/* Fin de champ de verification de mot de passe  */}
-                                        <View style={[tw`mt-10 items-center mb-50`]}>
-                                            <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
-                                                onPress={handleSubmit(inscription)}> 
-                                                <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
-                                            </TouchableOpacity>
-                                        </View>
+                                            {errors && showToast()}
                                     </LinearGradient>
+                                    <Toast />
+                                </>
                             )
                         default: (
                             <>
