@@ -8,6 +8,7 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import tw from "twrnc"
 import OneSignal from 'react-native-onesignal';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 const Login = () => {
@@ -73,6 +74,7 @@ const Login = () => {
 // ******* fin de code oneSignal pour External_user_id 
 
     return (
+        <KeyboardAwareScrollView  >
             <View style={[tw`h-full`]}>
                 <LinearGradient 
                  colors={['#FF2A2A','#FF6D21']}
@@ -158,6 +160,7 @@ const Login = () => {
                     </View>
                 </LinearGradient>
             </View>
+        </KeyboardAwareScrollView>
     )
 }
 

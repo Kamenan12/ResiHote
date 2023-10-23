@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Icon } from "@rneui/themed";
 import { auth } from "../firebase";
 import { db } from "../firebase";
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "twrnc"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -109,12 +109,13 @@ const SignIn = () => {
     })
 
     return (
-        
-        <View style={[tw` h-full `]}>
+        <KeyboardAwareScrollView extraHeight={15} enableOnAndroid={true}>
+
                 <LinearGradient 
                     colors={['#FF2A2A','#FF6D21']}
                     style={styles.backGround}
                     >
+        <View style={[tw` `]}>
                 <ScrollView showsVerticalScrollIndicator={false} >
                         <View style={[tw`p-6 items-center`]}>
                             <View>
@@ -322,7 +323,7 @@ const SignIn = () => {
                             </View>
                             {/* Fin de champ de verification de mot de passe  */}
 
-                            <View style={[tw`mt-10 items-center mb-5`]}>
+                            <View style={[tw`mt-10 items-center mb-50`]}>
                             <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
                                 onPress={handleSubmit(inscription)}> 
                                  <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
@@ -335,8 +336,9 @@ const SignIn = () => {
 
                         
         </ScrollView>
-                    </LinearGradient>
             </View>
+                    </LinearGradient>
+          </KeyboardAwareScrollView> 
     )
 }
 

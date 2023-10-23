@@ -11,7 +11,7 @@ import tw from "twrnc"
 const OrangeApiSms = () => {
     const [token, setToken] = useState()
     const orangeAuthorization = "Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg=="
-    global.Buffer = Buffer;
+    // global.Buffer = Buffer; mis en commentaire paceque je pense que j'ai pas utiliser
 
 
 
@@ -71,60 +71,6 @@ const OrangeApiSms = () => {
         const fetch = require(`node-fetch`)
 
 
-
-
-
-
-
-
-
-
-    // let credentials="Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==";
-    // let postData = "";
-    // postData += "grant_type=client_credentials";
-    
-    //     let options = {
-    //         host: 'api.orange.com',
-    //         path: '/oauth/v2/token'
-    //     };
-    //     options['method'] = 'POST';
-    //     options['headers'] = {
-    //         'Authorization': credentials,
-    //         'Content-Type': 'application/x-www-form-urlencoded',
-    //         'Content-Length': Buffer.byteLength(postData)
-    //     };
-    //     let req = https.request (options, function(response) {
-    //         response.setEncoding('utf8');
-    //         let responseData = '';
-    //         response.on ('data', function(data) { responseData += data; });
-    //         response.on ('end', function() { let result = JSON.parse (responseData); });
-    //    })
-    //    .on('error', (e) => {console.log(e)});
-    //    req.write(postData);
-    //    req.end();
-    
-
-
-
-
-
-
-
-
-        // const url = 'https://api.orange.com/oauth/v3/token'
-
-        // const options = {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: "application/json",
-        //         Authorization: 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
-        //         "Content-Type": "application/x-www-form-urlencoded",
-        //         'Content-Length': Buffer.byteLength(postData)
-                
-        //     },
-        //     body: 
-        // }
-
         fetch('https://api.orange.com/oauth/v3/token', {
                         method: "POST",
                         body: "grant_type=client_credentials",
@@ -141,83 +87,6 @@ const OrangeApiSms = () => {
                         )
                     .catch(err => console.error('error:' + err))
                     ;
-
-                    // console.log("tokkk", tok)
-        // let postData = "";
-        // postData += "grant_type=client_credentials";
-        // fetch('https://api.orange.com/oauth/v3/token', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Authorization': 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
-        //                 'Accept': 'application/json',
-        //                 "Content-Type": "application/x-www-form-urlencoded",
-        //                 'Content-Length': "grant_type=client_credentials"
-        //                 // 'Content-Length': Buffer.byteLength(postData)
-        //             }
-        //             // body: new URLSearchParams({
-        //             //     'grant_type': 'client_credentials'
-        //             // })
-        //         })
-        //         .then(res => res.json())
-        //         .then(json => console.log(json))
-        //         .catch(err => console.error('error:' + err))
-        //         ;
-
-
-
-
-
-
-
-        // fetch('https://api.orange.com/oauth/v3/token', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Authorization': 'Basic N1ZIeWJaTk9FYXRnVlZNZ3lkVklnUFR0MnZaR2pDbEE6dVpBSFdyY2ZCd1gyaHJMNg==',
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/x-www-form-urlencoded'
-        //         },
-        //         body: new URLSearchParams({
-        //             'grant_type': 'client_credentials'
-        //         })
-        //         })
-        //         .then(res => res.json())
-        //         .then(json => console.log(json))
-        //         .catch(err => console.error('error:' + err))
-
-
-
-
-
-        // //         // console.log("tokkk", tok)
-        // return new Promise(async(resolve)=>{
-        //     console.log("lancement api orange")
-          
-        //   let credentials= orangeAuthorizationHeader;
-        //   let postData = "";
-        //   postData += "grant_type=client_credentials";
-        //     let options = {
-        //         host: 'api.orange.com',
-        //         path: '/oauth/v3/token'
-        //     };
-        //     options['method'] = 'POST';
-        //     options['headers'] = {
-        //         'Authorization': credentials,
-        //         'Content-Type': 'application/x-www-form-urlencoded',
-        //         'Content-Length': Buffer.byteLength(postData)
-        //     };
-        //     let req = https.request (options, (response)=> {
-        //         response.setEncoding('utf8');
-        //         let responseData = '';
-        //         response.on ('data', (data)=> { responseData += data; });
-        //         response.on ('end', ()=> {
-        //           responseData = JSON.parse(responseData);
-        //           resolve(responseData.access_token);
-        //         });
-        //    })
-        //    .on('error', (e)=> { console.log(e); });
-        //    req.write(postData);
-        //    req.end();
-        // });
     };
 
     useEffect(() => {
