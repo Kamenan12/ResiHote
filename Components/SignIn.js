@@ -22,7 +22,7 @@ const SignIn = () => {
     const [step, setStep] = useState(1)
 
 
-    const { register, getValues, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+    const { register, getValues, setValue, handleSubmit,setError, control ,reset, formState: { errors } } = useForm({
         defaultValues: {
           nom: '',
           prenom: '',
@@ -31,7 +31,8 @@ const SignIn = () => {
           passWord: '',
           confirmPassWord: ''
           
-        }
+        },
+        mode: "onChange"
       });
 
     const Login = () => {
@@ -39,7 +40,14 @@ const SignIn = () => {
     }
     // fonction de suivant 
     const Suivant = () => {
-        setStep(step + 1)
+        // setError("nom", {
+        //     types: {
+        //       required: "This is required",
+        //       minLength: "This is minLength",
+        //     },
+        //   })
+        setStep(step + 1 )
+        
     }
     //  fonction de precedent 
     const Precedent = () => {
@@ -115,14 +123,14 @@ const SignIn = () => {
 
 // ******* fin de code oneSignal pour External_user_id 
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user) {
-                navigation.navigate("Home-G")
-            }
-        })
-        return unsubscribe
-    })
+    // useEffect(() => {
+    //     const unsubscribe = auth.onAuthStateChanged(user => {
+    //         if (user) {
+    //             navigation.navigate("Home-G")
+    //         }
+    //     })
+    //     return unsubscribe
+    // })
 
     return (
         <>
@@ -147,6 +155,15 @@ const SignIn = () => {
                                         </View>
                                     </View>
 
+                                    {
+                                                errors.pseudo?.type === "required" &&
+                                                <View style={tw`bg-black m-2`}>
+                                                    <Text style={{color: "white"}}> Erreur des Champs pseudo</Text>
+                                                    <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
+                                                </View>
+                                                
+                                            }
+
                                     <View style={[tw` mt-5 p-6`, {}]}>
                                             {/* Debut de champ nom  */}
                                                 <View>
@@ -161,7 +178,7 @@ const SignIn = () => {
                                                             onChangeText={value => onChange(value)}
                                                             value={value}
                                                             style={[styles.Input]}
-                                                            ri
+                                                            
                                                             />
                                                         )}
                                                         name="nom"
@@ -228,6 +245,14 @@ const SignIn = () => {
                                     style={[styles.backGround]}
                                     >
                                     
+                                    {/* {
+                                        errors.pseudo?.type === "required" &&  
+                                        <View style={tw`bg-black m-2`}>
+                                            <Text style={{color: "white"}}> Erreur des Champs nom</Text>
+                                            <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
+                                        </View>
+                                                
+                                    } */}
                                     {/* debut de champ Pseudo  */}
                                         <View style={[tw` mt-40 px-6`]}>
                                             <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre Pseudo</Text>
@@ -310,8 +335,36 @@ const SignIn = () => {
                                         colors={['#FF2A2A','#FF6D21']}
                                         style={[styles.backGround]}
                                         >
+                                            
+                                            {/* {
+                                                errors  &&
+                                                <View style={tw`bg-black m-2`}>
+                                                    <Text style={{color: "white"}}> Erreur des Champs nom</Text>
+                                                    <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
+                                                </View>
+                                                
+                                            } */}
+                                            {/* {
+                                                errors.nom?.type === "required" &&
+                                                <View style={tw`bg-black m-2`}>
+                                                    <Text style={{color: "white"}}> Erreur des Champs nom</Text>
+                                                    <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
+                                                </View>
+                                                
+                                            } */}
+                                            {/* {
+                                                errors &&  
+                                                <View style={tw`bg-black m-2`}>
+                                                    <Text style={{color: "white"}}> Erreur des Champs nom</Text>
+                                                    <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
+                                                </View>
+                                                
+                                            } */}
+                                            
+                                            
+                                            
                                             {/* debut de champ de mot de passe  */}
-                                                <View style={[tw`mt-40 px-6`]}>
+                                                <View style={[tw`mt-30 px-6`]}>
                                                     <Text style={[tw``, { color: "white", fontSize: 26, fontWeight: "500"}]}>Votre mot de passe</Text>
                                                     <View style={[tw``]}>
                                                         <Controller 
@@ -386,9 +439,9 @@ const SignIn = () => {
                                                     <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
                                                 </TouchableOpacity>
                                             </View>
-                                            {errors && showToast()}
+                                            {/* {errors && showToast()} */}
                                     </LinearGradient>
-                                    <Toast />
+                                    
                                 </>
                             )
                         default: (
