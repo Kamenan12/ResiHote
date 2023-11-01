@@ -25,6 +25,7 @@ import OneSignal from 'react-native-onesignal';
 import Constants from "expo-constants";
 import { useEffect } from 'react';
 import DetailReservation from './Components/ReservationScreen/details/DetailReservation';
+import CodePush from 'react-native-code-push';
 OneSignal.setAppId("aa4ac4ba-af7d-4cda-8026-880f02f59063")
 
 
@@ -198,7 +199,7 @@ function TabNavigation () {
 const Stack = createNativeStackNavigator();
 
 
-export default function App() {
+const  App = () => {
 
   // const userIdOnesignal = async() => {
   //   const data = await OneSignal.getDeviceState();
@@ -232,6 +233,13 @@ export default function App() {
 
   );
 } 
+
+const codePushOptions = {
+  checkFrequency: CodePush.CheckFrequency.ON_APP_START
+};
+
+
+export default CodePush(codePushOptions)(App);
 
 const styles = StyleSheet.create({
   backGround: {
