@@ -126,19 +126,22 @@ const ResidenceView = () => {
 
     return (
         <View style={tw`pt-6`}> 
-            <View>
+            <View style={tw`items-center`}>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes residences </Text>
             </View>
-            <Text> ov av ajouert les bouton pour ajout de residences  </Text>
-            <Button 
-            title='Ajout de residences'
-            color='secondary'
-            onPress={() => AjoutChambre()}
-                />
+            {/* <Text> ov av ajouert les bouton pour ajout de residences  </Text> */}
+            <View style={tw`items-center`}>
+                <Button 
+                title='Ajout de residences'
+                color='secondary'
+                buttonStyle={[tw`w-70 rounded-lg`]}
+                onPress={() => AjoutChambre()}
+                    />
+            </View>
 
-                <View>
+                <View style>
 
-                    <Text> texte ici mettre les residences!</Text>
+                    {/* <Text> texte ici mettre les residences!</Text> */}
                     { resi ? 
                         resi.map((R, index) => (
                             R.data.map((Resi, index) => (
