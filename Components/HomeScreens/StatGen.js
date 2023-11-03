@@ -78,13 +78,13 @@ const StatGen = () => {
                     <Image source={require("../images/wallet/001-wallet-1.png")} style={{ height: 120, width: 120}} />
                 </View>
             </View>
-            {
+            {/* {
                 NetInfo.isConnected ? 
                 null : 
                 <View style={tw`pt-3`}>
                     <PasConnexion />
                 </View> 
-            }
+            } */}
             
             <View style={[tw`flex flex-row justify-between pt-3`]}>
                 
