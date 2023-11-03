@@ -20,7 +20,7 @@ const ReservationView = () => {
 
 
     const getReser = async() => {
-        const reser = query(collection(db, "reservations"), where("userHoteIdDoc", "==", hotedocid))
+        const reser = query(collection(db, "reservations"), where("userHoteIdDoc", "==", hotedocid), orderBy("date_create", "desc"))
         const unReser = onSnapshot(reser, (queryonSnap) => {
             let rss = [];
             queryonSnap.forEach(async(reserv) => {
@@ -38,7 +38,7 @@ const ReservationView = () => {
                     rss = [...rss, rs]
                 }
                 // console.log("les serrr hooo ifff",rs.length)
-                console.log("les serrr  queeerrr",rss)
+                // console.log("les serrr  queeerrr",rss)
                 setReser(rss)
             })
         })
