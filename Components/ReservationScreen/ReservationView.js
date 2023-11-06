@@ -5,6 +5,7 @@ import { collection, onSnapshot, query, where,orderBy, doc, getDoc, } from "fire
 import MesReservation from "./MesReservation";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "@rneui/themed";
+import moment from "moment";
 import tw from "twrnc"
 import { db } from "../../firebase";
 
@@ -15,7 +16,8 @@ const ReservationView = () => {
 
     const hotedocid = useSelector((state) => state.hote.idDoc)
     const [reser, setReser] = useState([])
-
+    const minDay = new Date();
+    const Today = moment(minDay).format("DD/MM/YYYY")
 
 
 
@@ -58,6 +60,7 @@ const ReservationView = () => {
             <View style={tw`items-center pb-4`}>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
                 {/* <Text>{rs}</Text> */}
+                <Text>{Today}</Text>
             </View>
             {/* <View style={tw``}> */}
                 <ScrollView style={tw`h-160`}>
@@ -67,7 +70,7 @@ const ReservationView = () => {
                         reser.map((R, index) => (
                             R.map((re, index2) => (
 
-                                <Reservation id={re.idReservation} data={re.Reservation} resi={re.Residence} key={index}/>
+                                <Reservation id={re.idReservation} data={re.Reservation} resi={re.Residence} key={index} />
                             ))
                         //    <Text>{re.length}</Text>
                         ))
@@ -85,7 +88,19 @@ const ReservationView = () => {
 
 const Reservation = (props) => {
 
+    const id = props.id
+    const infoReser = props.data 
+    const resi = props.resi
+    // const hote = props.hote
+
     const Navigation = useNavigation()
+    const minDay = new Date();
+    // const Today = moment(minDay).format("DD/MM/YYYY")
+    // const Today = moment()
+    const TodayFor = moment().format("MM/DD/YYYY")
+    const JourFin = moment(infoReser.finSejour).format("DD/MM/YYYY")
+    const JourDeb = moment(infoReser.debutSejour).format("DD/MM/YYYY")
+    const Jequ =  moment(JourFin).diff(TodayFor, "days")                   //moment(JourFin).diff(JourDeb, "day")
 
     const DetailReservation = (id, infoReser, resi) => {
         Navigation.navigate("DetailReservation", {
@@ -99,10 +114,7 @@ const Reservation = (props) => {
     // const reser = props.rese
 
 
-    const id = props.id
-    const infoReser = props.data 
-    const resi = props.resi
-    // const hote = props.hote
+    
     // console.log("ttttt", resi) props.details(id, infoReser,resi, hote)
     return (
         <TouchableOpacity onPress={() => DetailReservation(id, infoReser,resi)}>
@@ -116,10 +128,19 @@ const Reservation = (props) => {
                     <Text>Fin : {infoReser.finSejour}</Text>
                 </View>
                 <View style={tw`pt-10 `}>
-                    <View style={tw`bg-yellow-500 p-2 rounded-full`}>
+                    {
+                        Jequ < 0 ? (
+                        <View style={tw`bg-red-500 p-2 rounded-full`}>
 
-                        <Text>en cours</Text>
-                    </View>
+                            <Text>Termine </Text>
+                        </View>
+                        ):
+                        (<View style={tw`bg-yellow-500 p-2 rounded-full`}>
+
+                            <Text>en cours </Text>
+                        </View>)
+                    }
+                    {/* <Text>{Jequ}</Text> */}
                 </View>
                 <View>
                     <View style={tw`pt-5 pl-5`}>
