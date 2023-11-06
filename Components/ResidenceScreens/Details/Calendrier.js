@@ -31,7 +31,7 @@ const Calendrier = (props) => {
     const jourJ = new Date();
     return (
         <View>
-            <Text style={[{ fontSize: 24, fontWeight: "700", fontFamily: "serif"}]}>Disponibilite </Text>
+            <Text style={[tw`px-5`,{ fontSize: 24, fontWeight: "700", fontFamily: "serif"}]}>Disponibilite </Text>
             <View>
                 {/* <View>
                     {jourIndispo.map((j, index) => (

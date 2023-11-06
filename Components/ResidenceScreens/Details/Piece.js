@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-import { Icon } from "@rneui/themed";
+import { Icon, Button } from "@rneui/themed";
 
 import tw from "twrnc"
 
@@ -10,7 +10,7 @@ import tw from "twrnc"
 const Piece = (props) => {
     return (
         <>
-        <View style={tw`flex-row pt-5 justify-between`}>
+        <View style={tw`flex-row pt-5 justify-between px-5`}>
                {/* <View style={tw`items-center`}>
                    <Text style= {[{fontSize: 20, fontWeight: "700", fontFamily:"sans-serif", color: "gray"}]}>Prix </Text>
                    <Text style= {[{fontSize: 20, fontWeight: "700", fontFamily:"sans-serif", color: "black"}]}>{ResiDetail.prix} Fr</Text>
@@ -33,6 +33,23 @@ const Piece = (props) => {
                </View>
 
            </View>
+           <View style={tw`items-end pt-5 px-5`}>
+                            <Button title="modifier"
+                                buttonStyle={tw`bg-transparent border rounded-xl`}
+                                titleStyle={{
+                                    color: "red"
+                                }}
+                                // icon={{
+                                //     name: "cancel",
+                                //     type: "material",
+                                //     size: 15,
+                                //     color: "red"
+                                    
+                                // }}
+                                
+                                // iconRight
+                            />
+                        </View>
 </>
     )
 }

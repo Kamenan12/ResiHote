@@ -63,46 +63,48 @@ const Info = (props) => {
         modif === false ? (
 
         <>
-             <View style={tw`flex-row justify-between`}>
-                        <Text style={[{ fontSize: 33, fontWeight: "700", fontFamily: "serif"}]}>{props.Titre} </Text>
-             </View>
-             <View style={tw`flex-row`}>
-                        
-                        <View style={tw`flex-row`}>
-                            <Icon  name="location" color="black" type="entypo" size={25}/>
-                            <Text style= {[{fontSize: 17, fontWeight: "700", fontFamily:"sans-serif", color: "black"}]}> {props.Localite.ville}</Text>
-                        </View>
-                        <View style={tw`flex-row`}>
-                                  
-                            <Text style= {[{fontSize: 17, fontWeight: "700", fontFamily:"sans-serif", color: "black"}]}> {props.Localite.commune}</Text>
-                            {/* <Text style={[{color:"gray"}]}> un bon quatier près</Text> */}
-                        </View>
-                    </View>
-                        <View style={tw`flex-row`}>
-                        <Icon  name="location-pin" color="black" type="entypo" size={25}/> 
-                            <Text style={[{fontSize: 15, fontWeight: '500'}]}> {props.Localite.description}</Text>
-                        </View>
-             
-                    <View style={tw`pt-5`}>
-                        <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description} </Text>
-                    </View>
-                    <View style={tw`items-end pt-5 px-5`}>
-                        <Button title="modifier" onPress={() => SetModif(true)}
-                            buttonStyle={tw`bg-transparent border rounded-xl`}
-                            titleStyle={{
-                                color: "red"
-                            }}
-                            // icon={{
-                            //     name: "cancel",
-                            //     type: "material",
-                            //     size: 15,
-                            //     color: "red"
-                                
-                            // }}
+            <View style={tw`px-5`}>
+                <View style={tw`flex-row justify-between`}>
+                            <Text style={[{ fontSize: 33, fontWeight: "700", fontFamily: "serif"}]}>{props.Titre} </Text>
+                </View>
+                <View style={tw`flex-row`}>
                             
-                            // iconRight
-                        />
-                    </View>
+                            <View style={tw`flex-row`}>
+                                <Icon  name="location" color="black" type="entypo" size={25}/>
+                                <Text style= {[{fontSize: 17, fontWeight: "700", fontFamily:"sans-serif", color: "black"}]}> {props.Localite.ville}</Text>
+                            </View>
+                            <View style={tw`flex-row`}>
+                                    
+                                <Text style= {[{fontSize: 17, fontWeight: "700", fontFamily:"sans-serif", color: "black"}]}> {props.Localite.commune}</Text>
+                                {/* <Text style={[{color:"gray"}]}> un bon quatier près</Text> */}
+                            </View>
+                        </View>
+                            <View style={tw`flex-row`}>
+                            <Icon  name="location-pin" color="black" type="entypo" size={25}/> 
+                                <Text style={[{fontSize: 15, fontWeight: '500'}]}> {props.Localite.description}</Text>
+                            </View>
+                
+                        <View style={tw`pt-5`}>
+                            <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description} </Text>
+                        </View>
+                        <View style={tw`items-end pt-5 px-5`}>
+                            <Button title="modifier" onPress={() => SetModif(true)}
+                                buttonStyle={tw`bg-transparent border rounded-xl`}
+                                titleStyle={{
+                                    color: "red"
+                                }}
+                                // icon={{
+                                //     name: "cancel",
+                                //     type: "material",
+                                //     size: 15,
+                                //     color: "red"
+                                    
+                                // }}
+                                
+                                // iconRight
+                            />
+                        </View>
+            </View>
         </>
         ) :  (
 

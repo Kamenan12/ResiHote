@@ -18,7 +18,7 @@ const Equipement = (props) => {
 
     return (
         <>
-                <View style={tw`pt-5`}>
+                <View style={tw`pt-5 px-5`}>
                     <Text style={[{ fontSize: 24, fontWeight: "700", fontFamily: "serif"}]}>Equipement </Text>
                         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                             <View style={tw` flex-row`}>
