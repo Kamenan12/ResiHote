@@ -130,18 +130,26 @@ function TabNavigation () {
          tabBarIcon: ({color, size}) => (
           <View style={[tw``]}>
 
-            <Icon type='ionicon' name='home-sharp' size={29}   color={color} />
+            <Icon type='ionicon' name='home-sharp' size={25}   color={color} />
+            <Text> Home</Text>
           </View>
          ),
-          
+        //  tabBarLabel:"Home",
+        //  tabBarLabelStyle: {
+        //   // paddingTop: 0,
+        //   fontSize: 12
+        //  },
          tabBarActiveTintColor: '#062737',
          tabBarInactiveTintColor: '#B4BEC3'
          }}/>
             {/* fin de bouton Home screen  */}
 
         <Tab.Screen name="Residences" component={ResidenceScreen} options={{ headerShown: false, 
-         tabBarIcon: ({color, size}) => (
-          <Icon type='ionicon' name='md-bed-sharp' size={29}   color={color} />
+         tabBarIcon: ({color, size, focused}) => (
+          <View style={[]}>
+            <Icon type='ionicon' name='md-bed-sharp' size={25}   color={color} />
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Résidences</Text>
+          </View>
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
@@ -152,16 +160,23 @@ function TabNavigation () {
      
         
         <Tab.Screen name="Reservation" component={ReservationScreen} options={{ headerShown: false, 
-        tabBarIcon: ({color, size}) => (
-          <Icon type='antdesign' name='wallet' size={29}   color={color} />
+        tabBarIcon: ({color, size, focused}) => (
+          <View>
+            
+            <Icon type='antdesign' name='wallet' size={25}   color={color} />
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Reservations</Text>
+          </View>
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
         }}/>
 
         <Tab.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false, 
-        tabBarIcon: ({color, size}) => (
-          <Icon type='antdesign' name='notification' size={29}   color={color} />
+        tabBarIcon: ({color, size, focused}) => (
+          <View>
+            <Icon type='antdesign' name='notification' size={25}   color={color} />
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Notification</Text>
+          </View>
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
