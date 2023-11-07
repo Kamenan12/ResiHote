@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 
 import { Icon, Button } from "@rneui/themed";
+import { useNavigation } from "@react-navigation/native";
 
 import tw from "twrnc"
 
@@ -8,6 +9,25 @@ import tw from "twrnc"
 
 
 const Piece = (props) => {
+
+    const Navigation = useNavigation()
+
+
+    
+    const ModilPiece = (idDoc, idDocUser, Type, Chambre, Salon, Prix, bain, capacite) => {
+        Navigation.navigate('ModifPieces', {
+            idDoc: idDoc,
+            idDocUser: idDocUser,
+            type: Type,
+            Chambre: Chambre,
+            Salon: Salon,
+            Prix: Prix,
+            bain: bain,
+            capacite: capacite
+        })
+    }
+
+
     return (
         <>
         <View style={tw`flex-row pt-5 justify-between px-5`}>
@@ -34,7 +54,7 @@ const Piece = (props) => {
 
            </View>
            <View style={tw`items-end pt-5 px-5`}>
-                            <Button title="modifier"
+                            <Button title="modifier" onPress={() => ModilPiece(props.idDoc, props.idDocUser, props.Type, props.Chambre, props.Salon, props.Prix, props.bain, props.capacite)}
                                 buttonStyle={tw`bg-transparent border rounded-xl`}
                                 titleStyle={{
                                     color: "red"

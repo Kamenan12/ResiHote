@@ -13,6 +13,7 @@ import NotificationView from './Components/NotificationScreen/NotificationView';
 import ChambreView from './Components/ChambreScreen/ChambreView';
 import ImageModif from './Components/ResidenceScreens/Details/Modif/Images';
 import EquipementModif from './Components/ResidenceScreens/Details/Modif/Equipement';
+import PiecesModif from './Components/ResidenceScreens/Details/Modif/Pieces';
 import CalendrierModif from './Components/ResidenceScreens/Details/Modif/Calendrier';
 import MenuParametre from './Components/Profil/MenuParametre';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -237,6 +238,7 @@ const  App = () => {
           <Stack.Screen name="ModifImage" component={ImageModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="ModifCalendrier" component={CalendrierModif}  options={{ headerShown: false }}/>
+          <Stack.Screen name="ModifPieces" component={PiecesModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="Profil" component={MenuParametre}  options={{ headerShown: false }}/>
           <Stack.Screen name='DetailReservation' component={DetailReservation} options={{headerShown: false}}/>
         </Stack.Navigator>

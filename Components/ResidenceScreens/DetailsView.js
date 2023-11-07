@@ -4,7 +4,7 @@ import Equipement from "./Details/Equipement";
 import Images from "./Details/Images";
 import Info from "./Details/Info";
 import Piece from "./Details/Piece";
-
+import tw from "twrnc"
 
 
 const DetailsView = (props) => {
@@ -19,10 +19,10 @@ const DetailsView = (props) => {
         <>
         <ScrollView showsVerticalScrollIndicator={false}>
 
-            <View>
+            <View style={tw`pb-10`}>
                 <Images img={Detail.residences.Images} retour={retour} idDoc={Detail.resiID} idDocUser={Detail.idDocUser}/>
                 <Info Titre={Detail.residences.Titre} Localite={Detail.residences.Location} Description={Detail.residences.Description} idDoc={Detail.resiID} idDocUser={Detail.idDocUser}/>
-                <Piece Type={Detail.residences.Type_residence} Chambre={Detail.residences.chambre} Salon={Detail.residences.salon} Prix={Detail.residences.Prix}/>
+                <Piece Type={Detail.residences.Type_residence} Chambre={Detail.residences.chambre} Salon={Detail.residences.salon} Prix={Detail.residences.Prix} bain={Detail.residences.bain} capacite={Detail.residences.Capacite} idDoc={Detail.resiID}/>
                 <Equipement EquiBase={Detail.residences.Equipement_bases} EquiExtra={Detail.residences.Equipement_extra} idDoc={Detail.resiID} idDocUser={Detail.idDocUser}/>
                 <Calendrier Calendrier={Detail.residences.Calendrier} idDoc={Detail.resiID} idDocUser={Detail.idDocUser}/> 
             </View>
