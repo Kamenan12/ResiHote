@@ -44,7 +44,7 @@
           "ios": {
             "CodePushDeploymentKey": ""
           },
-          "android": {
+          "android": { 
             "CodePushDeploymentKey": "fvrXWaqLkljT0PuHHuVtuVW7mOYQHi-Lp6CXO"
           }
         }
