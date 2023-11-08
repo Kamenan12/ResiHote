@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import { auth } from "../../firebase";
 // import { getAuth } from "firebase/auth";
 import { db } from "../../firebase";
@@ -16,7 +16,7 @@ import { getHote } from "../Store/getHoteSlice";
 
 const BarEntete = () => {
         // const auth = getAuth();
-    const Navigation = useNavigation();
+    // const Navigation = useNavigation();
     const user = auth.currentUser;
     const [userDoc, setUserDoc] = useState();
     const UserNom = useSelector((state) => state.hote.nom)

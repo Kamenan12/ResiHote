@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image,  } from "react-native";
-import {useNetInfo} from '@react-native-community/netinfo';
+// import {useNetInfo} from '@react-native-community/netinfo';
 import { db } from "../../firebase";
 import { collection, onSnapshot, query, where,orderBy } from "firebase/firestore";
 
@@ -18,7 +18,7 @@ const StatGen = () => {
 
     const [resi, setResi] = useState([])
     const [reser, setReser] = useState([])
-    const NetInfo = useNetInfo();
+    // const NetInfo = useNetInfo();
     const HoteDocId = useSelector((state) => state.hote.idDoc)
     const userhoteId = useSelector((state) => state.hote.userhote)
     const NbreResi = useSelector((state) => state.hote.residences)
