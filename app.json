@@ -41,9 +41,7 @@
       [
         "./app.plugin",
         {
-          "ios": {
-            "CodePushDeploymentKey": ""
-          },
+          
           "android": { 
             "CodePushDeploymentKey": "fvrXWaqLkljT0PuHHuVtuVW7mOYQHi-Lp6CXO"
           }
