@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ResiHote",
-    "slug": "ResiHote",
+    "slug": "resihote",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -41,13 +41,37 @@
       [
         "./app.plugin",
         {
-          
-          "android": { 
+          "ios": {
+            "CodePushDeploymentKey": ""
+          },
+          "android": {
             "CodePushDeploymentKey": "fvrXWaqLkljT0PuHHuVtuVW7mOYQHi-Lp6CXO"
           }
         }
       ]
-      
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "OneSignalNotificationServiceExtension",
+                  "bundleIdentifier": "com.test.test.OneSignalNotificationServiceExtension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.test.test.onesignal"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "e166eb03-0a41-4e6f-89b5-3922fae67ceb"
+      }
+    },
+    "owner": "kamenan12"
   }
 }
