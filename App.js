@@ -135,7 +135,7 @@ function TabNavigation () {
           </View>
          ),
         //  tabBarLabel:"Home",
-        //  tabBarLabelStyle: {
+        //  tabBarLabelStyle: { 
         //   // paddingTop: 0,
         //   fontSize: 12
         //  },
