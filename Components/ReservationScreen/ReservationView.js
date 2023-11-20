@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { collection, onSnapshot, query, where,orderBy, doc, getDoc, } from "firebase/firestore";
 import MesReservation from "./MesReservation";
@@ -54,24 +54,27 @@ const ReservationView = () => {
     return (
         <>
 
-        <View style={[tw`pt-10`]}>
-            <View>
+        <View style={[tw`pt-5`]}>
+            <View style={tw`items-center pb-4`}>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
                 {/* <Text>{rs}</Text> */}
             </View>
-            <View style={tw`h-50`}>
-                {/* <Text>{reser.length}</Text> */}
-                {
-                    reser.map((R, index) => (
-                        R.map((re, index2) => (
+            {/* <View style={tw``}> */}
+                <ScrollView style={tw`h-160`}>
 
-                            <Reservation id={re.idReservation} data={re.Reservation} resi={re.Residence} key={index}/>
+                    {/* <Text>{reser.length}</Text> */}
+                    {
+                        reser.map((R, index) => (
+                            R.map((re, index2) => (
+
+                                <Reservation id={re.idReservation} data={re.Reservation} resi={re.Residence} key={index}/>
+                            ))
+                        //    <Text>{re.length}</Text>
                         ))
-                    //    <Text>{re.length}</Text>
-                    ))
-                }
-                {/* <Text> {reser.length}</Text> */}
-            </View>
+                    }
+                    {/* <Text> {reser.length}</Text> */}
+                </ScrollView>
+            {/* </View> */}
             {/* <Text> Page resevativvvvon </Text> */}
             {/* <MesReservation /> */}
         </View>
