@@ -13,6 +13,7 @@ import NotificationView from './Components/NotificationScreen/NotificationView';
 import ChambreView from './Components/ChambreScreen/ChambreView';
 import ImageModif from './Components/ResidenceScreens/Details/Modif/Images';
 import EquipementModif from './Components/ResidenceScreens/Details/Modif/Equipement';
+import PiecesModif from './Components/ResidenceScreens/Details/Modif/Pieces';
 import CalendrierModif from './Components/ResidenceScreens/Details/Modif/Calendrier';
 import MenuParametre from './Components/Profil/MenuParametre';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -22,6 +23,7 @@ import DetailsView from './Components/ResidenceScreens/DetailsView';
 import { Provider } from 'react-redux'
 import { store } from './Components/Store/store';
 import OneSignal from 'react-native-onesignal';
+import {useNetInfo} from '@react-native-community/netinfo';
 import Constants from "expo-constants";
 import { useEffect } from 'react';
 import DetailReservation from './Components/ReservationScreen/details/DetailReservation';
@@ -128,18 +130,26 @@ function TabNavigation () {
          tabBarIcon: ({color, size}) => (
           <View style={[tw``]}>
 
-            <Icon type='ionicon' name='home-sharp' size={29}   color={color} />
+            <Icon type='ionicon' name='home-sharp' size={25}   color={color} />
+            <Text> Home</Text>
           </View>
          ),
-          
+        //  tabBarLabel:"Home",
+        //  tabBarLabelStyle: {
+        //   // paddingTop: 0,
+        //   fontSize: 12
+        //  },
          tabBarActiveTintColor: '#062737',
          tabBarInactiveTintColor: '#B4BEC3'
          }}/>
             {/* fin de bouton Home screen  */}
 
         <Tab.Screen name="Residences" component={ResidenceScreen} options={{ headerShown: false, 
-         tabBarIcon: ({color, size}) => (
-          <Icon type='ionicon' name='md-bed-sharp' size={29}   color={color} />
+         tabBarIcon: ({color, size, focused}) => (
+          <View style={[]}>
+            <Icon type='ionicon' name='md-bed-sharp' size={25}   color={color} />
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Résidences</Text>
+          </View>
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
@@ -150,16 +160,23 @@ function TabNavigation () {
      
         
         <Tab.Screen name="Reservation" component={ReservationScreen} options={{ headerShown: false, 
-        tabBarIcon: ({color, size}) => (
-          <Icon type='antdesign' name='wallet' size={29}   color={color} />
+        tabBarIcon: ({color, size, focused}) => (
+          <View>
+            
+            <Icon type='antdesign' name='wallet' size={25}   color={color} />
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Reservations</Text>
+          </View>
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
         }}/>
 
         <Tab.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false, 
-        tabBarIcon: ({color, size}) => (
-          <Icon type='antdesign' name='notification' size={29}   color={color} />
+        tabBarIcon: ({color, size, focused}) => (
+          <View>
+            <Icon type='antdesign' name='notification' size={25}   color={color} />
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Notification</Text>
+          </View>
         ),
         tabBarActiveTintColor: '#062737',
         tabBarInactiveTintColor: '#B4BEC3'
@@ -201,6 +218,7 @@ const Stack = createNativeStackNavigator();
 
 const  App = () => {
 
+    const NetInfo = useNetInfo()
   // const userIdOnesignal = async() => {
   //   const data = await OneSignal.getDeviceState();
   //   console.log("dtattaa",data)
@@ -215,6 +233,16 @@ const  App = () => {
     <Provider store={store}>
 
       <NavigationContainer>
+        {
+          // ici nette info information
+          NetInfo.isInternetReachable ? 
+           null
+           :
+           <View style={tw`bg-red-500 w-100 items-center p-1`}>
+             <Text style={{color: "white", fontWeight: "600"}}>pas de connexion a internet</Text>
+             {/* <Text> essayez de vous </Text> */}
+           </View>
+        }
         <Stack.Navigator initialRouteName='LogScreen'>
           <Stack.Screen name="LogScreen" component={LogScreen} options={{ headerShown: false, }} />
           <Stack.Screen name="Login" component={Login}  options={{ headerShown: false, }} />
@@ -225,6 +253,7 @@ const  App = () => {
           <Stack.Screen name="ModifImage" component={ImageModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="ModifEquipement" component={EquipementModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="ModifCalendrier" component={CalendrierModif}  options={{ headerShown: false }}/>
+          <Stack.Screen name="ModifPieces" component={PiecesModif}  options={{ headerShown: false }}/>
           <Stack.Screen name="Profil" component={MenuParametre}  options={{ headerShown: false }}/>
           <Stack.Screen name='DetailReservation' component={DetailReservation} options={{headerShown: false}}/>
         </Stack.Navigator>
