@@ -22,6 +22,8 @@ const BarEntete = () => {
     const UserNom = useSelector((state) => state.hote.nom)
     const dispatch = useDispatch()
 
+    console.log("userConec IUD", user.uid)
+    console.log("userNom ", UserNom)
 
     const getHoteDoc = async() => {
         const q = query(collection(db, "hotes"), where("userHote", "==", user.uid));
@@ -54,7 +56,7 @@ const BarEntete = () => {
                                     data: doc.data()
                                 })
                             })
-                            // console.log("Resrvations", rs)
+                            console.log("Resrvations", rs)
                             // let aff = 0
                             if (rs.length >= 1) {
                                 let aff = 0
@@ -81,7 +83,7 @@ const BarEntete = () => {
                         })
                     }
                     // setUserDoc(dc[0]); 
-                    // dispatch(getHote({
+                    // dispatch(getHote({ 
                     //     idDoc: dc[0].id,
                     //     user: dc[0].data.userHote,
                     //     nom: dc[0].data.nom,

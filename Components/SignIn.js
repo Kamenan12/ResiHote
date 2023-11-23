@@ -74,14 +74,14 @@ const SignIn = () => {
                     email: data.email,
                     date_create: serverTimestamp()
 
-
+ 
                 })
                 console.log("User ajouter a la collection", docRef.id)
                 AddExternalUserIdOneSignal(user.uid)
+                navigation.navigate("Home-G")
             } catch (e) {
                 console.log("erreur d'ajout de user en collection", e.code)
             }
-            // navigation.navigate("Home")
         }
 
         ).catch((e) => {
