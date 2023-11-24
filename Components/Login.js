@@ -40,7 +40,20 @@ const Login = () => {
                 AddExternalUserIdOneSignal(user.uid)
                 navigation.navigate('Home-G')
             }
-        ))
+        )).catch((e) => {
+            if (e.code == "auth/email-already-in-use") {
+                alert("Mail deja utilise")
+            } else if (e.code == "auth/invalid-email") {
+                alert("Mail invalide")
+            } else if (e.code == "auth/wrong-password") {
+                alert("mot de passe incorrect")
+            } else {
+                alert("Error de mail ou de mot de passe ")
+            }
+
+            // console.log("Error firebaseCode", e.code)
+            // console.log("Error firebaseMessage", e.message)
+        })
         setChargement(false)
     }
 
