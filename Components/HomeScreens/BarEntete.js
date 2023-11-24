@@ -22,8 +22,8 @@ const BarEntete = () => {
     const UserNom = useSelector((state) => state.hote.nom)
     const dispatch = useDispatch()
 
-    console.log("userConec IUD", user.uid)
-    console.log("userNom ", UserNom)
+    // console.log("userConec IUD", user.uid)
+    // console.log("userNom ", UserNom)
 
     const getHoteDoc = async() => {
         const q = query(collection(db, "hotes"), where("userHote", "==", user.uid));
@@ -35,7 +35,18 @@ const BarEntete = () => {
                     data: doc.data()
                 })
                 // console.log("les doc", dc)
+                //Essayons de recuperer directement les information au fure et a mesur
             }); 
+            dispatch(getHote({
+                idDoc: dc[0].id,
+                user: dc[0].data.userHote,
+                nom: dc[0].data.nom,
+                prenom: dc[0].data.prenom,
+                pseudo: dc[0].data.pseudo, 
+                email: dc[0].data.email,
+                hote: dc[0].data.hote,
+                
+            }))
             if (dc.length >= 1 ) {
                 const resi = query(collection(db, "residences"), where("idDocHote", "==", dc[0].id));
                 const subscribe = onSnapshot(resi, (querySnapshot) => {
@@ -68,13 +79,6 @@ const BarEntete = () => {
                                 // console.log("affaire,", aff)
 
                                 dispatch(getHote({
-                                    idDoc: dc[0].id,
-                                    user: dc[0].data.userHote,
-                                    nom: dc[0].data.nom,
-                                    prenom: dc[0].data.prenom,
-                                    pseudo: dc[0].data.pseudo, 
-                                    email: dc[0].data.email,
-                                    hote: dc[0].data.hote,
                                     residences: r.length,
                                     reservations: rs.length,
                                     affaire: aff

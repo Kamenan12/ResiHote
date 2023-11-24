@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TextInput } from "react-native";
 import GlobalStyle from "./Styles/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
@@ -9,10 +10,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import tw from "twrnc"
 import OneSignal from 'react-native-onesignal';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Loading from './Loading';
 
 
 const Login = () => {
-
+    const [chargement, setChargement] = useState(false)
     const navigation = useNavigation();
 
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -30,6 +32,7 @@ const Login = () => {
     }
 
     const Connexion = (data) => {
+        setChargement(true)
         signInWithEmailAndPassword(auth, data.email, data.passWord).then((
             (userCredentials) => {
                 const user = userCredentials.user;
@@ -38,6 +41,7 @@ const Login = () => {
                 navigation.navigate('Home-G')
             }
         ))
+        setChargement(false)
     }
 
 
@@ -80,6 +84,7 @@ const Login = () => {
                  colors={['#FF2A2A','#FF6D21']}
                  style={styles.backGround}
                  >
+                    <Loading visi={chargement}/>
                     <View style={[tw`p-5 mt-10`]}>
                         <View>
                             <Text style={[tw``, { fontSize: 65, color: "white", fontWeight: "700"}]}>Bienvenue</Text>
