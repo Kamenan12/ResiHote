@@ -79,6 +79,13 @@ const BarEntete = () => {
                                 // console.log("affaire,", aff)
 
                                 dispatch(getHote({
+                                    idDoc: dc[0].id,
+                                    user: dc[0].data.userHote,
+                                    nom: dc[0].data.nom,
+                                    prenom: dc[0].data.prenom,
+                                    pseudo: dc[0].data.pseudo, 
+                                    email: dc[0].data.email,
+                                    hote: dc[0].data.hote,
                                     residences: r.length,
                                     reservations: rs.length,
                                     affaire: aff
@@ -118,7 +125,7 @@ const BarEntete = () => {
         <>
         <View style={[tw`pt-7 flex flex-row justify-between px-7`]}> 
             <View>
-                 <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! {UserNom == "" ? "" : UserNom} </Text>
+                 <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! {UserNom} </Text>
                  <Text style={{ fontSize: 25, fontWeight: "bold", fontFamily: "sans-serif"}}>Bienvenue chez R+ </Text> 
 
             </View>

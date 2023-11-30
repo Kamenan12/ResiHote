@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { PROVIDER_GOOGLE } from "react-native-maps"
 import { Icon, Dialog} from "@rneui/themed";
 
 import tw from 'twrnc'
@@ -180,6 +181,7 @@ const MapScreen = (props) => {
                     </View>
              <MapView
                 ref={mapRef}
+                provider={PROVIDER_GOOGLE}
                 style={styles.map}
                 initialRegion={{
                 latitude: localisation.lat,

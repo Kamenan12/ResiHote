@@ -725,7 +725,7 @@ const ChambreView = () => {
                                     onPress={() => Precedent()} 
                                 />
                                 {
-                                    WatchEquipement_bases.length == 0 || WatchEquipement_extra.length == 0 || WatchPrix === "" ? 
+                                    WatchEquipement_bases.length == 0 /*|| WatchEquipement_extra.length == 0 /** */ || WatchPrix === "" ? 
                                     <Button title="suivant"
                                         onPress={() => Suivant()} 
                                         disabled
