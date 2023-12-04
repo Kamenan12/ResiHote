@@ -185,7 +185,10 @@ const Calendrier = (props) => {
 
     return (
         <View>
-            <Text> Calendier</Text>
+            <View style={tw`items-center`}>
+                
+                <Text style={{fontWeight: "500"}}> Selection des jours ou la chambre est occupee</Text>
+            </View>
             <CalendarPicker 
                 ref={CalendarRef}
                 startFromMonday={true}

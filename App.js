@@ -127,11 +127,11 @@ function TabNavigation () {
          {/* debut bouton de home screnn  */}
         <Tab.Screen name="Home-S" component={HomeScreen} options={{ headerShown: false,
        
-         tabBarIcon: ({color, size}) => (
+         tabBarIcon: ({color, size, focused}) => (
           <View style={[tw``]}>
 
             <Icon type='ionicon' name='home-sharp' size={25}   color={color} />
-            <Text> Home</Text>
+            <Text style={focused ? {color: "#062737"} : {color: "#B4BEC3"}}> Home</Text>
           </View>
          ),
         //  tabBarLabel:"Home",

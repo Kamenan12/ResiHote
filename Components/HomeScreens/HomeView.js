@@ -35,7 +35,7 @@ const Home =() => {
                     {/* <Text style={[tw`bg-red-500 w-30`]} onPress={()=> Decon()}> Deconnnection</Text>    */}
                     {/* { NetInfo.isConnected ? <Text> Connection actif</Text> : <Text> PAs de conneexion internet</Text>} */}
                     {/* <PasConnexion /> */}
-                    <OrangeApiSms />
+                    {/* <OrangeApiSms /> */}
         </View>
                
         </>

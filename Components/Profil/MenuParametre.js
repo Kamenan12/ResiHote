@@ -24,7 +24,7 @@ const MenuParametre = () => {
         <>
         <View style={tw`pt-10 bg-gray-100 h-full`}>
             <View style={tw`py-2 px-3 bg-white justify-between flex-row items-center`}>
-               <Icon type="antdesign" name="arrowleft" color="black" />
+               <Icon type="antdesign" name="arrowleft" color="black" onPress={() => Navigation.goBack()}/>
                <Text style={{ fontSize: 25, fontWeight: "500"}}> Paramètre</Text>
                <Text></Text>
                {/* <Icon type="font-awesome-5" name="user-circle" color="black" /> */}
