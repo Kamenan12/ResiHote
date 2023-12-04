@@ -725,7 +725,7 @@ const ChambreView = () => {
                                     onPress={() => Precedent()} 
                                 />
                                 {
-                                    WatchEquipement_bases.length == 0 || WatchEquipement_extra.length == 0 || WatchPrix === "" ? 
+                                    WatchEquipement_bases.length == 0 /*|| WatchEquipement_extra.length == 0 /** */ || WatchPrix === "" ? 
                                     <Button title="suivant"
                                         onPress={() => Suivant()} 
                                         disabled
@@ -932,42 +932,48 @@ const ChambreView = () => {
                     case 5: 
                     return (
                         <View>
-                            <Text> Ici calendrier </Text>
-                            <Controller 
-                            control={control}
-                            render={({field: {onChange, onBlur, value}}) => (
+                            <ScrollView style={tw`mb-5`}>
+                                <View style={tw`items-center`}>
+                                    <Text style={{fontWeight: "600", fontSize: 25}}> Calendrier de la Chambre </Text>
+                                </View>
+                                <Controller 
+                                control={control}
+                                render={({field: {onChange, onBlur, value}}) => (
 
-                                <Calendrier onChange={onChange}/>
-                            )}
-                            name="Calendrier"
-                            />
-                            
-                            <View style={[tw`flex-row justify-around w-95`]}>
-                                     
-                                         <Button title="precedent"
-                                         onPress={() => Precedent()} 
-                                         /> 
+                                    <Calendrier onChange={onChange}/>
+                                )}
+                                name="Calendrier"
+                                />
+                                
+                                <View style={[tw`flex-row justify-around w-95`]}>
+                                        
+                                            <Button title="precedent"
+                                            onPress={() => Precedent()} 
+                                            /> 
 
-                                         {
-                                            WatchCalendrier.length == 0 ? 
-                                            <Button title="suivant"
-                                                onPress={() => Suivant()} disabled
-                                            /> : 
-                                            <Button title="suivant"
-                                                onPress={() => Suivant()} 
-                                            />
-                                         }
-                            </View>
-                                 {console.log("On change calendar ", WatchCalendrier)}
+                                            {
+                                                WatchCalendrier.length == 0 ? 
+                                                <Button title="suivant"
+                                                    onPress={() => Suivant()} disabled
+                                                /> : 
+                                                <Button title="suivant"
+                                                    onPress={() => Suivant()} 
+                                                />
+                                            }
+                                </View>
+                                    {console.log("On change calendar ", WatchCalendrier)}
+                            </ScrollView>
                         </View>
                     )
                     case 6: 
                     return (
                         <View >
                             <ScrollView>
-                                <Text>
-                                    Verification de toute les donner 
-                                </Text>
+                                <View style={tw`items-center`}>
+                                    <Text style={{fontSize:22, fontWeight: "600" }}>
+                                        Derniere Verifications 
+                                    </Text>
+                                </View>
                                 <View>
                                     <ScrollView horizontal>
                                         <View  style={[tw`flex-row`]}>
@@ -979,7 +985,7 @@ const ChambreView = () => {
                                         </View>
                                     </ScrollView>
                                 </View>
-                                <View>
+                                <View style={tw`items-center`}>
                                     <View>
                                         <Text>Type de residence: </Text> 
                                         <Text> {WatchType_residence}</Text>

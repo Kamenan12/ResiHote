@@ -23,7 +23,7 @@ import DetailsView from './Components/ResidenceScreens/DetailsView';
 import { Provider } from 'react-redux'
 import { store } from './Components/Store/store';
 import OneSignal from 'react-native-onesignal';
-// import {useNetInfo} from '@react-native-community/netinfo';
+import {useNetInfo} from '@react-native-community/netinfo';
 import Constants from "expo-constants";
 import { useEffect } from 'react';
 import DetailReservation from './Components/ReservationScreen/details/DetailReservation';
@@ -135,7 +135,7 @@ function TabNavigation () {
           </View>
          ),
         //  tabBarLabel:"Home",
-        //  tabBarLabelStyle: { 
+        //  tabBarLabelStyle: {
         //   // paddingTop: 0,
         //   fontSize: 12
         //  },
@@ -218,7 +218,7 @@ const Stack = createNativeStackNavigator();
 
 const  App = () => {
 
-    // const NetInfo = useNetInfo()
+    const NetInfo = useNetInfo()
   // const userIdOnesignal = async() => {
   //   const data = await OneSignal.getDeviceState();
   //   console.log("dtattaa",data)
@@ -233,7 +233,16 @@ const  App = () => {
     <Provider store={store}>
 
       <NavigationContainer>
-        
+        {
+          // ici nette info information
+          NetInfo.isInternetReachable ? 
+           null
+           :
+           <View style={tw`bg-red-500 w-100 items-center p-1`}>
+             <Text style={{color: "white", fontWeight: "600"}}>pas de connexion a internet</Text>
+             {/* <Text> essayez de vous </Text> */}
+           </View>
+        }
         <Stack.Navigator initialRouteName='LogScreen'>
           <Stack.Screen name="LogScreen" component={LogScreen} options={{ headerShown: false, }} />
           <Stack.Screen name="Login" component={Login}  options={{ headerShown: false, }} />

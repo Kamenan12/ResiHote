@@ -70,7 +70,7 @@ const StatGen = () => {
             <View style={[tw` h-38 w-86 rounded-xl justify-between flex-row shadow-2xl`, { backgroundColor: "#f78f54"}]}>
                 <View style={[tw` py-5 px-2`]}>
                     <Text style={[ tw``, { fontSize: 20, color: "white"}]}> Balance</Text>
-                    <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}>{affaire} Fr</Text>
+                    <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}>{affaire == null ? 0 : affaire} Fr</Text>
                     {/* <Text style={[tw``, {fontSize: 35, color: "white", fontWeight: "900", fontFamily: "sans-serif"}]}></Text> */}
                    
                 </View>  
@@ -119,7 +119,7 @@ const StatGen = () => {
                                     <Text style={[tw``,{fontSize: 20, color: "white", fontWeight: "400"}]}>Chambres</Text>
                                 </View>
                                 <View style={[tw`flex-row justify-evenly items-center`]}>
-                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre}</Text> 
+                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre == null ? 0 : props.nombre}</Text> 
                                     <Image source={require("../images/house/003-homepage.png")} style={{ height: 70, width: 70}} />
                                 </View>
                             </View>
@@ -136,7 +136,7 @@ const StatGen = () => {
                                     <Text style={[tw``,{fontSize: 20, color: "white", fontWeight: "400"}]}>Vues</Text>
                                 </View>
                                 <View style={[tw` flex-row items-center justify-evenly`]}>
-                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre} </Text> 
+                                    <Text style={[tw``, {fontSize: 30, color: "white", fontWeight: "700"}]}> {props.nombre == null ? 0 : props.nombre} </Text> 
                                     <Image source={require("../images/eyes/003-eye-care.png")} style={{ height: 70, width: 70}} />
                                 </View>
                              </View>

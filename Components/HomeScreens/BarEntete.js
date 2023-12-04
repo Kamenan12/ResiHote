@@ -22,6 +22,8 @@ const BarEntete = () => {
     const UserNom = useSelector((state) => state.hote.nom)
     const dispatch = useDispatch()
 
+    // console.log("userConec IUD", user.uid)
+    // console.log("userNom ", UserNom)
 
     const getHoteDoc = async() => {
         const q = query(collection(db, "hotes"), where("userHote", "==", user.uid));
@@ -33,7 +35,18 @@ const BarEntete = () => {
                     data: doc.data()
                 })
                 // console.log("les doc", dc)
+                //Essayons de recuperer directement les information au fure et a mesur
             }); 
+            dispatch(getHote({
+                idDoc: dc[0].id,
+                user: dc[0].data.userHote,
+                nom: dc[0].data.nom,
+                prenom: dc[0].data.prenom,
+                pseudo: dc[0].data.pseudo, 
+                email: dc[0].data.email,
+                hote: dc[0].data.hote,
+                
+            }))
             if (dc.length >= 1 ) {
                 const resi = query(collection(db, "residences"), where("idDocHote", "==", dc[0].id));
                 const subscribe = onSnapshot(resi, (querySnapshot) => {
@@ -54,7 +67,7 @@ const BarEntete = () => {
                                     data: doc.data()
                                 })
                             })
-                            // console.log("Resrvations", rs)
+                            console.log("Resrvations", rs)
                             // let aff = 0
                             if (rs.length >= 1) {
                                 let aff = 0
@@ -81,7 +94,7 @@ const BarEntete = () => {
                         })
                     }
                     // setUserDoc(dc[0]); 
-                    // dispatch(getHote({
+                    // dispatch(getHote({ 
                     //     idDoc: dc[0].id,
                     //     user: dc[0].data.userHote,
                     //     nom: dc[0].data.nom,
@@ -112,7 +125,7 @@ const BarEntete = () => {
         <>
         <View style={[tw`pt-7 flex flex-row justify-between px-7`]}> 
             <View>
-                 <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! {UserNom == "" ? "" : UserNom} </Text>
+                 <Text style={{ color: "gray", fontSize: 20, fontWeight: "400"}}>Heee! {UserNom} </Text>
                  <Text style={{ fontSize: 25, fontWeight: "bold", fontFamily: "sans-serif"}}>Bienvenue chez R+ </Text> 
 
             </View>

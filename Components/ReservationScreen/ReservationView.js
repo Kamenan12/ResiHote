@@ -60,7 +60,7 @@ const ReservationView = () => {
             <View style={tw`items-center pb-4`}>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
                 {/* <Text>{rs}</Text> */}
-                <Text>{Today}</Text>
+                {/* <Text>{Today}</Text> */}
             </View>
             {/* <View style={tw``}> */}
                 <ScrollView style={tw`h-160`}>

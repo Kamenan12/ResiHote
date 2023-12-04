@@ -25,12 +25,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.test.test</string>
+          <string>com.rooskyd.hote</string>
         </array>
       </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
+    <key>GMSApiKey</key>
+    <string>AIzaSyDR3pVVOjdnryueq2UI3E1H6BwWg74DGk8</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>

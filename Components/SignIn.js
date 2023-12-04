@@ -12,6 +12,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { async } from "@firebase/util";
 import OneSignal from 'react-native-onesignal';
+import Loading from './Loading';
 
 
 
@@ -20,7 +21,7 @@ const SignIn = () => {
 
     const navigation = useNavigation();
     const [step, setStep] = useState(1)
-
+    const [chargement, setChargement] = useState(false)
 
     const { register, getValues, setValue, handleSubmit,setError, control ,reset, formState: { errors } } = useForm({
         defaultValues: {
@@ -62,35 +63,41 @@ const SignIn = () => {
     // }
 
     const inscription = async(data) => {
-        createUserWithEmailAndPassword(auth, data.email, data.passWord).then( async( userCredential) => {
-            const user = userCredential.user;
-
-            try {
-                const docRef  = await addDoc(collection(db, "hotes"), {
-                    userHote: user.uid,
-                    nom: data.nom,
-                    prenom: data.prenom,
-                    pseudo: data.pseudo,
-                    email: data.email,
-                    date_create: serverTimestamp()
-
-
-                })
-                console.log("User ajouter a la collection", docRef.id)
-                AddExternalUserIdOneSignal(user.uid)
-            } catch (e) {
-                console.log("erreur d'ajout de user en collection", e.code)
+        if (errors.nom || errors.prenom || errors.pseudo) {
+            alert("veuiller remplir tout les champ")
+        } else (
+            createUserWithEmailAndPassword(auth, data.email, data.passWord).then( async( userCredential) => {
+                setChargement(true)
+                const user = userCredential.user;
+    
+                try {
+                    const docRef  = await addDoc(collection(db, "hotes"), {
+                        userHote: user.uid,
+                        nom: data.nom,
+                        prenom: data.prenom,
+                        pseudo: data.pseudo,
+                        email: data.email,
+                        date_create: serverTimestamp()
+    
+     
+                    })
+                    console.log("User ajouter a la collection", docRef.id)
+                    AddExternalUserIdOneSignal(user.uid)
+                    navigation.navigate("Home-G")
+                } catch (e) {
+                    console.log("erreur d'ajout de user en collection", e.code)
+                }
+                setChargement(false)
             }
-            // navigation.navigate("Home")
-        }
-
-        ).catch((e) => {
-            if (e.code == "auth/email-already-in-use") {
-                alert("Mail deja utilise")
-            }
-            // console.log("Error firebaseCode", e.code)
-            // console.log("Error firebaseMessage", e.message)
-        })
+    
+            ).catch((e) => {
+                if (e.code == "auth/email-already-in-use") {
+                    alert("Mail deja utilise")
+                }
+                // console.log("Error firebaseCode", e.code)
+                // console.log("Error firebaseMessage", e.message)
+            })
+        )
     }
 
      // ******** Ajout du code de oneSignale pour lier le External_user_id avec Id de user 
@@ -155,14 +162,14 @@ const SignIn = () => {
                                         </View>
                                     </View>
 
-                                    {
+                                    {/* {
                                                 errors.pseudo?.type === "required" &&
                                                 <View style={tw`bg-black m-2`}>
                                                     <Text style={{color: "white"}}> Erreur des Champs pseudo</Text>
                                                     <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
                                                 </View>
                                                 
-                                            }
+                                            } */}
 
                                     <View style={[tw` mt-5 p-6`, {}]}>
                                             {/* Debut de champ nom  */}
@@ -228,10 +235,36 @@ const SignIn = () => {
                                     </View>
                                     
                                     <View style={tw`flex-row justify-center `}>
+                                    {/* {
+                                        (errors.nom? 
+                                        <Button title="suivant"
+                                            onPress={() => Suivant()}
+                                            disabled
+                                            buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
+                                        /> :
+                                        <Button title="suivant"
+                                            onPress={() => Suivant()}
+                                            
+                                            buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
+                                        />
+
+                                    } */}
+                                    {
+                                        errors.nom?.type === "minLength" | errors.nom?.type === "pattern" | errors.nom?.type === "required" | errors.prenom?.type === "required"  | errors.prenom?.type === "minLength" | errors.prenom?.type === "pattern" ? 
+                                        <Button title="suivant"
+                                            onPress={() => Suivant()}
+                                            disabled
+                                            buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
+                                        /> :
                                         <Button title="suivant"
                                             onPress={() => Suivant()}
                                             buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
                                         />
+                                    }
+                                        {/* <Button title="suivant"
+                                            onPress={() => Suivant()}
+                                            buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
+                                        /> */}
                                         {/* <Button title="precedent"
                                             onPress={() => Precedent()} 
                                         /> */}
@@ -320,11 +353,19 @@ const SignIn = () => {
                                             onPress={() => Precedent()} 
                                             buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]}
                                         />
+                                        {
+                                            errors.pseudo?.type === "required" | errors.pseudo?.type === "minLength" | errors.pseudo?.type === "pattern" | errors.email?.type === "required" | errors.email?.type === "minLength" | errors.email?.type === "pattern"? 
 
-                                        <Button title="suivant"
-                                            onPress={() => Suivant()}
-                                            buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
-                                        />
+                                            <Button title="suivant"
+                                                onPress={() => Suivant()}
+                                                disabled
+                                                buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
+                                            /> :
+                                            <Button title="suivant"
+                                                onPress={() => Suivant()}
+                                                buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mt-4`]} 
+                                            />
+                                        }
                                     </View>
                                 </LinearGradient>
                             )
@@ -335,7 +376,7 @@ const SignIn = () => {
                                         colors={['#FF2A2A','#FF6D21']}
                                         style={[styles.backGround]}
                                         >
-                                            
+                                            <Loading visi={chargement} />
                                             {/* {
                                                 errors  &&
                                                 <View style={tw`bg-black m-2`}>
@@ -352,14 +393,25 @@ const SignIn = () => {
                                                 </View>
                                                 
                                             } */}
-                                            {/* {
-                                                errors &&  
-                                                <View style={tw`bg-black m-2`}>
-                                                    <Text style={{color: "white"}}> Erreur des Champs nom</Text>
-                                                    <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct</Text>
-                                                </View>
+                                            {
+                                                  errors.nom?.type === "required" | errors.nom?.type === "minLength" | errors.nom?.type === "pattern" | 
+                                                  errors.prenom?.type === "required" | errors.prenom?.type === "minLength" | errors.prenom?.type === "pattern" | 
+                                                  errors.pseudo?.type === "required" | errors.pseudo?.type === "minLength" | errors.pseudo?.type === "pattern"|
+                                                  errors.email?.type === "required" | errors.email?.type === "minLength" | errors.email?.type === "pattern" |
+                                                  errors.passWord?.type === "required" | errors.passWord?.type === "pattern" |
+                                                  errors.confirmPassWord?.type === "required" | errors.confirmPassWord?.type === "validate" ?
+                                                <View style={tw`bg-black m-2 rounded-lg p-4 flex-row`}>
+                                                    <View>
+                                                        <Icon name='dangerous' type="materialicon" color="red" />
+                                                    </View>
+                                                    <View>
+                                                        <Text style={{color: "white"}}> Erreur des Champs nom</Text>
+                                                        <Text style={{color: "white"}}> Veuillez Verifier si tout les champs sont correct !</Text>
+                                                    </View>
+                                                </View> :
+                                                null
                                                 
-                                            } */}
+                                            }
                                             
                                             
                                             
@@ -434,10 +486,24 @@ const SignIn = () => {
                                                 onPress={() => Precedent()}
                                                 buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-40 items-center mb-4`]} 
                                             />
-                                                <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
-                                                    onPress={handleSubmit(inscription)}> 
-                                                    <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
-                                                </TouchableOpacity>
+                                            {
+                                                errors.passWord?.type === "required" | errors.passWord?.type === "pattern" | errors.confirmPassWord?.type === "required" | errors.confirmPassWord?.type === "validate" ?
+
+                                                <Button title="Inscription"
+                                                    onPress={handleSubmit(inscription)}
+                                                    disabled
+                                                    buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-60 items-center mb-4`]} 
+                                                /> :
+                                                <Button title="Inscription"
+                                                    onPress={handleSubmit(inscription)}
+                                                    buttonStyle={[tw`bg-transparent border-2 border-white p-4 rounded-full w-60 items-center mb-4`, {fontSize: 56}]} 
+                                                />
+                                                // <TouchableOpacity style={[tw`border-2 border-white p-4 rounded-full w-60 items-center`]} 
+                                                //     onPress={handleSubmit(inscription)}> 
+                                                //     <Text style={[tw``, {fontSize: 22, color: "white", fontWeight: "600"}]}>Inscription</Text>
+                                                // </TouchableOpacity>
+
+                                            }
                                             </View>
                                             {/* {errors && showToast()} */}
                                     </LinearGradient>
