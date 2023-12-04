@@ -1,4 +1,4 @@
-package com.test.test.newarchitecture;
+package com.rooskyd.hote.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.test.test.BuildConfig;
-import com.test.test.newarchitecture.components.MainComponentsRegistry;
-import com.test.test.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.rooskyd.hote.BuildConfig;
+import com.rooskyd.hote.newarchitecture.components.MainComponentsRegistry;
+import com.rooskyd.hote.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -19,7 +19,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.test.test",
+      "bundleIdentifier": "com.rooskyd.hote",
       "config": {
         "googleMapsApiKey": "AIzaSyDR3pVVOjdnryueq2UI3E1H6BwWg74DGk8"
       }
@@ -29,7 +29,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.test.test",
+      "package": "com.rooskyd.hote",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyDR3pVVOjdnryueq2UI3E1H6BwWg74DGk8"

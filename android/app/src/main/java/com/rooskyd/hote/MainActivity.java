@@ -1,4 +1,4 @@
-package com.test.test;
+package com.rooskyd.hote;
 
 import android.os.Build;
 import android.os.Bundle;
