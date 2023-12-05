@@ -376,8 +376,8 @@ const ChambreView = () => {
                         <KeyboardAwareScrollView extraHeight={15} enableOnAndroid={true} >
                             <View style={tw`bg-white`}>
                                 <View>
-                                    <View> 
-                                        <Text> Info sur la Residences</Text>
+                                    <View style={tw`items-center`}> 
+                                        <Text style={{fontSize: 25, fontWeight: "500"}}> Info sur la Residences</Text>
                                     </View>
                                     {/* View sur les type de residencs  */}
                                     <View>
