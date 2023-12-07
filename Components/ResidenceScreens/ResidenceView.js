@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { db } from "../../firebase";
@@ -129,29 +129,34 @@ const ResidenceView = () => {
             <View>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes residences </Text>
             </View>
-            <Text> ov av ajouert les bouton pour ajout de residences  </Text>
-            <Button 
-            title='Ajout de residences'
-            color='secondary'
-            onPress={() => AjoutChambre()}
-                />
+            <View style={tw`py-2`}>
+                <Text> ov av ajouert les bouton pour ajout de residences  </Text>
+                    <Button 
+                    title='Ajout de residences'
+                    color='secondary'
+                    onPress={() => AjoutChambre()}
+                        />
+            </View>
 
                 <View>
-
-                    <Text> texte ici mettre les residences!</Text>
-                    { resi ? 
-                        resi.map((R, index) => (
-                            R.data.map((Resi, index) => (
-                                <View key={index} style={[tw`items-center`]}>
-                                    <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docHote={hotedoc}/>
+                    <ScrollView style={tw`mb-50`}>
+                        
+                        {/* <Text> texte ici mettre les residences!</Text> */}
+                        { resi ? 
+                            resi.map((R, index) => (
+                                R.data.map((Resi, index) => (
+                                    <View key={index} style={[tw`items-center`]}>
+                                        <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docHote={hotedoc}/>
+                                    </View>
+                                ))
+                            )) : 
+                                <View> 
+                                    <Text> Aucune residences</Text>
                                 </View>
-                            ))
-                        )) : 
-                            <View> 
-                                <Text> Aucune residences</Text>
-                            </View>
-                    }
-                    {/* {console.log("resi", resi)} */}
+                        }
+                        {/* {console.log("resi", resi)} */}
+                    </ScrollView>
+
                     
                 </View>
         </View>
