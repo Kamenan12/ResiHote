@@ -9,7 +9,7 @@ import { db } from "../firebase";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import tw from "twrnc"
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp, setDoc, doc } from "firebase/firestore";
 import { async } from "@firebase/util";
 import OneSignal from 'react-native-onesignal';
 import Loading from './Loading';
@@ -70,9 +70,21 @@ const SignIn = () => {
                 setChargement(true)
                 const user = userCredential.user;
     
+                // try {
+                //     const docRef  = await addDoc(collection(db, "hotes"), {
+                //         userHote: user.uid,
+                //         nom: data.nom,
+                //         prenom: data.prenom,
+                //         pseudo: data.pseudo,
+                //         email: data.email,
+                //         date_create: serverTimestamp()
+     
+     
+                //     })
                 try {
-                    const docRef  = await addDoc(collection(db, "hotes"), {
-                        userHote: user.uid,
+                    // const myCollection = doc(collection(db, "hotes"), `${user.uid}`);
+                    const docRef  = await setDoc(doc(db, "hotes", user.uid), {
+                        // userHote: user.uid,
                         nom: data.nom,
                         prenom: data.prenom,
                         pseudo: data.pseudo,
@@ -81,11 +93,11 @@ const SignIn = () => {
      
      
                     })
-                    console.log("User ajouter a la collection", docRef.id)
+                    console.log("User ajouter a la collection")
                     AddExternalUserIdOneSignal(user.uid)
                     navigation.navigate("Home-G")
                 } catch (e) {
-                    console.log("erreur d'ajout de user en collection", e.code)
+                    console.log("erreur d'ajout de user en collection", e)
                 }
                 setChargement(false)
             }
