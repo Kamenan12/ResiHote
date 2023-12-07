@@ -78,7 +78,7 @@ const SignIn = () => {
                         pseudo: data.pseudo,
                         email: data.email,
                         date_create: serverTimestamp()
-    
+     
      
                     })
                     console.log("User ajouter a la collection", docRef.id)
