@@ -16,7 +16,7 @@ const ResidenceView = () => {
     // recuperer Id de user
     // const CurrentUser = auth.currentUser.uid;
     const hotedoc = useSelector((state) => state.hote.idDoc)
-    const userhote = useSelector((state) => state.hote.userhote)
+    const userhote = useSelector((state) => state.hote.hote)
     const [userDoc, setUserDoc] = useState()
 
     const Navigation = useNavigation();
@@ -56,7 +56,7 @@ const ResidenceView = () => {
                         // us.push(
                         //     doc.id
                         // )
-                        let r = query(collection(db,"residences"), where("userHote", "==", userhote));
+                        let r = query(collection(db,"residences"), where("Hote", "==", userhote));
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
                             queryResi.forEach((doc) => {
