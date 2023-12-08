@@ -36,7 +36,7 @@ const BarEntete = () => {
                 })
                 // console.log("les doc", dc)
                 //Essayons de recuperer directement les information au fure et a mesur
-            }); 
+            });  
             dispatch(getHote({
                 idDoc: dc[0].id,
                 user: dc[0].data.userHote,
