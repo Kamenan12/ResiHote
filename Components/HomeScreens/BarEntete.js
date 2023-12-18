@@ -32,16 +32,53 @@ const BarEntete = () => {
         const hote = await getDoc(h)
         if(hote.exists()){
             console.log("doc hote", hote.id)
-            dispatch(getHote({
-                // idDoc: dc[0].id,
-                // user: dc[0].data.userHote,
-                nom: hote.data().nom,
-                prenom: hote.data().prenom,
-                pseudo: hote.data().pseudo, 
-                email: hote.data().email,
-                hote: hote.id,
-                
-            }))
+            let r = query(collection(db,'residences'), where("Hote", "==", user.uid))
+            const unsub = onSnapshot(r, (queryRes) => {
+                let re = []
+                queryRes.forEach((doc) => {
+                    re.push({
+                        idResi: doc.id,
+                        dataResi: doc.data()
+                    })
+                })
+                if (re.length >= 1){
+                    const reser = query(collection(db, "reservations"), where("userHoteIdDoc", "==", user.uid));
+                    const sub = onSnapshot(reser, (queryReser) => {
+                        const rs = [];
+                        queryReser.forEach((doc) => {
+                            rs.push({
+                                idReser: doc.id,
+                                dataReser: doc.data()
+                            })
+                        })
+                        if (rs.length >= 1 ){
+                            let Aff = 0
+                            let Njour = 0
+                            rs.map( R1 => {
+                                // R1.dataReser.map(R => {
+                                    // console.log("affaire", R1.dataReser.coutSejour)
+                                    Aff = Aff + R1.dataReser.coutSejour
+                                    Njour = Njour + R1.dataReser.nombreDeJour
+                                // })
+                            })
+                            dispatch(getHote({
+                                // idDoc: dc[0].id,
+                                // user: dc[0].data.userHote,
+                                nom: hote.data().nom,
+                                prenom: hote.data().prenom,
+                                pseudo: hote.data().pseudo, 
+                                email: hote.data().email,
+                                hote: hote.id,
+                                residences: re.length,
+                                affaire: Aff,
+                                nombreOccuper: Njour
+                                
+                            }))
+                        }
+                    })
+                }
+                // console.log("Re", re)
+            })
         }   
          
             // dispatch(getHote({

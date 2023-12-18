@@ -14,10 +14,11 @@ import { db } from "../../firebase";
 
 const ReservationView = () => {
 
-    const hotedocid = useSelector((state) => state.hote.idDoc)
+    const hotedocid = useSelector((state) => state.hote.hote)
     const [reser, setReser] = useState([])
-    const minDay = new Date();
-    const Today = moment(minDay).format("DD/MM/YYYY")
+    // const minDay = new Date();
+     const minDay = moment().format("DD MMMM");
+    // const Today = moment(minDay).format("DD/MM/YYYY")
 
 
 
@@ -60,7 +61,7 @@ const ReservationView = () => {
             <View style={tw`items-center pb-4`}>
                 <Text style={[{ fontSize: 25, fontWeight: "600"}]}> Mes reservations </Text>
                 {/* <Text>{rs}</Text> */}
-                {/* <Text>{Today}</Text> */}
+                <Text>--{minDay}</Text>
             </View>
             {/* <View style={tw``}> */}
                 <ScrollView style={tw`h-160`}>
@@ -94,13 +95,13 @@ const Reservation = (props) => {
     // const hote = props.hote
 
     const Navigation = useNavigation()
-    const minDay = new Date();
+    // const minDay = moment();
     // const Today = moment(minDay).format("DD/MM/YYYY")
     // const Today = moment()
     const TodayFor = moment().format("MM/DD/YYYY")
-    const JourFin = moment(infoReser.finSejour).format("DD/MM/YYYY")
-    const JourDeb = moment(infoReser.debutSejour).format("DD/MM/YYYY")
-    const Jequ =  moment(JourFin).diff(TodayFor, "days")                   //moment(JourFin).diff(JourDeb, "day")
+    const JourFin = moment(infoReser.finSejour).format("MM-DD")
+    const JourDeb = moment(infoReser.debutSejour).format("MM-DD")
+    const Jequ =  moment(infoReser.jourSelection[infoReser.jourSelection.length - 1]).diff(infoReser.jourSelection[0], "days")                   //moment(JourFin).diff(JourDeb, "day")
 
     const DetailReservation = (id, infoReser, resi) => {
         Navigation.navigate("DetailReservation", {
@@ -128,6 +129,7 @@ const Reservation = (props) => {
                     <Text>Fin : {infoReser.finSejour}</Text>
                 </View>
                 <View style={tw`pt-10 `}>
+                    <Text>{Jequ}</Text>
                     {
                         Jequ < 0 ? (
                         <View style={tw`bg-red-500 p-2 rounded-full`}>

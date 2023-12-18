@@ -26,7 +26,7 @@ const Images = (props) => {
     return (
     
 
-        <View>
+        <View style={tw`pb-5`}>
             <ScrollView  horizontal style={tw` h-100, bg-white shadow-2xl`}>
                 <View style={ tw`bg-white h-full`}>
                     <View style={ tw`flex-row`}>
@@ -50,20 +50,20 @@ const Images = (props) => {
                     <Icon  name="arrow-left-circle" color="white" type="feather" size={32} onPress={() => props.retour()} />
                 </View>
             </View> */}
-            <View style={tw`items-end pt-5 px-5`}>
+            <View style={tw`items-end pt-5 px-5 absolute left-75`}>
                 
-                <Button title="modifier" onPress={() => ModifImg(props.idDoc, props.idDocUser)} 
+                <Button onPress={() => ModifImg(props.idDoc, props.idDocUser)} 
                 buttonStyle={tw`bg-transparent border rounded-xl`}
                             titleStyle={{
                                 color: "red"
                             }}
-                            // icon={{
-                            //     name: "cancel",
-                            //     type: "material",
-                            //     size: 15,
-                            //     color: "red"
+                            icon={{
+                                name: "edit",
+                                type: "feather",
+                                size: 15,
+                                color: "red"
                                 
-                            // }}
+                            }}
                             
                             // iconRight
                             />

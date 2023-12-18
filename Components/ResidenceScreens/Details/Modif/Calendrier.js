@@ -8,7 +8,7 @@ import { query, addDoc, collection, onSnapshot, where, getDocs, doc, setDoc, ser
 
 import moment from "moment";
 import tw from 'twrnc'
-import { Button } from "@rneui/base";
+import { Button, Icon } from "@rneui/base";
 import { async } from "@firebase/util";
 
 
@@ -173,6 +173,10 @@ const CalendrierModif = (props) => {
     return (
 
         <View style={tw`pt-10`}>
+            <View style={tw` absolute  p-2`} >   
+                <Icon  name="arrow-left-circle" type="feather" size={32} onPress={() => Navigation.goBack()} />
+                
+            </View>
             <View style={tw`items-center`}>
                 <Text style={{ fontSize: 25, fontWeight: "600"}}> Calendier</Text>
             </View>

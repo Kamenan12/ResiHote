@@ -38,19 +38,19 @@ const Equipement = (props) => {
                                 ))}
                             </View>
                         </ScrollView>
-                        <View style={tw`items-end pt-5 px-5`}>
-                        <Button title="Modifier" onPress={() => ModifEquip(props.idDoc, props.idDocUser)}
+                        <View style={tw`items-end pt-5 px-5 absolute left-75`}>
+                        <Button onPress={() => ModifEquip(props.idDoc, props.idDocUser)}
                             buttonStyle={tw`bg-transparent border rounded-xl`}
                             titleStyle={{
                                 color: "red"
                             }}
-                            // icon={{
-                            //     name: "cancel",
-                            //     type: "material",
-                            //     size: 15,
-                            //     color: "red"
+                            icon={{
+                                name: "edit",
+                                type: "feather",
+                                size: 15,
+                                color: "red"
                                 
-                            // }}
+                            }}
                             
                             // iconRight
                         /> 

@@ -87,19 +87,19 @@ const Info = (props) => {
                         <View style={tw`pt-5`}>
                             <Text style={[{color: "gray", fontWeight: "700", fontSize: 15}]}> {props.Description} </Text>
                         </View>
-                        <View style={tw`items-end pt-5 px-5`}>
-                            <Button title="modifier" onPress={() => SetModif(true)}
+                        <View style={tw`items-end pt-5 px-5 absolute left-75`}>
+                            <Button onPress={() => SetModif(true)}
                                 buttonStyle={tw`bg-transparent border rounded-xl`}
                                 titleStyle={{
                                     color: "red"
                                 }}
-                                // icon={{
-                                //     name: "cancel",
-                                //     type: "material",
-                                //     size: 15,
-                                //     color: "red"
+                                icon={{
+                                    name: "edit",
+                                    type: "feather",
+                                    size: 15,
+                                    color: "red"
                                     
-                                // }}
+                                }}
                                 
                                 // iconRight
                             />
@@ -143,7 +143,7 @@ const Info = (props) => {
                                 numberOfLines={6}
                                 maxLength={250}
                                 onChangeText={value => onChange(value)}
-                                defaultValue={props.Localite.description}
+                                defaultValue={props.Description}
                                 // containerStyle={{
                                 //     height: 120,
                                 // }}
