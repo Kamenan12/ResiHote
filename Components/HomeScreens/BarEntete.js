@@ -74,7 +74,7 @@ const BarEntete = () => {
                                 nombreOccuper: Njour
                                 
                             }))
-                        }
+                        } 
                     })
                 }
                 // console.log("Re", re)
