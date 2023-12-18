@@ -5,7 +5,7 @@ import { auth } from "../../firebase";
 // import { getAuth } from "firebase/auth";
 import { db } from "../../firebase";
 import tw from 'twrnc'
-
+import * as Location from 'expo-location'
 import { collection, getDoc, where, query, onSnapshot, doc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { getHote } from "../Store/getHoteSlice";
@@ -19,6 +19,7 @@ const BarEntete = () => {
     const Navigation = useNavigation();
     const user = auth.currentUser;
     const [userDoc, setUserDoc] = useState();
+    const [location, setLocation] = useState(null);
     const UserNom = useSelector((state) => state.hote.nom)
     const dispatch = useDispatch()
 
@@ -251,6 +252,19 @@ const BarEntete = () => {
 
     useEffect(() => {
         getHoteDoc();
+        
+        (async () => {
+            console.log("rentrer icici")
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+              setErrorMsg('Permission to access location was denied');
+              return;
+            }
+      
+            let location = await Location.getCurrentPositionAsync({});
+            console.log("localisation", location)
+            setLocation(location);
+          })();
     }, []) 
     return (
         <>
