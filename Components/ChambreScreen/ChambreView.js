@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView, Image } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView, Image, Linking } from "react-native";
 import { useForm, Controller } from 'react-hook-form';
 // import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon, Button, BottomSheet, ListItem, Input, CheckBox, Dialog } from "@rneui/themed";
@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import tw from 'twrnc'
 // import InfoNewResi from "./InfoNewResi";
+import * as Location from 'expo-location'
 import { itemsTypeResi } from "../Data/Data";
 import MapScreen from "./MapScreen";
 import Img from "./Img";
@@ -26,7 +27,8 @@ const ChambreView = () => {
 
     const hotedoc = useSelector((state) => state.hote.idDoc)
     const userhote = useSelector((state) => state.hote.hote)
-
+    const [foreground, requestForeground] = Location.useForegroundPermissions();
+    const [location, setLocation] = useState(null);
     // Intialisation des champ a controller par useForm 
     const { register, watch, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
@@ -76,6 +78,7 @@ const ChambreView = () => {
      const [openImage, setOpenImage] = useState(false);
   
      
+     const [visibleAlert, setVisibleAlert] = useState(false)
  
  
        const WatchType_residence = watch('type_residence');
@@ -102,7 +105,11 @@ const ChambreView = () => {
     const Precedent = () => {
         setStep(step - 1)
     }
+    // fermerture de l'alert
 
+    const FermeAlert = () => {
+        setVisibleAlert(false)
+    }
     //Donnees des villes
 
     const Villes = [
@@ -359,8 +366,49 @@ const ChambreView = () => {
        }
     //******************** */  Finnnnnn  Fonction pour ajouter la residences a la base des donnees **************
 
-   
+   const getLoc = () => {
+    (async () => {
+        console.log("rentrer icici")
+        let { status } = await Location.getForegroundPermissionsAsync();
+        if (status !== 'granted') {
+        //   alert('Permission to access location was denied');
+          setVisibleAlert(true)
+        //   await Location.requestBackgroundPermissionsAsync();
+        // await Location.getForegroundPermissionsAsync();
+        //   status = await Location.requestForegroundPermissionsAsync();
+          return;
+        }
+  
+        let location = await Location.getCurrentPositionAsync({});
+        if (location != null ) {
+            setVisibleAlert(false)
+            console.log("localisation", location)
+            setLocation(location);
+        }
+      })();
+   }
+
+   const paramet = async() => {
+    await Linking.openSettings().then(
+        getLoc()
+        // navigation.reset({
+        //     index: 1,
+        //     routes:[
+        //         {
+        //             name: 'Chambres'
+        //         },
+        //         Linking.openSettings(),
+        //     ]
+        // })
+    )
+   }
     
+    useEffect(() => {
+        getLoc()
+        
+    }, [location])
+
+
     // console.log("hotDOCID", userhote)
     // useEffect(() => {
     //     getUSerDoc();
@@ -380,6 +428,37 @@ const ChambreView = () => {
                                         <Text style={{fontSize: 25, fontWeight: "500"}}> Info sur la Residences</Text>
                                     </View>
                                     {/* View sur les type de residencs  */}
+
+                                    {/* mettre dialog pour l'autorisation de la localisation */}
+                                    <View>
+                                        <Dialog isVisible={visibleAlert}
+                                        // onBackdropPress={FermeAlert}
+                                        >
+                                            <Dialog.Title  title="Attention !"/>
+                                            <Text> 1:Veuillez autoriser la localisation a l'application </Text>
+                                            <Text> 2:cela va permettre de prendre facilement la localisation de la residences </Text>
+                                            <Text> 3: Allez dans permission > Localisation > Acceptez</Text>
+                                            <Text style={{ fontWeight: "600"}}>NB: Cela permet au client de mieux s'oriennter </Text>
+                                            <Dialog.Actions>
+                                                {/* <Dialog.Button
+                                                title="compris"
+                                                onPress={FermeAlert} /> */}
+                                                {
+                                                    location === null ? (
+
+                                                        <Dialog.Button
+                                                        title="Activer"
+                                                        onPress={() => [ paramet()/*Linking.openSettings()/*requestForeground(), getLoc()*/]} />
+                                                    ) : (
+                                                        <Dialog.Button
+                                                            title="compris"
+                                                            onPress={FermeAlert} />
+                                                    )
+                                                }
+                                            </Dialog.Actions>
+                                        </Dialog>
+                                    </View>
+                                    {/* mettre dialog pour l'autorisation de la localisation */}
                                     <View>
                                         <Button 
                                             title={WatchType_residence ? WatchType_residence : "Type de Residences"}
@@ -792,7 +871,7 @@ const ChambreView = () => {
                                 render={({ field: {onChange, onBlur, value}}) => (
 
                                     // <Localite onChange={onChange}/>
-                                    <MapScreen onChange={onChange}/>
+                                    <MapScreen onChange={onChange} location={location}/>
                                 )}
                                 name="Localisation"
                                 /> 
@@ -1022,8 +1101,9 @@ const ChambreView = () => {
                                     </View>
                                     <View>
                                         <Text>La localisation : </Text> 
-                                        {/* <Text> {WatchLocalisation.description}</Text>
-                                        <Text> Latitude: {WatchLocalisation.localisation.lat}</Text>
+                                        {console.log("location", WatchLocalisation)}
+                                        <Text> {WatchLocalisation.description}</Text>
+                                        {/* <Text> Latitude: {WatchLocalisation.localisation.lat}</Text>
                                         <Text> Logitude: {WatchLocalisation.localisation.lng}</Text> */}
                                         
                                     </View>

@@ -28,15 +28,27 @@ const MapScreen = (props) => {
             const [commune, setCommune] = useState('')
             const [ville, setVille] = useState('')
             const [description, setDescription] = useState('')
-            const [localisation, setLocalisation] = useState({
-                lat: 7.539988999999999,
-                lng: -5.547079999999999
-            })
+            const [localisation, setLocalisation] = useState(
+                // props.location ? 
+                {
+                lat: props.location.coords.latitude,
+                lng: props.location.coords.longitude } 
+                // : 
+                // {
+                //     lat: 7.5468545,
+                //     lng: -5.547099500000002
+                // }
+                )
 
             const [visibleAlert, setVisibleAlert] = useState(false)
         // const Origin = props.carte.localisation ? props.carte.localisation : {
         //     lat: 37.78825,
         //     lng: -122.4324 
+                // abidjan {
+
+                //     lat: 7.5468545,
+                //     lng: -5.547099500000002
+                // }
         // }
         // const [position, setPosition] = useState()
         const mapRef = useRef(null)

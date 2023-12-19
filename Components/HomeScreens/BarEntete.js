@@ -19,7 +19,7 @@ const BarEntete = () => {
     const Navigation = useNavigation();
     const user = auth.currentUser;
     const [userDoc, setUserDoc] = useState();
-    const [location, setLocation] = useState(null);
+    // const [location, setLocation] = useState(null);
     const UserNom = useSelector((state) => state.hote.nom)
     const dispatch = useDispatch()
 
@@ -253,18 +253,18 @@ const BarEntete = () => {
     useEffect(() => {
         getHoteDoc();
         
-        (async () => {
-            console.log("rentrer icici")
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-              setErrorMsg('Permission to access location was denied');
-              return;
-            }
+        // (async () => {
+        //     console.log("rentrer icici")
+        //     let { status } = await Location.requestForegroundPermissionsAsync();
+        //     if (status !== 'granted') {
+        //       setErrorMsg('Permission to access location was denied');
+        //       return;
+        //     }
       
-            let location = await Location.getCurrentPositionAsync({});
-            console.log("localisation", location)
-            setLocation(location);
-          })();
+        //     let location = await Location.getCurrentPositionAsync({});
+        //     console.log("localisation", location)
+        //     setLocation(location);
+        //   })();
     }, []) 
     return (
         <>

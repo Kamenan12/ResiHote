@@ -106,6 +106,19 @@ const ResidenceView = () => {
 
     const AjoutChambre = () => {
         Navigation.navigate('Chambres')
+        // Navigation.reset({
+        //     index: 1,
+        //     routes: [
+        //         {
+                        // name: 'Chambres'
+                    // },
+                    // { name: 'ResultRecherche',  // le liens de la page enfant
+                    // params: {
+                    // data: data,
+                    // details: details}
+                    // },
+        //     }]
+        //     })
     }
 
 
