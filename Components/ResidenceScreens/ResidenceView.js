@@ -68,7 +68,7 @@ const ResidenceView = () => {
                             })
                             console.log("les Resss", re)
                             setResi(re)
-                        })
+                        }) 
                     // })
                     // console.log("les Resi de user ID", us)
                     //  setUserDoc(us[0])
