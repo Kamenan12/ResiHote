@@ -59,15 +59,53 @@ const ResidenceView = () => {
                         let r = query(collection(db,"residences"), where("Hote", "==", userhote));
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
+                            let rss = []
                             queryResi.forEach((doc) => {
-                                re.push({
-                                    idDoc: doc.id, 
-                                    data: [doc.data()]
-                                })
+                                
+                                // re.push({
+                                //     idDoc: doc.id, 
+                                //     data: [doc.data()],
+                                //     // reserve: rs
+                                // })
+                                // if (re.length >= 1 ){
+                                    let s = query(collection(db, "reservations"), where("idResidence", "==", doc.id));
+
+                                    const unReser = onSnapshot(s, (queryReser) => {
+                                        const rs =[]
+                                        queryReser.forEach((reser) => {
+                                            rs.push(
+                                                reser.data().jourSelection
+                                            )
+                                        })
+                                        console.log("rsss1", rss)
+                                        re.push({
+                                            idDoc: doc.id, 
+                                            data: [doc.data()],
+                                            reserve: rs
+                                        })
+                                        console.log("Rsiii", re)
+                                        setResi(re)
+                                        // rss = [...rss, rs]
+                                        // rss = rs
+                                        // if (rss.length >= 1 ){
+                                            
+                                            // }
+                                            // console.log("rsss", rs)
+                                    })
+                                    // re.push({
+                                    //     idDoc: doc.id, 
+                                    //     data: [doc.data()],
+                                    //     // reserve: rs
+                                    // })
+                                // }
+                                // re.push({
+                                //     idDoc: doc.id, 
+                                //     data: [doc.data()],
+                                //     // reserve: rs
+                                // })
                                 // console.log("ID du Doc", doc.id)
                             })
-                            console.log("les Resss", re)
-                            setResi(re)
+                            // console.log("les Resss22", re)
                         }) 
                     // })
                     // console.log("les Resi de user ID", us)
@@ -122,11 +160,12 @@ const ResidenceView = () => {
     }
 
 
-    const AfficheDetail = (residence, id, docUser) => {
+    const AfficheDetail = (residence, id, docUser, reserve) => {
         Navigation.navigate('DetailsResidences', {
             residences: residence,
             resiID: id,
-            idDocUser: docUser
+            idDocUser: docUser,
+            reservation: reserve
         });
     }
     // console.log("Id user:", CurrentUser)
@@ -159,7 +198,7 @@ const ResidenceView = () => {
                             resi.map((R, index) => (
                                 R.data.map((Resi, index) => (
                                     <View key={index} style={[tw`items-center`]}>
-                                        <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docHote={hotedoc}/>
+                                        <Residence residence={Resi} detail={AfficheDetail} idDoc={R.idDoc} docHote={userhote} reserve={R.reserve}/>
                                     </View>
                                 ))
                             )) : 
@@ -185,6 +224,7 @@ const Residence = (props) => {
     const residen = props.residence
     const Id = props.idDoc
     const docUser = props.docHote
+    const reserve = props.reserve
     return (
         // <View style={tw`bg-white flex`}>
         //     <View style={tw`h-40 w-80`}>
@@ -192,7 +232,7 @@ const Residence = (props) => {
         //     </View>
         //     <Text>{residen.Titre} </Text>
         // </View>
-        <TouchableOpacity onPress={() => props.detail(residen, Id, docUser)}>
+        <TouchableOpacity onPress={() => props.detail(residen, Id, docUser, reserve)}>
             <View style={[tw` p-3`, ]}>
                 <View style={tw`flex-row bg-white rounded-3xl p-3 w-85 `}>
                     <View>

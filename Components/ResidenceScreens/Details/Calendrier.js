@@ -13,13 +13,20 @@ const Calendrier = (props) => {
 
 
     const jourIndispo = []
+    const jourIndispoReser = []
+    
 
     props.Calendrier.map((tab) => (
         tab.Tab.map((d) => (
             jourIndispo.push(d.jour)
         ))
     ))
-
+    props.reservation.map((tab) => (
+        tab.map((d) => ( 
+            jourIndispoReser.push(d)
+        ))
+    ))
+    const jourIndispoTotal = [...jourIndispo, ...jourIndispoReser]
 
     const ModifCalendrier = (idDoc, idDocUser) => {
         Navigation.navigate('ModifCalendrier', {
@@ -46,7 +53,7 @@ const Calendrier = (props) => {
                 nextTitle="Suivant"
                 weekdays={['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'sam', 'Dim']}
                 months={['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Otobre', 'Novembre', 'Decembre']}
-                disabledDates={jourIndispo}
+                disabledDates={jourIndispoTotal}
                 />
             </View>
             <View style={tw`items-end pt-5 px-5 absolute left-75 bottom-75`}>
