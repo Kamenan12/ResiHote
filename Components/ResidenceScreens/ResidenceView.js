@@ -59,7 +59,7 @@ const ResidenceView = () => {
                         let r = query(collection(db,"residences"), where("Hote", "==", userhote));
                         const unResi = onSnapshot(r, (queryResi) => {
                             const re = []
-                            // let rss = []
+                            let rss = []
                             queryResi.forEach((doc) => {
                                 
                                 // re.push({
@@ -68,23 +68,23 @@ const ResidenceView = () => {
                                 //     // reserve: rs
                                 // })
                                 // if (re.length >= 1 ){
-                                    // let s = query(collection(db, "reservations"), where("idResidence", "==", doc.id));
+                                    let s = query(collection(db, "reservations"), where("idResidence", "==", doc.id));
 
-                                    // const unReser = onSnapshot(s, (queryReser) => {
-                                    //     const rs =[]
-                                    //     queryReser.forEach((reser) => {
-                                    //         rs.push(
-                                    //             reser.data().jourSelection
-                                    //         )
-                                    //     })
-                                        // console.log("rsss1", rss)
+                                    const unReser = onSnapshot(s, (queryReser) => {
+                                        const rs =[]
+                                        queryReser.forEach((reser) => {
+                                            rs.push(
+                                                reser.data().jourSelection
+                                            )
+                                        })
+                                        console.log("rsss1", rss)
                                         re.push({
                                             idDoc: doc.id, 
                                             data: [doc.data()],
-                                            // reserve: rs
+                                            reserve: rs
                                         })
                                         console.log("Rsiii", re)
-                                        // setResi(re)
+                                        setResi(re)
                                         // rss = [...rss, rs]
                                         // rss = rs
                                         // if (rss.length >= 1 ){
@@ -104,9 +104,8 @@ const ResidenceView = () => {
                                 //     // reserve: rs
                                 // })
                                 // console.log("ID du Doc", doc.id)
-                            // })
+                            })
                             // console.log("les Resss22", re)
-                            setResi(re)
                         }) 
                     // })
                     // console.log("les Resi de user ID", us)
