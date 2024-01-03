@@ -36,6 +36,7 @@ const Home =() => {
                     {/* { NetInfo.isConnected ? <Text> Connection actif</Text> : <Text> PAs de conneexion internet</Text>} */}
                     {/* <PasConnexion /> */}
                     {/* <OrangeApiSms /> */}
+                    <Text>Mise a jour fait</Text>
         </View>
                
         </>

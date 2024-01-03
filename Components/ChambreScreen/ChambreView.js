@@ -1030,15 +1030,15 @@ const ChambreView = () => {
                                             onPress={() => Precedent()} 
                                             /> 
 
-                                            {
+                                            {/* {
                                                 WatchCalendrier.length == 0 ? 
                                                 <Button title="suivant"
                                                     onPress={() => Suivant()} disabled
-                                                /> : 
+                                                /> :  */}
                                                 <Button title="suivant"
                                                     onPress={() => Suivant()} 
                                                 />
-                                            }
+                                            {/* } */}
                                 </View>
                                     {console.log("On change calendar ", WatchCalendrier)}
                             </ScrollView>

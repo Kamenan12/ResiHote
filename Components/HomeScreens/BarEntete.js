@@ -32,7 +32,7 @@ const BarEntete = () => {
         // let dc = []; 
         const hote = await getDoc(h)
         if(hote.exists()){
-            console.log("doc hote", hote.id)
+            // console.log("doc hote", hote.data().prenom)
             let r = query(collection(db,'residences'), where("Hote", "==", user.uid))
             const unsub = onSnapshot(r, (queryRes) => {
                 let re = []
@@ -52,6 +52,7 @@ const BarEntete = () => {
                                 dataReser: doc.data()
                             })
                         })
+                        console.log("prenomnnnn resi" ,hote.data().prenom)
                         if (rs.length >= 1 ){
                             let Aff = 0
                             let Njour = 0
@@ -62,6 +63,7 @@ const BarEntete = () => {
                                     Njour = Njour + R1.dataReser.nombreDeJour
                                 // })
                             })
+                            console.log("prenomnnn reser" ,hote.data().prenom)
                             dispatch(getHote({
                                 // idDoc: dc[0].id,
                                 // user: dc[0].data.userHote,
@@ -75,8 +77,37 @@ const BarEntete = () => {
                                 nombreOccuper: Njour
                                 
                             }))
-                        } 
+                        } else if (rs.length == 0) {
+                            dispatch(getHote({
+                                // idDoc: dc[0].id,
+                                // user: dc[0].data.userHote,
+                                nom: hote.data().nom,
+                                prenom: hote.data().prenom,
+                                pseudo: hote.data().pseudo, 
+                                email: hote.data().email,
+                                hote: hote.id,
+                                residences: re.length,
+                                affaire: 0,
+                                nombreOccuper: 0
+                                
+                            }))
+                        }
                     })
+                } else if (re.length == 0) {
+                    console.log("prenomnnn33333" ,hote.data().prenom)
+                    dispatch(getHote({
+                        // idDoc: dc[0].id,
+                        // user: dc[0].data.userHote,
+                        nom: hote.data().nom,
+                        prenom: hote.data().prenom,
+                        pseudo: hote.data().pseudo, 
+                        email: hote.data().email,
+                        hote: hote.id,
+                        residences: 0,
+                        affaire: 0,
+                        nombreOccuper: 0
+                        
+                    }))
                 }
                 // console.log("Re", re)
             })

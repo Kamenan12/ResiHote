@@ -98,10 +98,10 @@ const Reservation = (props) => {
     // const minDay = moment();
     // const Today = moment(minDay).format("DD/MM/YYYY")
     // const Today = moment()
-    const TodayFor = moment().format("MM/DD/YYYY")
+    const TodayFor = moment()
     const JourFin = moment(infoReser.finSejour).format("MM-DD")
     const JourDeb = moment(infoReser.debutSejour).format("MM-DD")
-    const Jequ =  moment(infoReser.jourSelection[infoReser.jourSelection.length - 1]).diff(infoReser.jourSelection[0], "days")                   //moment(JourFin).diff(JourDeb, "day")
+    const Jequ =  moment(infoReser.jourSelection[infoReser.jourSelection.length - 1]).diff(TodayFor, "days")                   //moment(JourFin).diff(JourDeb, "day")
 
     const DetailReservation = (id, infoReser, resi) => {
         Navigation.navigate("DetailReservation", {
@@ -129,7 +129,7 @@ const Reservation = (props) => {
                     <Text>Fin : {infoReser.finSejour}</Text>
                 </View>
                 <View style={tw`pt-10 `}>
-                    <Text>{Jequ}</Text>
+                    {/* <Text>{Jequ}</Text> */}
                     {
                         Jequ < 0 ? (
                         <View style={tw`bg-red-500 p-2 rounded-full`}>
